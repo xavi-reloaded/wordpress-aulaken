@@ -44,12 +44,12 @@ class Aula implements IAulaWordpress {
 
     private function init($wp_upload_dir, $upload_directory)
     {
-        $this->plugin_file = WP_CONTENT_DIR . "/plugins/aula/aula.php";
-        $this->directories['plugin'] = WP_CONTENT_DIR . "/plugins/aula";
-        $this->directories['css'] = WP_CONTENT_DIR . "/plugins/aula/css";
-        $this->directories['template'] = WP_CONTENT_DIR . "/plugins/aula/templates";
-        $this->directories['views'] = WP_CONTENT_DIR . "/plugins/aula/templates/views";
-        $this->directories['buttons'] = WP_CONTENT_DIR . "/plugins/aula/templates/buttons";
+        $this->plugin_file = WP_CONTENT_DIR . "/plugins/wordpress-aulaken/aula.php";
+        $this->directories['plugin'] = WP_CONTENT_DIR . "/plugins/wordpress-aulaken";
+        $this->directories['css'] = WP_CONTENT_DIR . "/plugins/wordpress-aulaken/css";
+        $this->directories['template'] = WP_CONTENT_DIR . "/plugins/wordpress-aulaken/templates";
+        $this->directories['views'] = WP_CONTENT_DIR . "/plugins/wordpress-aulaken/templates/views";
+        $this->directories['buttons'] = WP_CONTENT_DIR . "/plugins/wordpress-aulaken/templates/buttons";
         $this->directories['languages'] = WP_CONTENT_DIR . "/plugins/localization";
 
         $this->directories['wp_uploads'] = $wp_upload_dir['basedir'];
@@ -61,18 +61,18 @@ class Aula implements IAulaWordpress {
         $this->directories['user_views'] = $wp_upload_dir['basedir'] . "/aula/templates";
 
         // define commen urls for the plugin
-        $this->urls['plugin'] = content_url() . "/plugins/aula";
-        $this->urls['css'] = content_url() . "/plugins/aula/css";
-        $this->urls['javascript'] = content_url() . "/plugins/aula/js";
-        $this->urls['images'] = content_url() . "/plugins/aula/images";
-        $this->urls['template'] = content_url() . "/plugins/aula/templates";
-        $this->urls['views'] = content_url() . "/plugins/aula/templates/views";
-        $this->urls['buttons'] = content_url() . "/plugins/aula/templates/buttons";
+        $this->urls['plugin'] = content_url() . "/plugins/wordpress-aulaken";
+        $this->urls['css'] = content_url() . "/plugins/wordpress-aulaken/css";
+        $this->urls['javascript'] = content_url() . "/plugins/wordpress-aulaken/js";
+        $this->urls['images'] = content_url() . "/plugins/wordpress-aulaken/images";
+        $this->urls['template'] = content_url() . "/plugins/wordpress-aulaken/templates";
+        $this->urls['views'] = content_url() . "/plugins/wordpress-aulaken/templates/views";
+        $this->urls['buttons'] = content_url() . "/plugins/wordpress-aulaken/templates/buttons";
 
-        $this->urls['originals'] = $upload_directory . "/aula/originals";
-        $this->urls['thumbnails'] = $upload_directory . "/aula/thumbnails";
-        $this->urls['fullsize'] = $upload_directory . "/aula/fullsize";
-        $this->urls['user_views'] = $upload_directory . "/aula/templates";
+        $this->urls['originals'] = $upload_directory . "/wordpress-aulaken/originals";
+        $this->urls['thumbnails'] = $upload_directory . "/wordpress-aulaken/thumbnails";
+        $this->urls['fullsize'] = $upload_directory . "/wordpress-aulaken/fullsize";
+        $this->urls['user_views'] = $upload_directory . "/wordpress-aulaken/templates";
     }
 
     public function registerWordPressHooks()
