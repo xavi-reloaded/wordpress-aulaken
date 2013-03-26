@@ -16,7 +16,6 @@
         <li class='trash'><a href='edit-comments.php?comment_status=trash'>Trash <span class="count">(<span class="trash-count">0</span>)</span></a></li>
     </ul>
 
-    <form id="comments-form" action="" method="get">
 
 
 

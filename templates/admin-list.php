@@ -14,7 +14,7 @@
 				</th>
 				
 				
-				<th class="column-description <?php echo $description_col_class ?>"><?php _e("Description", "aula"); ?></th>
+				<th class="column-description <?php echo $description_col_class ?>"><?php _e("Summary", "aula"); ?></th>
 
 
 				<th class="column-categories <?php echo $categories_col_class ?>"><?php _e("Categories", "aula"); ?></th>				
@@ -45,7 +45,7 @@
 				<th class="cb_icon_column"><?php _e("Image", "aula"); ?></th>
 				<th class=""><?php _e("Title", "aula"); ?></th>
 
-				<th class="column-description <?php echo $description_col_class ?>"><?php _e("Description", "aula"); ?></th>
+				<th class="column-description <?php echo $description_col_class ?>"><?php _e("Summary", "aula"); ?></th>
 
 				
 				<th class="column-categories <?php echo $categories_col_class ?>"><?php _e("Categories", "aula"); ?></th>
