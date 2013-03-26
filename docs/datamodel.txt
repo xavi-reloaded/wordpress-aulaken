@@ -1,0 +1,70 @@
+General
+Category
+
+Course full name
+
+Course short name
+
+Course ID number
+
+Course summary
+
+
+
+Path: p
+Format
+
+Course start date Day Month Year
+News items to show
+
+Show gradebook to students
+
+Show activity reports
+
+Maximum upload size
+
+Formatting options for Weekly format
+Number of sections
+
+Hidden sections
+
+Course layout
+
+Guest access
+Allow guest access
+
+Password
+Unmask
+Groups
+Group mode
+
+Force group mode
+
+Default grouping
+
+Availability
+Availability
+
+Language
+Force language
+
+
+
+
+Role renaming
+
+Your word for 'Manager'
+
+Your word for 'Course creator'
+
+Your word for 'Teacher'
+
+Your word for 'Non-editing teacher'
+
+Your word for 'Student'
+
+Your word for 'Guest'
+
+Your word for 'Authenticated user'
+
+Your word for 'Authenticated user on frontpage'

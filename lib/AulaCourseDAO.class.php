@@ -91,7 +91,7 @@ class AulaCourseDAO
      * Get a single catalog item by database id
      *
      * @param integer $id The id of the catalog item you wish to get.
-     * @return null|DeliberaForum
+     * @return null|AunaCourse
      */
 
     public static function getItem($id, $customPostName=null,$post_meta_name=null)
@@ -129,9 +129,10 @@ class AulaCourseDAO
         return $item;
     }
 
-    public static function saveCourseItem($title, $new_item_order,$summary="",$tax_input=null,$shortname="")
+    public static function saveCourseItem($title, $new_item_order,$id="",$summary="",$tax_input=null,$shortname="")
     {
         $new_item = new AulaCourseItem();
+        if (isset($id)) $new_item->setId($id);
         $new_item->setTitle($title);
         $new_item->setOrder($new_item_order);
         $new_item->setSummary($summary);
@@ -139,6 +140,10 @@ class AulaCourseDAO
         $new_item->setShortname($shortname);
         $new_item->save();
         return $new_item;
+    }
+
+    public static function getItemById($id)
+    {
     }
 
 

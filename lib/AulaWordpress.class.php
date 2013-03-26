@@ -225,6 +225,10 @@ class AulaWordpress implements IAulaWordpress {
             $this->aula_save_course(true);
         }
 
+        if(strpos($_SERVER['QUERY_STRING'], 'aula-save-course') !== false) {
+            $this->aula_save_course(true);
+        }
+
         if(strpos($_SERVER['QUERY_STRING'], 'aula-delete-course') !== false) {
             $this->aula_delete_course(true);
         }
@@ -312,10 +316,16 @@ class AulaWordpress implements IAulaWordpress {
 
             $new_item_order = wp_count_posts($this->custom_post_course_name)->publish + 1;
 
-            $new_item = AulaCourseDAO::saveCourseItem($title,$new_item_order,$summary,$tax_input,$shortname);
+            if (isset($_REQUEST['save'])){
+                $id=$_REQUEST['save_id'];
+            } else {
+                $id = null;
+            }
+            $new_item = AulaCourseDAO::saveCourseItem($title, $new_item_order, $id, $summary, $tax_input, $shortname);
+
+            header('Location: admin.php?page=aula&id=' . $new_item->getId()); die;
 
             // wp_redirect( self_admin_url("admin.php?page=delibera&id=".$new_item->getId()) );
-            header('Location: admin.php?page=aula&id=' . $new_item->getId()); die;
         }
         else {
             $error = __("WordPress Nonce Error, please reload the form and try again.", 'aula');
@@ -333,7 +343,7 @@ class AulaWordpress implements IAulaWordpress {
             include_once($this->directories['template'] . '/admin-discfull.php');
         }
         else {
-            include_once($this->directories['template'] . '/admin-aula.php');
+                include_once($this->directories['template'] . '/admin-course-new.php');
         }
     }
 
@@ -343,7 +353,7 @@ class AulaWordpress implements IAulaWordpress {
         // if id is set show edit form
         if (isset($_GET['id'])) {
             $this->admin_edit();
-            return false;
+            return;
         }
 
         $user = wp_get_current_user();
@@ -364,14 +374,9 @@ class AulaWordpress implements IAulaWordpress {
     public function admin_course_new()
     {
 
-        wp_enqueue_script('post');
 
-        if ( wp_is_mobile() )
-            wp_enqueue_script( 'jquery-touch-punch' );
 
-        add_meta_box( 'submitdiv', __( 'Publish Course' ), array( &$this->metaBoxHelper, 'post_submit_meta_box' ), null, 'side', 'core');
-        add_meta_box( 'categoriesdiv', __( 'Course Categories' ), array( &$this->metaBoxHelper, 'post_categories_meta_box' ), null, 'side', 'core');
-        add_meta_box( 'lessonsdiv', __( 'Lessons' ), array( &$this->metaBoxHelper, 'render_meta_box_lessons' ), null, 'normal', 'core');
+        $this->addMetaBoxForNewForm();
 
         $post_new_file=true;
         $post_type=$this->custom_post_course_name;
@@ -386,6 +391,16 @@ class AulaWordpress implements IAulaWordpress {
         else {
             include_once($this->directories['template'] . '/admin-course-new.php');
         }
+    }
+
+    public function addMetaBoxForNewForm()
+    {
+        wp_enqueue_script('post');
+        if ( wp_is_mobile() )
+            wp_enqueue_script( 'jquery-touch-punch' );
+        add_meta_box('submitdiv', __('Publish Course'), array(&$this->metaBoxHelper, 'post_submit_meta_box'), null, 'side', 'core');
+        add_meta_box('categoriesdiv', __('Course Categories'), array(&$this->metaBoxHelper, 'post_categories_meta_box'), null, 'side', 'core');
+        add_meta_box('lessonsdiv', __('Lessons'), array(&$this->metaBoxHelper, 'render_meta_box_lessons'), null, 'normal', 'core');
     }
 
     public function render_aula_admin_message() {
@@ -419,6 +434,20 @@ class AulaWordpress implements IAulaWordpress {
                 header('Location: admin.php?page=aula&message=3'); die;
             }
         }
+    }
+
+    private function admin_edit()
+    {
+        $post = get_post($_REQUEST['id']);
+        $course = AulaCourseDAO::getItem($_REQUEST['id']);
+
+        $this->addMetaBoxForNewForm();
+
+        $post_new_file=false;
+        $post_type=$this->custom_post_course_name;
+        $form_action="editpost";
+
+        include_once($this->directories['template'] . '/admin-course-new.php');
     }
 
 
