@@ -2,6 +2,7 @@
 
 require_once(dirname(__FILE__) . '/IAulaWordpress.class.php');
 require_once(dirname(__FILE__) . '/AulaCourseDAO.class.php');
+require_once(dirname(__FILE__) . '/AulaMetaboxHelper.class.php');
 /**
  * Created by JetBrains PhpStorm.
  * User: xavi
@@ -12,6 +13,7 @@ require_once(dirname(__FILE__) . '/AulaCourseDAO.class.php');
 
 class AulaWordpress implements IAulaWordpress {
 
+    public $metaBoxHelper;
     private $custom_tax_name          = "aula-taxonomy-test";
     private $custom_user_meta_name    = "aula_screen_settings";
     private $custom_post_course_name  = "aula-course";
@@ -32,6 +34,7 @@ class AulaWordpress implements IAulaWordpress {
     {
         $this->directories = $directories;
         $this->urls = $urls;
+        $this->metaBoxHelper = new AulaMetaboxHelper();
     }
 
 
@@ -356,8 +359,9 @@ class AulaWordpress implements IAulaWordpress {
 
     public function admin_course_new()
     {
-        add_meta_box( 'submitdiv', __( 'Publish Course' ), array( &$this, 'render_meta_box_content' ), null, 'side', 'core');
-        add_meta_box( 'wekediv', __( 'Lessons' ), array( &$this, 'render_meta_box_content2' ), null, 'normal', 'core');
+        add_meta_box( 'submitdiv', __( 'Publish Course' ), array( &$this->metaBoxHelper, 'render_meta_box_content' ), null, 'side', 'core');
+        add_meta_box( 'lessonsdiv', __( 'Lessons' ), array( &$this->metaBoxHelper, 'render_meta_box_lessons' ), null, 'normal', 'core');
+
         $post_new_file=true;
         $post_type=$this->custom_post_course_name;
 
@@ -403,22 +407,6 @@ class AulaWordpress implements IAulaWordpress {
                 header('Location: admin.php?page=aula&message=3'); die;
             }
         }
-    }
-
-    /**
-     * Render Meta Box content
-     */
-    public function render_meta_box_content()
-    {
-        echo '<h1>TEST OUTPUT - this gets rendered inside the meta box.</h1>';
-    }
-
-    /**
-     * Render Meta Box content
-     */
-    public function render_meta_box_content2()
-    {
-        echo '<h1>TEST OUTPUT - this gets rendered inside the meta box.22222</h1>';
     }
 
 
