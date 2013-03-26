@@ -56,7 +56,7 @@ class AulaCourseDAO
 
         foreach ($posts as $post) {
 
-            $item = new AulaGenericItem();
+            $item = new AulaCourseItem();
 
             $item->id           = $post->ID;
             $item->title        = $post->post_title;
@@ -114,7 +114,7 @@ class AulaCourseDAO
             }
         }
 
-        $item = new AulaGenericItem();
+        $item = new AulaCourseItem();
         
         $item->id           = $post->ID;
         $item->title        = $post->post_title;
@@ -131,7 +131,7 @@ class AulaCourseDAO
 
     public static function saveDeliberaPortal($title, $new_item_order)
     {
-        $new_item = new AulaGenericItem();
+        $new_item = new AulaCourseItem();
         $new_item->setTitle($title);
         $new_item->setOrder($new_item_order);
         $default_term = '';
