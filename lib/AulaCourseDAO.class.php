@@ -1,6 +1,6 @@
 <?php
 
-require_once(dirname(__FILE__) . '/AulaGenericItem.class.php');
+require_once(dirname(__FILE__) . '/AulaCourseItem.class.php');
 require_once(dirname(__FILE__) . '/AulaHelper.class.php');
 
 /**
