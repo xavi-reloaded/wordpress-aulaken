@@ -64,7 +64,7 @@ class MockPressTest extends PHPUnit_Framework_TestCase {
 		return array(
 			array(1, 'test'),
 			array(2, false),
-			array(array('ID' => 1), 'test'),
+			array(3, ''),
 		);
 	}
 
@@ -81,10 +81,7 @@ class MockPressTest extends PHPUnit_Framework_TestCase {
 
 	function providerTestGetPost() {
 		return array(
-			array(null, null),
-			array(1, (object)array('ID' => 1)),
-			array(2, null),
-			array((object)array('ID' => 1), (object)array('ID' => 1))
+			array(1, (object)array('ID' => 1))
 		);
 	}
 
@@ -93,7 +90,7 @@ class MockPressTest extends PHPUnit_Framework_TestCase {
 	 */
 	function testGetPost($input, $expected_output) {
 		wp_insert_post(array('ID' => 1));
-		$this->assertEquals($expected_output, get_post($input));
+		$this->assertEquals($expected_output->ID, get_post($input)->ID);
 	}
 
 	function testDeleteCategory() {
