@@ -75,7 +75,7 @@
                         ?>
                         <div id="postdivrich" class="postarea">
 
-                            <?php wp_editor($post->post_content, 'content', array('dfw' => true, 'tabfocus_elements' => 'sample-permalink,post-preview', 'editor_height' => 360) ); ?>
+                            <?php wp_editor($post->post_content, 'post_summary', array('dfw' => true, 'tabfocus_elements' => 'sample-permalink,post-preview', 'editor_height' => 300) ); ?>
 
                             <table id="post-status-info" cellspacing="0"><tbody><tr>
                                     <td id="wp-word-count"><?php printf( __( 'Word count: %s' ), '<span class="word-count">0</span>' ); ?></td>

@@ -60,7 +60,7 @@ class AulaCourseDAO
 
             $item->id           = $post->ID;
             $item->title        = $post->post_title;
-            $item->description  = $post->post_content;
+            $item->summary      = $post->post_content;
             $item->date         = $post->post_date;
             $item->categories   = array();
             $item->order        = $post->menu_order;
@@ -129,11 +129,12 @@ class AulaCourseDAO
         return $item;
     }
 
-    public static function saveDeliberaPortal($title, $new_item_order)
+    public static function saveCourseItem($title, $new_item_order,$summary="")
     {
         $new_item = new AulaCourseItem();
         $new_item->setTitle($title);
         $new_item->setOrder($new_item_order);
+        $new_item->setSummary($summary);
         $default_term = '';
         $new_item->setCategories(array($default_term->term_id=>$default_term->name));
         $new_item->save();

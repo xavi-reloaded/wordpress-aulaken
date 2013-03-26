@@ -28,5 +28,24 @@ class AulaCourseItemTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("course name", $this->sut->getTitle());
         $this->assertEquals("course short name", $this->sut->getShortName());
     }
+
+
+    function providerSummaries() {
+        return array(
+            array("this is a sample of the summary", "this is a sample of the summary"),
+            array("this is a sample of the summary asdfsad asdfsadf asdf asdf asdf sdadf asdf asdf asdf sadfs a dfasdf sadfasd asdf asdf asdfthis is a sample of the summary asdfsad asdfsadf asdf asdf asdf sdadf asdf asdf asdf sadfs a dfasdf sadfasd asdf asdf asdfthis is a sample of the summary asdfsad asdfsadf asdf asdf asdf sdadf asdf asdf asdf sadfs a dfasdf sadfasd asdf asdf asdfthis is a sample of the summary asdfsad asdfsadf asdf asdf asdf sdadf asdf asdf asdf sadfs a dfasdf sadfasd asdf asdf asdfthis is a sample of the summary asdfsad asdfsadf asdf asdf asdf sdadf asdf asdf asdf sadfs a dfasdf sadfasd asdf asdf asdfthis is a sample of the summary asdfsad asdfsadf asdf asdf asdf sdadf asdf asdf asdf sadfs a dfasdf sadfasd asdf asdf asdfthis is a sample of the summary asdfsad asdfsadf asdf asdf asdf sdadf asdf asdf asdf sadfs a dfasdf sadfasd asdf asdf asdfthis is a sample of the summary asdfsad asdfsadf asdf asdf asdf sdadf asdf asdf asdf sadfs a dfasdf sadfasd asdf asdf asdfthis is a sample of the summary asdfsad asdfsadf asdf asdf asdf sdadf asdf asdf asdf sadfs a dfasdf sadfasd asdf asdf asdfthis is a sample of the summary asdfsad asdfsadf asdf asdf asdf sdadf asdf asdf asdf sadfs a dfasdf sadfasd asdf asdf asdfthis is a sample of the summary asdfsad asdfsadf asdf asdf asdf sdadf asdf asdf asdf sadfs a dfasdf sadfasd asdf asdf asdfthis is a sample of the summary asdfsad asdfsadf asdf asdf asdf sdadf asdf asdf asdf sadfs a dfasdf sadfasd asdf asdf asdfthis is a sample of the summary asdfsad asdfsadf asdf asdf asdf sdadf asdf asdf asdf sadfs a dfasdf sadfasd asdf asdf asdfthis is a sample of the summary asdfsad asdfsadf asdf asdf asdf sdadf asdf asdf asdf sadfs a dfasdf sadfasd asdf asdf asdfthis is a sample of the summary asdfsad asdfsadf asdf asdf asdf sdadf asdf asdf asdf sadfs a dfasdf sadfasd asdf asdf asdf",
+                "this is a sample of the summary asdfsad asdfsadf asdf asdf asdf sdadf asdf asdf asdf sadfs a dfasdf sadfasd asdf asdf as..."),
+            array("", "")
+        );
+    }
+
+    /**
+     * @dataProvider providerSummaries
+     */
+    public function test_getDescriptionSummary_standart_string($summary, $expected_value)
+    {
+        $this->sut=new AulaCourseItem("course name","course short name",$summary);
+        $this->assertEquals($expected_value, $this->sut->getDescriptionSummary());
+    }
 }
 ?>

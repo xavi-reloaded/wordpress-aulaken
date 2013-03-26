@@ -296,8 +296,10 @@ class AulaWordpress implements IAulaWordpress {
 
         if ($nonce_verified) {
             $title = $_REQUEST['post_title'];
+            $summary = $_REQUEST['post_summary'];
             $new_item_order = wp_count_posts($this->custom_post_course_name)->publish + 1;
-            $new_item = AulaCourseDAO::saveDeliberaPortal($title,$new_item_order);
+
+            $new_item = AulaCourseDAO::saveCourseItem($title,$new_item_order,$summary);
             // wp_redirect( self_admin_url("admin.php?page=delibera&id=".$new_item->getId()) );
             header('Location: admin.php?page=aula&id=' . $new_item->getId()); die;
         }

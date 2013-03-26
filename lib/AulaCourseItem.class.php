@@ -6,6 +6,9 @@
  * Time: 13:02
  * To change this template use File | Settings | File Templates.
  */
+
+require_once(dirname(__FILE__) . '/AulaHelper.class.php');
+
 class AulaCourseItem
 {
     public $id;
@@ -46,10 +49,11 @@ class AulaCourseItem
     public $word_for_authenticated_user;
     public $word_for_authenticated_user_on_frontpage;
 
-    function __construct($title="",$shortname="")
+    function __construct($title="",$shortname="",$summary="")
     {
         $this->title = $title;
         $this->shortname = $shortname;
+        $this->summary = $summary;
 
     }
 
@@ -71,6 +75,7 @@ class AulaCourseItem
         $params['menu_order']   = $this->order;
         $params['post_date']    = $this->date;
         $params['post_status']  = 'publish';
+
 
         if ($this->id > 0) {
             $params['ID'] = $this->id;
