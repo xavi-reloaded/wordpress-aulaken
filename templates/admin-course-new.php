@@ -41,8 +41,12 @@
                     <?php if ( post_type_supports($post_type, 'title') ) { ?>
                         <div id="titlediv">
                             <div id="titlewrap">
-                                <label class="screen-reader-text" id="title-prompt-text" for="title"><?php echo apply_filters( 'enter_title_here', __( 'Enter title here' ), $post ); ?></label>
+                                <label class="screen-reader-text" id="title-prompt-text" for="title"><?php echo apply_filters( 'enter_name_course_here', __( 'Enter name or the course here' ), $post ); ?></label>
                                 <input type="text" name="post_title" size="30" value="<?php echo esc_attr( htmlspecialchars( $post->post_title ) ); ?>" id="title" autocomplete="off" />
+                            </div>
+                            <div id="titlewrap">
+                                <label class="screen-reader-text" id="shortname-prompt-text" for="shortname"><?php echo apply_filters( 'enter_name_course_here', __( 'Enter a shortname, maybe an intelligent codify description ?' ), $post ); ?></label>
+                                <input type="text" name="post_shortname" size="30" value="<?php echo esc_attr( htmlspecialchars( $post->post_title ) ); ?>" id="shortname" autocomplete="off" />
                             </div>
                             <div class="inside">
                                 <?php
@@ -75,7 +79,7 @@
                         ?>
                         <div id="postdivrich" class="postarea">
 
-                            <?php wp_editor($post->post_content, 'post_summary', array('dfw' => true, 'tabfocus_elements' => 'sample-permalink,post-preview', 'editor_height' => 360) ); ?>
+                            <?php wp_editor($post->post_content, 'post_summary', array('dfw' => true, 'tabfocus_elements' => 'sample-permalink,post-preview', 'editor_height' => 280) ); ?>
 
                             <table id="post-status-info" cellspacing="0"><tbody><tr>
                                     <td id="wp-word-count"><?php printf( __( 'Word count: %s' ), '<span class="word-count">0</span>' ); ?></td>
@@ -132,7 +136,6 @@
         </div><!-- /poststuff -->
 
         <?php wp_nonce_field( 'aula-create-course', '_aula_create_course_nonce', false, true ) ?>
-        <input type="submit" name="save" value="<?php _e("Create", "aula") ?>" class="button-primary" />
     </form>
 </div>
 

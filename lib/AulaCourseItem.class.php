@@ -54,7 +54,7 @@ class AulaCourseItem
         $this->title = $title;
         $this->shortname = $shortname;
         $this->summary = $summary;
-
+        $this->categories = array();
     }
 
 
@@ -98,9 +98,12 @@ class AulaCourseItem
         //$this->updatePostMeta();
 
         // update post terms
-        // NOTE: this is the one instance where $this->categories should be an array on term ids, otherwise
-        //       it is an array of term names keyed by term id.
-        $terms_set = wp_set_object_terms($this->id, $this->categories, $this->_custom_tax_name);
+        // NOTE: $this->categories must be an array on term ids, otherwise it is an array of term names keyed by term id.
+
+        $termIdArray = AulaHelper::getTermIdArrayFromCategory($this->categories);
+        $terms_set = wp_set_object_terms($this->id, $termIdArray, "aula-taxonomy");
+
+//        wp_set_post_categories( $this->id, $this->categories );
         if ($terms_set instanceof WP_Error) {
             return __("Could not set categories, please try again.", 'aula');
         }
@@ -205,6 +208,11 @@ class AulaCourseItem
     public function getShortName()
     {
         return $this->shortname;
+    }
+
+    public function setShortname($shortname)
+    {
+        $this->shortname=$shortname;
     }
 
 

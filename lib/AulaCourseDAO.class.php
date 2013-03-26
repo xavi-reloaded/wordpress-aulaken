@@ -64,7 +64,7 @@ class AulaCourseDAO
             $item->date         = $post->post_date;
             $item->categories   = array();
             $item->order        = $post->menu_order;
-            $item->post_name   = $post->post_name;
+            $item->post_name    = $post->post_name;
 
             $item_cats = array();
             if ($load_categories) {
@@ -129,14 +129,14 @@ class AulaCourseDAO
         return $item;
     }
 
-    public static function saveCourseItem($title, $new_item_order,$summary="")
+    public static function saveCourseItem($title, $new_item_order,$summary="",$tax_input=null,$shortname="")
     {
         $new_item = new AulaCourseItem();
         $new_item->setTitle($title);
         $new_item->setOrder($new_item_order);
         $new_item->setSummary($summary);
-        $default_term = '';
-        $new_item->setCategories(array($default_term->term_id=>$default_term->name));
+        $new_item->setCategories($tax_input);
+        $new_item->setShortname($shortname);
         $new_item->save();
         return $new_item;
     }

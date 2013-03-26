@@ -15,9 +15,18 @@
 
 class AulaHelper {
 
-    /*****************************************************
-     **       - HELPER METHODS
-     *****************************************************/
+    public static function getTermIdArrayFromCategory($category) {
+        $termIdArray=array();
+        if (is_array($termIdArray)) {
+        foreach ($category["aula-taxonomy"] as $key => $value) {
+            if($key>0) array_push($termIdArray,(int)$value);
+        }}
+
+        return $termIdArray;
+
+
+    }
+
     public static function processPostMeta($meta, $obj) {
 
         // deserialize meta if necessary

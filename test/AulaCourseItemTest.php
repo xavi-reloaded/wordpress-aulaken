@@ -29,6 +29,15 @@ class AulaCourseItemTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("course short name", $this->sut->getShortName());
     }
 
+    public function test_setCategories_withValues_saveCategories()
+    {
+        $this->sut=new AulaCourseItem("course name","course short name");
+        $dummy=array("aula-taxonomy" => array(0,8));
+        $this->sut->setCategories($dummy);
+
+        $this->assertEquals($dummy, $this->sut->getCategories());
+    }
+
 
     function providerSummaries() {
         return array(
@@ -47,5 +56,7 @@ class AulaCourseItemTest extends PHPUnit_Framework_TestCase
         $this->sut=new AulaCourseItem("course name","course short name",$summary);
         $this->assertEquals($expected_value, $this->sut->getDescriptionSummary());
     }
+
+
 }
 ?>

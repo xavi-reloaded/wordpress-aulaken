@@ -14,7 +14,7 @@ require_once(dirname(__FILE__) . '/AulaMetaboxHelper.class.php');
 class AulaWordpress implements IAulaWordpress {
 
     public $metaBoxHelper;
-    private $custom_tax_name          = "aula-taxonomy-test";
+    private $custom_tax_name          = "aula-taxonomy";
     private $custom_user_meta_name    = "aula_screen_settings";
     private $custom_post_course_name  = "aula-course";
     private $custom_post_lesson_name   = "aula-lesson";
@@ -46,7 +46,7 @@ class AulaWordpress implements IAulaWordpress {
 
 
         // attempt to load public settings, default to private if options not available
-        $public_posts_enabled = (isset($this->options['public_posts']))?     $this->options['public_posts'] : false;
+        $public_posts_enabled = (isset($this->options['public_posts']))?     $this->options['public_posts'] : true;
         $public_posts_slug    = (isset($this->options['public_post_slug']))? array('slug'=>$this->options['public_post_slug']) : true;
         $public_tax_slug      = (isset($this->options['public_tax_slug']))?  array('slug'=>$this->options['public_tax_slug']) : true;
 
@@ -83,7 +83,7 @@ class AulaWordpress implements IAulaWordpress {
         $params = array();
         $params['label']                = __("Aula Category", 'aula');
         $params['public']                = $public_posts_enabled;
-        $params['show_ui']               = false;
+        $params['show_ui']               = true;
         $params['show_tagcloud']         = true;
         $params['hierarchical']          = true;
         $params['rewrite']               = $public_tax_slug;
@@ -307,9 +307,13 @@ class AulaWordpress implements IAulaWordpress {
         if ($nonce_verified) {
             $title = $_REQUEST['post_title'];
             $summary = $_REQUEST['post_summary'];
+            $shortname = $_REQUEST['post_shortname'];
+            $tax_input = $_REQUEST['tax_input'];
+
             $new_item_order = wp_count_posts($this->custom_post_course_name)->publish + 1;
 
-            $new_item = AulaCourseDAO::saveCourseItem($title,$new_item_order,$summary);
+            $new_item = AulaCourseDAO::saveCourseItem($title,$new_item_order,$summary,$tax_input,$shortname);
+
             // wp_redirect( self_admin_url("admin.php?page=delibera&id=".$new_item->getId()) );
             header('Location: admin.php?page=aula&id=' . $new_item->getId()); die;
         }
@@ -318,7 +322,7 @@ class AulaWordpress implements IAulaWordpress {
         }
         if (!$init_run && $error !== false) {
             $this->wp_error($error);
-            include_once($this->directories['template'] . '/admin-aula.php');
+            include_once($this->directories['template'] . '/admin-portals.php');
         }
 
     }
@@ -359,11 +363,19 @@ class AulaWordpress implements IAulaWordpress {
 
     public function admin_course_new()
     {
-        add_meta_box( 'submitdiv', __( 'Publish Course' ), array( &$this->metaBoxHelper, 'render_meta_box_content' ), null, 'side', 'core');
+
+        wp_enqueue_script('post');
+
+        if ( wp_is_mobile() )
+            wp_enqueue_script( 'jquery-touch-punch' );
+
+        add_meta_box( 'submitdiv', __( 'Publish Course' ), array( &$this->metaBoxHelper, 'post_submit_meta_box' ), null, 'side', 'core');
+        add_meta_box( 'categoriesdiv', __( 'Course Categories' ), array( &$this->metaBoxHelper, 'post_categories_meta_box' ), null, 'side', 'core');
         add_meta_box( 'lessonsdiv', __( 'Lessons' ), array( &$this->metaBoxHelper, 'render_meta_box_lessons' ), null, 'normal', 'core');
 
         $post_new_file=true;
         $post_type=$this->custom_post_course_name;
+        $form_action="editpost";
 
 //        do_action('add_meta_boxes', '', $post);
 //        add_meta_box( 'submitdiv', __( 'Publish' ), 'post_submit_meta_box', null, 'side', 'core' );
