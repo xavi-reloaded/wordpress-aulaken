@@ -357,6 +357,7 @@ class AulaWordpress implements IAulaWordpress {
     public function admin_course_new()
     {
         add_meta_box( 'submitdiv', __( 'Publish Course' ), array( &$this, 'render_meta_box_content' ), null, 'side', 'core');
+        add_meta_box( 'wekediv', __( 'Lessons' ), array( &$this, 'render_meta_box_content2' ), null, 'normal', 'core');
         $post_new_file=true;
         $post_type=$this->custom_post_course_name;
 
@@ -410,6 +411,14 @@ class AulaWordpress implements IAulaWordpress {
     public function render_meta_box_content()
     {
         echo '<h1>TEST OUTPUT - this gets rendered inside the meta box.</h1>';
+    }
+
+    /**
+     * Render Meta Box content
+     */
+    public function render_meta_box_content2()
+    {
+        echo '<h1>TEST OUTPUT - this gets rendered inside the meta box.22222</h1>';
     }
 
 

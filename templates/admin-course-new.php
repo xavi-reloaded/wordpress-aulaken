@@ -71,7 +71,6 @@
 
                     do_action( 'edit_form_after_title' );
 
-                    echo "antes del supports editor $post_type";
                     if ( post_type_supports($post_type, 'editor') ) {
                         ?>
                         <div id="postdivrich" class="postarea">
@@ -105,12 +104,9 @@
                 <div id="postbox-container-1" class="postbox-container">
                     <?php
 
-                    if ( 'page' == $post_type )
-                        do_action('submitpage_box');
-                    else
-                        do_action('submitpost_box');
-
-                    do_meta_boxes($post_type, 'side', $post);
+                    do_action('submitpost_box');
+// IMPORTANT METABOX 1
+                    do_meta_boxes(null, 'side', $post);
 
                     ?>
                 </div>
@@ -121,6 +117,7 @@
 
                     do_action('edit_form_advanced');
 
+                    // IMPORTANT METABOX 2
                     do_meta_boxes(null, 'advanced', $post);
 
                     ?>
