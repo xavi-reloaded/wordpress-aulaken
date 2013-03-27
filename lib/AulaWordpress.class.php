@@ -416,7 +416,10 @@ class AulaWordpress implements IAulaWordpress {
 
         add_meta_box('submitdiv', __('Publish Course'), array(&$this->metaBoxHelper, 'post_submit_meta_box'), null, 'side', 'core');
         add_meta_box('categoriesdiv', __('Course Categories'), array(&$this->metaBoxHelper, 'post_categories_meta_box'), null, 'side', 'core');
-        add_meta_box('lessonsdiv', __('Lessons'), array(&$this->metaBoxHelper, 'render_meta_box_lessons'), null, 'normal', 'core');
+        add_meta_box('lessonslistdiv', __('Lessons'), array(&$this->metaBoxHelper, 'post_lessons_meta_box'), null, 'side', 'core');
+
+
+        add_meta_box('lessonspaneldiv', __('Lessons'), array(&$this->metaBoxHelper, 'render_meta_box_lessons'), null, 'normal', 'core');
     }
 
     public function render_aula_admin_message() {
