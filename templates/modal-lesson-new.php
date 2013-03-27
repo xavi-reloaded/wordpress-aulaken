@@ -10,9 +10,7 @@ header('Content-Type: text/html; charset=' . get_bloginfo('charset'));
     <meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php echo get_option('blog_charset'); ?>" />
     <title><?php _e('Lesson'); ?></title>
     <script type="text/javascript" src="<?php echo get_option('siteurl') ?>/wp-includes/js/tinymce/tiny_mce_popup.js?ver=358-20121205"></script>
-    <?php
-    wp_admin_css( 'wp-admin', true );
-    ?>
+
     <style type="text/css">
         body {
             min-width: 0;
@@ -150,8 +148,11 @@ header('Content-Type: text/html; charset=' . get_bloginfo('charset'));
     <script src="angular/app/lib/angular/angular.js"></script>
     <link rel="stylesheet" href="angular/app/css/bootstrap.css"/>
     <link rel="stylesheet" href="angular/app/css/app.css"/>
+    <?php wp_admin_css( 'wp-admin', true ); ?>
 
     <!-- jQuery --> <!-- comes with wp! -->
+    <script src="angular/app/lib/jquery/jquery.min.js" type="text/javascript"></script>
+    <script src="angular/app/lib/jquery/jquery-ui.min.js" type="text/javascript"></script>
     <!-- Wijmo CSS and script -->
     <link href="angular/app/lib/wijmo/themes/cobalt/jquery-wijmo.css" rel="stylesheet" title="metro-jqueryui" type="text/css" />
     <link href="angular/app/lib/wijmo/jquery.wijmo-complete.all.2.3.2.min.css" rel="stylesheet" type="text/css" />
@@ -162,7 +163,7 @@ header('Content-Type: text/html; charset=' . get_bloginfo('charset'));
     <script src="angular/app/lib/wijmo/angular.wijmo.js" type="text/javascript"></script>
 
 </head>
-<body class="windows wp-core-ui">
+<body class="windows wp-core-ui" ng-controller="lessonForm">
 <script type="text/javascript">
     if ( tinymce.isMac )
         document.body.className = document.body.className.replace(/windows/, 'macos');
@@ -176,79 +177,38 @@ header('Content-Type: text/html; charset=' . get_bloginfo('charset'));
     <li><a id="tab4" href="javascript:flipTab(4)" title="<?php esc_attr_e('Business Model'); ?>" accesskey="4"><?php _e('eCommerce'); ?></a></li>
 </ul>
 
-<form id="lesson-modal" class="clear_float" method="post" >
-    <input type="hidden" id="referredby" name="referredby" value="<?php echo esc_url(stripslashes(wp_get_referer())); ?>" />
-    <input type="hidden" id="parent_course" name="parent_course" value="<?php echo $parent_course; ?>" />
 
-    <div id="flipper" class="wrap">
+
+<div id="flipper" class="wrap"  >
+
+    <form class="clear_float" method="post" name="myLessonForm">
+
+        <input type="hidden" id="referredby" name="referredby" value="<?php echo esc_url(stripslashes(wp_get_referer())); ?>" />
+        <input type="hidden" id="parent_course" name="parent_course" value="<?php echo $parent_course; ?>" />
 
         <div id="content1">
             <h2><?php _e('Lessons Management'); ?></h2>
 
             <div id="titlediv">
                 <div id="titlewrap">
-                    <label class="screen-reader-text" id="title-prompt-text" for="title"><?php echo apply_filters( 'enter_name_course_here', __( 'Enter name or the course here' ), $post ); ?></label>
-                    <input type="text" name="post_title" size="30" value="<?php echo esc_attr( htmlspecialchars( $post->post_title ) ); ?>" id="title" autocomplete="off" />
+                    <label class="screen-reader-text" id="title-prompt-text" for="lesson_title">Lesson Name</label>
+                    <input type="text" ng-model="form.name" required/>
                 </div>
-                <div id="titlewrap">
-                    <label class="screen-reader-text" id="shortname-prompt-text" for="shortname"><?php echo apply_filters( 'enter_name_course_here', __( 'Enter a shortname, maybe an intelligent codify description ?' ), $post ); ?></label>
-                    <input type="text" name="post_shortname" size="30" value="<?php echo esc_attr( htmlspecialchars( $post->post_title ) ); ?>" id="shortname" autocomplete="off" />
-                </div>
-                <div class="inside">
-                    <?php
-                    $sample_permalink_html = $post_type_object->public ? get_sample_permalink_html($post->ID) : '';
-                    $shortlink = wp_get_shortlink($post->ID, 'post');
-                    if ( !empty($shortlink) )
-                        $sample_permalink_html .= '<input id="shortlink" type="hidden" value="' . esc_attr($shortlink) . '" /><a href="#" class="button button-small" onclick="prompt(&#39;URL:&#39;, jQuery(\'#shortlink\').val()); return false;">' . __('Get Shortlink') . '</a>';
-
-                    if ( $post_type_object->public && ! ( 'pending' == get_post_status( $post ) && !current_user_can( $post_type_object->cap->publish_posts ) ) ) { ?>
-                        <div id="edit-slug-box" class="hide-if-no-js">
-                            <?php
-                            if ( $sample_permalink_html && 'auto-draft' != $post->post_status )
-                                echo $sample_permalink_html;
-                            ?>
-                        </div>
-                    <?php
-                    }
-                    ?>
-                </div>
-                <?php
-                wp_nonce_field( 'samplepermalink', 'samplepermalinknonce', false );
-                ?>
             </div>
-            <?if ( post_type_supports($post_type, 'editor') || true) {
-                ?>
-                <div id="lessondivrich" class="postarea">
-
-                    <?php wp_editor($post->post_content, 'lesson_summary', array('dfw' => true, 'tabfocus_elements' => 'sample-permalink,post-preview', 'editor_height' => 100) ); ?>
-
-                    <table id="post-status-info" cellspacing="0"><tbody><tr>
-                            <td id="wp-word-count"><?php printf( __( 'Word count: %s' ), '<span class="word-count">0</span>' ); ?></td>
-                            <td class="autosave-info">
-                                <span class="autosave-message">&nbsp;</span>
-                                <?php
-                                if ( 'auto-draft' != $post->post_status ) {
-                                    echo '<span id="last-edit">';
-                                    if ( $last_id = get_post_meta($post_ID, '_edit_last', true) ) {
-                                        $last_user = get_userdata($last_id);
-                                        printf(__('Last edited by %1$s on %2$s at %3$s'), esc_html( $last_user->display_name ), mysql2date(get_option('date_format'), $post->post_modified), mysql2date(get_option('time_format'), $post->post_modified));
-                                    } else {
-                                        printf(__('Last edited on %1$s at %2$s'), mysql2date(get_option('date_format'), $post->post_modified), mysql2date(get_option('time_format'), $post->post_modified));
-                                    }
-                                    echo '</span>';
-                                } ?>
-                            </td>
-                        </tr></tbody>
-                    </table>
-
-                </div>
-            <?php } ?>
+            <div id="lessondivrich" class="postarea">
+                <input type="text"  ng-model="form.summary" required/>
+            </div>
 
 
         </div>
 
         <div id="content2" class="hidden">
             <h2><?php _e('Lesson Activities'); ?></h2>
+            [ <a href="" ng-click="addActivity()">add</a> ]
+            <div ng-repeat="activity in form.activities">
+                <input type="text" ng-model="activity.value" required/>
+                [ <a href="" ng-click="removeActivity(activity)">X</a> ]
+            </div>
 
         </div>
 
@@ -261,17 +221,21 @@ header('Content-Type: text/html; charset=' . get_bloginfo('charset'));
             <h2><?php _e('Business Model'); ?></h2>
 
         </div>
-    </div>
+
+    </form>
+
+</div>
 
 
 
-    <div class="mceActionPanel">
-        <div style="margin: 8px auto; text-align: center;padding-bottom: 10px;">
-            <input type="submit"/>
-        </div>
-    </div>
+<div class="navbar-fixed-bottom">
+    <hr/>
+    <button ng-click="cancel()" ng-disabled="isCancelDisabled()">Cancel</button>
+    <button ng-click="save()" ng-disabled="isSaveDisabled()">set my profile</button>
 
-</form>
+</div>
+
+
 
 
 <script type="text/javascript">
@@ -292,19 +256,11 @@ header('Content-Type: text/html; charset=' . get_bloginfo('charset'));
             }
         }
     }
-
-    tinyMCEPopup.onInit.add(function() {
-        var win = tinyMCEPopup.getWin();
-
-        d('version').innerHTML = tinymce.majorVersion + "." + tinymce.minorVersion;
-        d('date').innerHTML = tinymce.releaseDate;
-
-        if ( win.fullscreen && win.fullscreen.settings.visible ) {
-            d('content1').className = 'hidden';
-            d('tabs').className = 'hidden';
-            d('content3').className = 'dfw';
-        }
-    });
 </script>
+<script src="angular/app/js/app.js"></script>
+<script src="angular/app/js/services.js"></script>
+<script src="angular/app/js/controllers.js"></script>
+<script src="angular/app/js/filters.js"></script>
+<script src="angular/app/js/directives.js"></script>
 </body>
 </html>
