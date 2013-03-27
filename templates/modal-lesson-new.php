@@ -5,7 +5,7 @@ require_once('../../../../wp-load.php');
 header('Content-Type: text/html; charset=' . get_bloginfo('charset'));
 ?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
+<html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?> ng-app="wijmo">
 <head>
     <meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php echo get_option('blog_charset'); ?>" />
     <title><?php _e('Lesson'); ?></title>
@@ -146,16 +146,21 @@ header('Content-Type: text/html; charset=' . get_bloginfo('charset'));
             td b { font-family: Tahoma, "Times New Roman", Times, serif }
         </style>
     <?php endif; ?>
-    <?
-//    wp_enqueue_script( 'common' );
-//    wp_enqueue_script('utils');
-//    wp_print_scripts('editor');
-//    wp_enqueue_script('word-count');
-//    wp_print_scripts('media-upload');
-//    wp_enqueue_script('post');
-//    if ( wp_is_mobile() )
-//        wp_enqueue_script( 'jquery-touch-punch' );
-    ?>
+
+    <script src="angular/app/lib/angular/angular.js"></script>
+    <link rel="stylesheet" href="angular/app/css/bootstrap.css"/>
+    <link rel="stylesheet" href="angular/app/css/app.css"/>
+
+    <!-- jQuery --> <!-- comes with wp! -->
+    <!-- Wijmo CSS and script -->
+    <link href="angular/app/lib/wijmo/themes/cobalt/jquery-wijmo.css" rel="stylesheet" title="metro-jqueryui" type="text/css" />
+    <link href="angular/app/lib/wijmo/jquery.wijmo-complete.all.2.3.2.min.css" rel="stylesheet" type="text/css" />
+
+    <script src="angular/app/lib/wijmo/jquery.wijmo-open.all.2.3.2.min.js" type="text/javascript"></script>
+    <script src="angular/app/lib/wijmo/jquery.wijmo-complete.all.2.3.2.min.js" type="text/javascript"></script>
+
+    <script src="angular/app/lib/wijmo/angular.wijmo.js" type="text/javascript"></script>
+
 </head>
 <body class="windows wp-core-ui">
 <script type="text/javascript">
