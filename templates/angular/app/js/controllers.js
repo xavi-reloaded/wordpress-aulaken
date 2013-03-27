@@ -48,4 +48,7 @@ function lessonForm($scope) {
 
     $scope.cancel();
 
+    $scope.list = ["one", "two", "three", "four", "five", "six"];
+
 }
+

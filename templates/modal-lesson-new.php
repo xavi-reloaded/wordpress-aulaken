@@ -129,6 +129,18 @@ header('Content-Type: text/html; charset=' . get_bloginfo('charset'));
         .windows .mac {
             display: none;
         }
+
+        .item, .placeholder {
+            padding: 2px;
+            width: 50px;
+            height: 20px;
+            border: 1px solid #333;
+            background: #EEE;
+        }
+
+        .placeholder {
+            background: #AEF;
+        }
     </style>
     <?php if ( is_rtl() ) : ?>
         <style type="text/css">
@@ -146,6 +158,7 @@ header('Content-Type: text/html; charset=' . get_bloginfo('charset'));
     <?php endif; ?>
 
     <script src="angular/app/lib/angular/angular.js"></script>
+    <script src="angular/app/lib/angular/angular-ui.min.js"></script>
     <link rel="stylesheet" href="angular/app/css/bootstrap.css"/>
     <link rel="stylesheet" href="angular/app/css/app.css"/>
     <?php wp_admin_css( 'wp-admin', true ); ?>
@@ -203,12 +216,15 @@ header('Content-Type: text/html; charset=' . get_bloginfo('charset'));
         </div>
 
         <div id="content2" class="hidden">
+
             <h2><?php _e('Lesson Activities'); ?></h2>
             [ <a href="" ng-click="addActivity()">add</a> ]
             <div ng-repeat="activity in form.activities">
                 <input type="text" ng-model="activity.value" required/>
                 [ <a href="" ng-click="removeActivity(activity)">X</a> ]
             </div>
+
+
 
         </div>
 
@@ -220,12 +236,17 @@ header('Content-Type: text/html; charset=' . get_bloginfo('charset'));
         <div id="content4" class="hidden">
             <h2><?php _e('Business Model'); ?></h2>
 
+            <ul ui-sortable ng-model="list">
+                <li ng-repeat="item in list" class="item">{{item}}</li>
+            </ul>
+            <hr />
+            <div ng-repeat="item in list">{{item}}</div>
+
         </div>
 
     </form>
 
 </div>
-
 
 
 <div class="navbar-fixed-bottom">
