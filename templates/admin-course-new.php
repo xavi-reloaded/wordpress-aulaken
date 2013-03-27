@@ -110,7 +110,7 @@
                     <?php
 
                     do_action('submitpost_box');
-// IMPORTANT METABOX 1
+                    // IMPORTANT METABOX 1
                     do_meta_boxes(null, 'side', $post);
 
                     ?>

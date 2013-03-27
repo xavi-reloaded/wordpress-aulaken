@@ -155,27 +155,42 @@ class AulaWordpress implements IAulaWordpress {
     public function admin_print_styles()
     {
         $aula_page = strpos($_SERVER['QUERY_STRING'], 'page=aula') !== false;
+
         if ($aula_page) {
             wp_enqueue_style('farbtastic');
             wp_enqueue_style('aula-admin-css', $this->urls['css'] . '/aula-admin.css', false, $this->version);
+            wp_admin_css();
         }
     }
 
     public function admin_enqueue_scripts()
     {
+
         wp_enqueue_script( 'common' );
-        wp_enqueue_script( 'jquery-color' );
-        wp_print_scripts('editor');
+        wp_enqueue_script('utils');
+
+        if (function_exists('wp_tiny_mce')) wp_tiny_mce();
         if (function_exists('add_thickbox')) add_thickbox();
+
+        wp_enqueue_script('jquery-ui-widget');
+        wp_enqueue_script('jquery-ui-tabs');
+        wp_enqueue_script('jquery-color');
+
+        wp_enqueue_script('jquery');
+        wp_enqueue_script('thickbox',null,array('jquery'));
+        wp_enqueue_style( 'thickbox');
+
+        wp_print_scripts('editor');
         wp_enqueue_script('word-count');
         wp_print_scripts('media-upload');
-        if (function_exists('wp_tiny_mce')) wp_tiny_mce();
-        wp_admin_css();
-        wp_enqueue_script('utils');
-        do_action("admin_print_styles-post-php");
-        do_action('admin_print_styles');
+
+
+//        wp_enqueue_script($this, plugins_url().'/wordpress-aulaken/lib/thkBox/tinymce/editor_plugin.js',array(),false,true);
 
     }
+
+
+
 
     public function screen_settings($current, $screen)
     {
@@ -398,6 +413,7 @@ class AulaWordpress implements IAulaWordpress {
         wp_enqueue_script('post');
         if ( wp_is_mobile() )
             wp_enqueue_script( 'jquery-touch-punch' );
+
         add_meta_box('submitdiv', __('Publish Course'), array(&$this->metaBoxHelper, 'post_submit_meta_box'), null, 'side', 'core');
         add_meta_box('categoriesdiv', __('Course Categories'), array(&$this->metaBoxHelper, 'post_categories_meta_box'), null, 'side', 'core');
         add_meta_box('lessonsdiv', __('Lessons'), array(&$this->metaBoxHelper, 'render_meta_box_lessons'), null, 'normal', 'core');
@@ -442,6 +458,7 @@ class AulaWordpress implements IAulaWordpress {
         $course = AulaCourseDAO::getItem($_REQUEST['id']);
 
         $this->addMetaBoxForNewForm();
+
 
         $post_new_file=false;
         $post_type=$this->custom_post_course_name;

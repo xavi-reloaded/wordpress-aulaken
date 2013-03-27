@@ -94,7 +94,7 @@ class Aula implements IAulaWordpress {
         if (is_admin()) {
             // register admin menus, stylesheets and javascript libraries
             add_action('admin_menu', array(&$this, 'admin_menu'));
-//            add_action('admin_print_styles', array(&$this, 'admin_print_styles'));
+            add_action('admin_print_styles', array(&$this, 'admin_print_styles'));
             add_action('admin_enqueue_scripts', array(&$this, 'admin_enqueue_scripts'));
 
             // register help and screen settings panel
