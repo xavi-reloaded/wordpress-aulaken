@@ -13,14 +13,7 @@ class AulaMetaboxHelper {
 
     public function render_meta_box_lessons()
     {
-?>
-        <h1>TEST OUTPUT - que passa wein</h1><br/>
-
-<!--        <a href="--><?//=plugins_url()?><!--/wordpress-aulaken/templates/mce.php?KeepThis=trueTB_iframe=true&width=600&height=550" class="thickbox">View my inline content!</a>-->
-        <a onclick="tb_show('Lessons','<?=plugins_url()?>/wordpress-aulaken/templates/modal-lesson-new.php?KeepThis=trueTB_iframe=true&height=430&width=600')" href="#" title="test2">Test2</a>
-<?
-
-
+        echo '<h1>TEST OUTPUT - que passa wein</h1><br/>';
     }
 
     /**

@@ -48,6 +48,7 @@
                             <div id="titlewrap">
                                 <label class="screen-reader-text" id="shortname-prompt-text" for="shortname"><?php echo apply_filters( 'enter_name_course_here', __( 'Enter a shortname, maybe an intelligent codify description ?' ), $post ); ?></label>
                                 <input type="text" name="post_shortname" size="30" value="<?php echo esc_attr( htmlspecialchars( $post->post_title ) ); ?>" id="shortname" autocomplete="off" />
+                                <a class="add-new-h2" onclick="tb_show('Lessons','<?=plugins_url()?>/wordpress-aulaken/templates/modal-lesson-new.php?KeepThis=trueTB_iframe=true&height=430&width=600')" href="#" title="test2">Add new Lesson</a>
                             </div>
                             <div class="inside">
                                 <?php
