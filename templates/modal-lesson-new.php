@@ -14,6 +14,13 @@ header('Content-Type: text/html; charset=' . get_bloginfo('charset'));
     <script src="angular/app/lib/angular/angular.js"></script>
     <link href="../css/bootstrap-combined.min.css" rel="stylesheet">
 
+    <script src="../js/ui-bootstrap-tpls-0.2.0.js" type="text/javascript"></script>
+
+    <script src="../js/ui-bootstrap-apium.js" type="text/javascript"></script>
+    <link href="../css/bootstrap-apium.css" rel="stylesheet">
+
+    <script src="angular/app/lib/angular/angular-ui.min.js"></script>
+
 
 
 </head>
@@ -44,19 +51,19 @@ header('Content-Type: text/html; charset=' . get_bloginfo('charset'));
 
         <pane heading="<?php _e('Success Workflow'); ?>">
 
-            <accordion close-others="oneAtATime">
-                <accordion-group heading="Static Header">
+            <apiumac close-others="oneAtATime">
+                <apiumac-group heading="Static Header">
                     This content is straight in the template.
-                </accordion-group>
-                <accordion-group heading="{{group.title}}" ng-repeat="group in groups">
+                </apiumac-group>
+                <apiumac-group heading="{{group.title}}" ng-repeat="group in groups">
                     {{group.content}}
-                </accordion-group>
-                <accordion-group heading="Dynamic Body Content">
+                </apiumac-group>
+                <apiumac-group heading="Dynamic Body Content">
                     <p>The body of the accordion group grows to fit the contents</p>
                     <button class="btn btn-small" ng-click="addItem()">Add Item</button>
                     <div ng-repeat="item in items">{{item}}</div>
-                </accordion-group>
-            </accordion>
+                </apiumac-group>
+            </apiumac>
 
         </pane>
 
@@ -92,7 +99,5 @@ header('Content-Type: text/html; charset=' . get_bloginfo('charset'));
 <script src="angular/app/js/filters.js"></script>
 <script src="angular/app/js/directives.js"></script>
 
-<script src="../js/ui-bootstrap-tpls-0.2.0.js" type="text/javascript"></script>
-<script src="angular/app/lib/angular/angular-ui.min.js"></script>
 </body>
 </html>

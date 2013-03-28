@@ -8,5 +8,5 @@ angular.module('app', ['app.filters', 'app.services', 'app.directives']).
     $routeProvider.otherwise({redirectTo: '/partial1'});
   }]);
 
-angular.module('app', ['ui','ui.bootstrap']);
+angular.module('app', ['ui','ui.bootstrap','ui.bootstrap-apium']);
 
