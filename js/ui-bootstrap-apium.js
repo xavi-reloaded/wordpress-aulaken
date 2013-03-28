@@ -339,8 +339,9 @@ angular.module("template/apiumac/apiumac.html", []).run(["$templateCache", funct
 angular.module("template/apiumac/apiumac-group.html", []).run(["$templateCache", function($templateCache){
     $templateCache.put("template/apiumac/apiumac-group.html",
         "<div class=\"apiumac-group\">" +
-            "  <div class=\"apiumac-heading\" ><a class=\"apiumac-toggle\" ng-click=\"isOpen = !isOpen\" apiumac-transclude=\"heading\">{{heading}}</a></div>" +
+            "<div class=\"apiumac-heading\" ><a class=\"apiumac-toggle\" ng-click=\"isOpen = !isOpen\" apiumac-transclude=\"heading\">{{heading}}</a></div>" +
             "  <div class=\"apiumac-body\" collapse=\"!isOpen\">" +
-            "    <div class=\"apiumac-inner\" ng-transclude></div>  </div>" +
+            "    <div class=\"apiumac-inner\" ng-transclude></div>" +
+            "  </div>" +
             "</div>");
 }]);
