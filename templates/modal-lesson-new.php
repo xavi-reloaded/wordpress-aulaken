@@ -51,24 +51,30 @@ header('Content-Type: text/html; charset=' . get_bloginfo('charset'));
 
         <pane heading="<?php _e('Success Workflow'); ?>">
 
-            <apiumac close-others="oneAtATime">
-                <apiumac-group ng-repeat="activity in form.activities">
-                    <apiumac-heading><img src="{{activity.pix}}">{{activity.title}}</apiumac-heading>
-                    {{activity.content}}
-                </apiumac-group>
-            </apiumac>
+            <button class="btn btn-primary" ng-click="openDialog()">Open Dialog</button>
 
-            <apiumac close-others="oneAtATime">
-                <apiumac-group ng-repeat="activity in form.activities">
-                    <apiumac-heading><img src="{{activity.pix}}">{{activity.title}}</apiumac-heading>
-                    {{activity.content}}
-                </apiumac-group>
-                <apiumac-group heading="Dynamic Body Content">
-                    <p>The body of the accordion group grows to fit the contents</p>
-                    <button class="btn btn-small" ng-click="addItem()">Add Item</button>
-                    <div ng-repeat="item in items">{{item}}</div>
-                </apiumac-group>
-            </apiumac>
+            <tabs>
+                <pane heading="<?php _e('Activities'); ?>">
+                    <apiumac close-others="oneAtATime">
+                        <apiumac-group ng-repeat="activity in activities">
+                            <apiumac-heading><img src="{{activity.pix}}">{{activity.title}}</apiumac-heading>
+                            {{activity.content}}
+                        </apiumac-group>
+                    </apiumac>
+                </pane>
+
+                <pane heading="<?php _e('Resources'); ?>">
+
+                    <apiumac close-others="oneAtATime">
+                        <apiumac-group ng-repeat="resource in resources">
+                            <apiumac-heading><img src="{{activity.pix}}">{{resource.title}}</apiumac-heading>
+                            {{resource.content}}
+                        </apiumac-group>
+                    </apiumac>
+                </pane>
+            </tabs>
+
+
 
         </pane>
 
