@@ -144,6 +144,20 @@ angular.module('ui.bootstrap-apium.apiumac', ['ui.bootstrap-apium.collapse'])
         };
     });
 
+angular.module("template/apiumac/apiumac.html", []).run(["$templateCache", function($templateCache){
+    $templateCache.put("template/apiumac/apiumac.html",
+        "<div class=\"apiumac\" ng-transclude></div>");
+}]);
+
+angular.module("template/apiumac/apiumac-group.html", []).run(["$templateCache", function($templateCache){
+    $templateCache.put("template/apiumac/apiumac-group.html",
+        "<div class=\"apiumac-group\">" +
+            "<div class=\"apiumac-heading\" ><a class=\"apiumac-toggle\" ng-click=\"isOpen = !isOpen\" apiumac-transclude=\"heading\">{{heading}}</a></div>" +
+            "  <div class=\"apiumac-body\" collapse=\"!isOpen\">" +
+            "    <div class=\"apiumac-inner\" ng-transclude></div>" +
+            "  </div>" +
+            "</div>");
+}]);
 
 
 angular.module('ui.bootstrap-apium.collapse',['ui.bootstrap-apium.transition'])
@@ -331,17 +345,4 @@ angular.module('ui.bootstrap-apium.transition', [])
 
 
 
-angular.module("template/apiumac/apiumac.html", []).run(["$templateCache", function($templateCache){
-    $templateCache.put("template/apiumac/apiumac.html",
-        "<div class=\"apiumac\" ng-transclude></div>");
-}]);
 
-angular.module("template/apiumac/apiumac-group.html", []).run(["$templateCache", function($templateCache){
-    $templateCache.put("template/apiumac/apiumac-group.html",
-        "<div class=\"apiumac-group\">" +
-            "<div class=\"apiumac-heading\" ><a class=\"apiumac-toggle\" ng-click=\"isOpen = !isOpen\" apiumac-transclude=\"heading\">{{heading}}</a></div>" +
-            "  <div class=\"apiumac-body\" collapse=\"!isOpen\">" +
-            "    <div class=\"apiumac-inner\" ng-transclude></div>" +
-            "  </div>" +
-            "</div>");
-}]);

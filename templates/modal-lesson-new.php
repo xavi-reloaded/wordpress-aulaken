@@ -42,7 +42,7 @@ header('Content-Type: text/html; charset=' . get_bloginfo('charset'));
 
             [ <a href="" ng-click="addActivity()">add</a> ]
             <div ng-repeat="activity in form.activities">
-                <input type="text" ng-model="activity.value" required/>
+                <input type="text" ng-model="activity.title" required/>
                 [ <a href="" ng-click="removeActivity(activity)">X</a> ]
             </div>
 
@@ -52,11 +52,16 @@ header('Content-Type: text/html; charset=' . get_bloginfo('charset'));
         <pane heading="<?php _e('Success Workflow'); ?>">
 
             <apiumac close-others="oneAtATime">
-                <apiumac-group heading="Static Header">
-                    This content is straight in the template.
+                <apiumac-group ng-repeat="activity in form.activities">
+                    <apiumac-heading><img src="{{activity.pix}}">{{activity.title}}</apiumac-heading>
+                    {{activity.content}}
                 </apiumac-group>
-                <apiumac-group heading="{{group.title}}" ng-repeat="group in groups">
-                    {{group.content}}
+            </apiumac>
+
+            <apiumac close-others="oneAtATime">
+                <apiumac-group ng-repeat="activity in form.activities">
+                    <apiumac-heading><img src="{{activity.pix}}">{{activity.title}}</apiumac-heading>
+                    {{activity.content}}
                 </apiumac-group>
                 <apiumac-group heading="Dynamic Body Content">
                     <p>The body of the accordion group grows to fit the contents</p>

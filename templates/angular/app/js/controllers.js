@@ -8,9 +8,12 @@ function lessonForm($scope) {
         summary: 'family name 1',
 
         activities:[
-            {value:'Assignement',val:50,min:0,max:100}
+            {title:'Assignement',pix:'nothing.png',content:'This is the content for assignement'},
+            {title:'Lesson',pix:'nothing.png',content:'This is the content for lesson'}
         ]
     };
+
+    $scope.oneAtATime = true;
 
 
     $scope.cancel = function() {
@@ -50,18 +53,7 @@ function lessonForm($scope) {
 
     $scope.list = ["one", "two", "three", "four", "five", "six"];
 
-    $scope.oneAtATime = true;
 
-    $scope.groups = [
-        {
-            title: "Dynamic Group Header - 1",
-            content: "Dynamic Group Body - 1"
-        },
-        {
-            title: "Dynamic Group Header - 2",
-            content: "Dynamic Group Body - 2"
-        }
-    ];
 
     $scope.items = ['Item 1', 'Item 2', 'Item 3'];
 
