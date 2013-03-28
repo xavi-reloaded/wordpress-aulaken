@@ -50,5 +50,33 @@ function lessonForm($scope) {
 
     $scope.list = ["one", "two", "three", "four", "five", "six"];
 
+    $scope.oneAtATime = true;
+
+    $scope.groups = [
+        {
+            title: "Dynamic Group Header - 1",
+            content: "Dynamic Group Body - 1"
+        },
+        {
+            title: "Dynamic Group Header - 2",
+            content: "Dynamic Group Body - 2"
+        }
+    ];
+
+    $scope.items = ['Item 1', 'Item 2', 'Item 3'];
+
+    $scope.addItem = function() {
+        var newItemNo = $scope.items.length + 1;
+        $scope.items.push('Item ' + newItemNo);
+    };
+
+    $scope.panes = [
+        { title:"Lessons Management", templateUrl:"partial1.html" },
+        { title:"Lesson Activities", templateUrl:"Dynamic content 2" },
+        { title:"Success Workflow", templateUrl:"Dynamic content 3" },
+        { title:"Course Commerce", templateUrl:"Dynamic content 3" },
+
+    ];
+
 }
 
