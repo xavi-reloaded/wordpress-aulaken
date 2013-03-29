@@ -3,6 +3,7 @@
 require_once(dirname(__FILE__) . '/IAulaWordpress.class.php');
 require_once(dirname(__FILE__) . '/AulaCourseDAO.class.php');
 require_once(dirname(__FILE__) . '/AulaMetaboxHelper.class.php');
+require_once(dirname(__FILE__) . '/AulaAngularBootstrap.class.php');
 /**
  * Created by JetBrains PhpStorm.
  * User: xavi
@@ -165,6 +166,8 @@ class AulaWordpress implements IAulaWordpress {
 
     public function admin_enqueue_scripts()
     {
+        AulaAngularBootstrap::loadScripts();
+        AulaAngularBootstrap::loadCSS();
 
         wp_enqueue_script( 'common' );
         wp_enqueue_script('utils');

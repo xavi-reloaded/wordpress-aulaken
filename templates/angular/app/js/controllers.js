@@ -8,9 +8,8 @@ function lessonForm($scope,$dialog) {
         summary: '',
 
         activities:[
+            {title:'Assignment',pix:'assignment.png',content:'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.'},
 
-        ],
-        resources:[
         ]
     };
 
@@ -66,7 +65,7 @@ function lessonForm($scope,$dialog) {
         backdrop: true,
         keyboard: true,
         backdropClick: true,
-        templateUrl: 'angular/app/partials/partial-resource-dialog.html',
+        templateUrl: 'partials/partial-resource-dialog.html',
         controller: 'TestDialogController'
     };
 

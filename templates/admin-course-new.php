@@ -41,14 +41,15 @@
                 <div id="post-body-content">
                     <?php if ( post_type_supports($post_type, 'title') ) { ?>
                         <div id="titlediv">
-                            <div id="titlewrap">
+                            <div id="">
                                 <label class="screen-reader-text" id="title-prompt-text" for="title"><?php echo apply_filters( 'enter_name_course_here', __( 'Enter name or the course here' ), $post ); ?></label>
                                 <input type="text" name="post_title" size="30" value="<?php echo esc_attr( htmlspecialchars( $post->post_title ) ); ?>" id="title" autocomplete="off" />
                             </div>
-                            <div id="titlewrap">
+                            <div id="">
                                 <label class="screen-reader-text" id="shortname-prompt-text" for="shortname"><?php echo apply_filters( 'enter_name_course_here', __( 'Enter a shortname, maybe an intelligent codify description ?' ), $post ); ?></label>
                                 <input type="text" name="post_shortname" size="30" value="<?php echo esc_attr( htmlspecialchars( $post->post_title ) ); ?>" id="shortname" autocomplete="off" />
-                                <a class="add-new-h2" onclick="tb_show('Topics','<?=plugins_url()?>/wordpress-aulaken/templates/modal-topic-new.php?KeepThis=trueTB_iframe=true&height=500&width=800')" href="#" title="test2">Add new Topic</a>
+                                <a class="btn btn-success btn-small" onclick="tb_show('Topics','<?=plugins_url()?>/wordpress-aulaken/templates/modal-topic-new.php?KeepThis=trueTB_iframe=true&height=500&width=800')" href="#" title="test2">Add new Topic</a>
+                                <button class="btn btn-danger btn-small" onclick="">Angular Window</Button>
                             </div>
                             <div class="inside">
                                 <?php
