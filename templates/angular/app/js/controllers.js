@@ -4,8 +4,8 @@
 
 function lessonForm($scope,$dialog) {
     var master = {
-        name: 'Put the topic name here',
-        summary: '... summary',
+        name: '',
+        summary: '',
 
         activities:[
 
@@ -61,13 +61,6 @@ function lessonForm($scope,$dialog) {
         $scope.items.push('Item ' + newItemNo);
     };
 
-    $scope.panes = [
-        { title:"Lessons Management", templateUrl:"partial1.html" },
-        { title:"Lesson Activities", templateUrl:"Dynamic content 2" },
-        { title:"Success Workflow", templateUrl:"Dynamic content 3" },
-        { title:"Course Commerce", templateUrl:"Dynamic content 3" },
-
-    ];
 
     $scope.opts = {
         backdrop: true,

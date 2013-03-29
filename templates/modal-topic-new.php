@@ -32,10 +32,15 @@ header('Content-Type: text/html; charset=' . get_bloginfo('charset'));
         <pane heading="<?php _e('Topic'); ?>">
 
             <div>
-                <label class="screen-reader-text" id="title-prompt-text" for="lesson_title">Lesson Name</label>
-                <input type="text" ng-model="form.name" required/>
+                <label for="topicname">Name</label>
+                <input type="text" ng-model="form.name" id="topicname" required/>
             </div>
-            <input type="text"  ng-model="form.summary" required/>
+            <div>
+                <label for="topicsummary">Summary</label>
+                <textarea ng-model="form.summary" id="topicsummary" required></textarea>
+            </div>
+
+
         </pane>
 
         <pane heading="<?php _e('Activities'); ?>">
