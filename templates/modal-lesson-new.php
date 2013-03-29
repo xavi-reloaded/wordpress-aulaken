@@ -32,15 +32,14 @@ header('Content-Type: text/html; charset=' . get_bloginfo('charset'));
         <pane heading="<?php _e('Lesson'); ?>">
 
             <div>
-                    <label class="screen-reader-text" id="title-prompt-text" for="lesson_title">Lesson Name</label>
-                    <input type="text" ng-model="form.name" required/>
+                <label class="screen-reader-text" id="title-prompt-text" for="lesson_title">Lesson Name</label>
+                <input type="text" ng-model="form.name" required/>
             </div>
-                <input type="text"  ng-model="form.summary" required/>
+            <input type="text"  ng-model="form.summary" required/>
         </pane>
 
         <pane heading="<?php _e('Lesson Activities'); ?>">
 
-            [ <a href="" ng-click="addActivity()">add</a> ]
             <div ng-repeat="activity in form.activities">
                 <input type="text" ng-model="activity.title" required/>
                 [ <a href="" ng-click="removeActivity(activity)">X</a> ]
@@ -49,45 +48,22 @@ header('Content-Type: text/html; charset=' . get_bloginfo('charset'));
         </pane>
 
 
-        <pane heading="<?php _e('Success Workflow'); ?>">
 
-            <button class="btn btn-primary" ng-click="openDialog()">Open Dialog</button>
-
-            <tabs>
-                <pane heading="<?php _e('Activities'); ?>">
-                    <apiumac close-others="oneAtATime">
-                        <apiumac-group ng-repeat="activity in activities">
-                            <apiumac-heading><img src="{{activity.pix}}">{{activity.title}}</apiumac-heading>
-                            {{activity.content}}
-                        </apiumac-group>
-                    </apiumac>
-                </pane>
-
-                <pane heading="<?php _e('Resources'); ?>">
-
-                    <apiumac close-others="oneAtATime">
-                        <apiumac-group ng-repeat="resource in resources">
-                            <apiumac-heading><img src="{{activity.pix}}">{{resource.title}}</apiumac-heading>
-                            {{resource.content}}
-                        </apiumac-group>
-                    </apiumac>
-                </pane>
-            </tabs>
-
-
-
-        </pane>
 
         <pane heading="<?php _e('Success Workflow'); ?>">
             <ul ui-sortable ng-model="list">
-            <li ng-repeat="item in list" class="item">{{item}}</li>
-        </ul>
+                <li ng-repeat="item in list" class="item">{{item}}</li>
+            </ul>
             <hr />
             <div ng-repeat="item in list">{{item}}</div>
         </pane>
 
+        <pane heading="<?php _e('Settings'); ?>">
 
-<!--        <pane ng-repeat="pane in panes" heading="{{pane.title}}" active="pane.active">{{pane.templateUrl}}</pane>-->
+        </pane>
+
+
+        <!--        <pane ng-repeat="pane in panes" heading="{{pane.title}}" active="pane.active">{{pane.templateUrl}}</pane>-->
     </tabs>
 
 
@@ -98,10 +74,10 @@ header('Content-Type: text/html; charset=' . get_bloginfo('charset'));
 
 
 
-<div class=""row-fluid"">
-<button ng-click="cancel()" ng-disabled="isCancelDisabled()">Cancel</button>
-<button ng-click="save()" ng-disabled="isSaveDisabled()">set my profile</button>
-
+<div class=""modal-footer"">
+<button class="btn btn-primary" ng-click="cancel()" ng-disabled="isCancelDisabled()">Cancel</button>
+<button class="btn btn-primary" ng-click="save()" ng-disabled="isSaveDisabled()">Save</button>
+<button class="btn btn-danger" ng-click="openDialog()">Add Activity or Resource</button>
 </div>
 
 <script src="angular/app/js/app.js"></script>

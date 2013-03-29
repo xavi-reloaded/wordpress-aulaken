@@ -1,28 +1,38 @@
 <div class="modal-header">
-    <h1>Add an Activity or Resource</h1>
+    <h2>Add an Activity or Resource</h2>
 </div>
 
 <tabs>
     <pane heading="Activities">
         <apiumac close-others="oneAtATime">
             <apiumac-group ng-repeat="activity in activities">
-                <apiumac-heading><img src="angular/app/img/l/{{activity.pix}}">{{activity.title}}</apiumac-heading>
+                <apiumac-heading>
+                    <img src="angular/app/img/l/{{activity.pix}}">
+                    <span>{{activity.title}}</span>
+                    <button ng-click="close(activity)" class="btn btn-small" >Add</button>
+                </apiumac-heading>
                 {{activity.content}}
             </apiumac-group>
         </apiumac>
     </pane>
 
     <pane heading="Resources">
-
         <apiumac close-others="oneAtATime">
             <apiumac-group ng-repeat="resource in resources">
-                <apiumac-heading><img src="angular/app/img/l/{{activity.pix}}">{{resource.title}}</apiumac-heading>
+                <apiumac-heading>
+                    <img src="angular/app/img/l/{{resource.pix}}">
+                    {{resource.title}}
+                    <button ng-click="close(resource)" class="btn btn-small" >Add</button>
+                </apiumac-heading>
                 {{resource.content}}
             </apiumac-group>
         </apiumac>
     </pane>
 </tabs>
 
+
+<!--<input ng-model="result" />-->
+
 <div class="modal-footer">
-    <button ng-click="close(result)" class="btn btn-primary" >Close</button>
+    <button ng-click="close()" class="btn btn-primary" >Close</button>
 </div>

@@ -25,6 +25,10 @@ angular.module('ui.bootstrap-apium.apiumac', ['ui.bootstrap-apium.collapse'])
             }
         };
 
+        this.setChoosenResult = function(value) {
+            console.log(value);
+        };
+
         // This is called from the apiumac-group directive to add itself to the apiumac
         this.addGroup = function(groupScope) {
             var that = this;
@@ -93,6 +97,8 @@ angular.module('ui.bootstrap-apium.apiumac', ['ui.bootstrap-apium.collapse'])
                 scope.$watch('isOpen', function(value) {
                     if ( value ) {
                         apiumacCtrl.closeOthers(scope);
+                        console.log(scope);
+                        apiumacCtrl.setChoosenResult(value);
                     }
                     if ( setIsOpen ) {
                         setIsOpen(scope.$parent, value);
