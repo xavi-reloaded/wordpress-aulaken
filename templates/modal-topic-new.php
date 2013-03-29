@@ -29,7 +29,7 @@ header('Content-Type: text/html; charset=' . get_bloginfo('charset'));
 <form class="clear_float" method="post" name="myLessonForm">
 
     <tabs>
-        <pane heading="<?php _e('Lesson'); ?>">
+        <pane heading="<?php _e('Topic'); ?>">
 
             <div>
                 <label class="screen-reader-text" id="title-prompt-text" for="lesson_title">Lesson Name</label>
@@ -38,7 +38,7 @@ header('Content-Type: text/html; charset=' . get_bloginfo('charset'));
             <input type="text"  ng-model="form.summary" required/>
         </pane>
 
-        <pane heading="<?php _e('Lesson Activities'); ?>">
+        <pane heading="<?php _e('Activities'); ?>">
 
             <div ng-repeat="activity in form.activities">
                 <input type="text" ng-model="activity.title" required/>

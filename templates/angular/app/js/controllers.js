@@ -4,12 +4,11 @@
 
 function lessonForm($scope,$dialog) {
     var master = {
-        name: 'Put the lesson name here',
-        summary: 'family name 1',
+        name: 'Put the topic name here',
+        summary: '... summary',
 
         activities:[
-            {title:'Assignment',pix:'nothing.png',content:'This is the content for assignement'},
-            {title:'Lesson',pix:'nothing.png',content:'This is the content for lesson'}
+
         ],
         resources:[
         ]
