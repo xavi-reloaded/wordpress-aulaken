@@ -93,6 +93,10 @@ function lessonForm($scope,$dialog) {
             });
     };
 
+    $scope.close = function(result){
+        dialog.close(result);
+    };
+
 
 
 
@@ -100,7 +104,7 @@ function lessonForm($scope,$dialog) {
 }
 
 // the dialog is injected in the specified controller
-function TestDialogController($scope, dialog){
+function ActivityResourceDialogController($scope, dialog){
     $scope.close = function(result){
         dialog.close(result);
     };

@@ -1,4 +1,144 @@
-<div class="wrap">
+<script language="javascript">
+    function AdminCourseNew($scope, $dialog){
+
+        $scope.opts = {
+            backdrop: true,
+            keyboard: true,
+            backdropClick: true,
+            templateUrl: '<?=plugins_url().'/wordpress-aulaken/templates/partials/partial-resource-dialog.html'?>',
+            controller: 'ActivityResourceDialogController'
+        };
+
+
+
+        $scope.openDialog = function(topicId){
+            var d = $dialog.dialog($scope.opts);
+            var id=topicId;
+
+            d.open().then(function(result){
+                if(result)
+                {
+                    var topics = $scope.form.topics;
+                    for (var i = 0, ii = topics.length; i < ii; i++) {
+                        if (id === topics[i].id) {
+
+                            topics[i].activities.push(result)
+                        }
+                    }
+
+                }
+            });
+        };
+
+        $scope.openMessageBox = function(){
+            var title = 'This is a message box';
+            var msg = 'This is the content of the message box';
+            var btns = [{result:'cancel', label: 'Cancel'}, {result:'ok', label: 'OK', cssClass: 'btn-primary'}];
+
+            $dialog.messageBox(title, msg, btns)
+                .open()
+                .then(function(result){
+                    alert('dialog closed with result: ' + result);
+                });
+        };
+
+        var master = {
+            name: '',
+            summary: '',
+
+            topics : [
+                {id:1,title:'A topic to learn wraks',summary:'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.',
+                    activities:[ {title:'Assignment',pix:'assignment.png',content:'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.'}]
+                },
+                {id:2,title:'A topic to learn wraks',summary:'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.',
+                    activities:[ {title:'Assignment',pix:'assignment.png',content:'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.'}]
+                }
+            ]
+        };
+
+        $scope.topics = [
+            {title:'A topic to learn wraks',summary:'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.',
+                activities:[ {title:'Assignment',pix:'assignment.png',content:'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.'},
+
+                ]}
+        ];
+
+        $scope.cancel = function() {
+            $scope.form = angular.copy(master);
+        };
+
+        $scope.save = function() {
+            master = $scope.form;
+            $scope.form = angular.copy(master);
+
+        };
+
+        $scope.cancel();
+
+        $scope.removeActivity  = function(topic, activity) {
+            var topics = $scope.form.topics;
+            for (var i = 0, ii = topics.length; i < ii; i++) {
+                if (topic === topics[i]) {
+                    var activities = topic.activities;
+                    for (var i = 0, ii = activities.length; i < ii; i++) {
+                        if (activity === activities[i]) {
+                            activities.splice(i, 1);
+                        }
+                    }
+                }
+            }
+        };
+
+        $scope.addTopic = function() {
+            $scope.form.topics.push({value:''});
+        };
+
+        var t = '<div class="modal-header">'+
+            '<h1>Create New Topic</h1>'+
+            '</div>'+
+            '<div class="modal-body">'+
+            '<table class="table">'+
+            '<tr><td>Name:</td><td><input ng-model="name" /></td></tr>'+
+            '</table>'+
+            '</div>'+
+            '<div class="modal-footer">'+
+            '<button ng-click="close(name,summary)" class="btn btn-primary" >Create Topic</button>'+
+            '</div>';
+
+//            '<tr><td>Summary:</td><td><input ng-model="summary" /></td></tr>'+
+
+        $scope.opts2 = {
+            backdrop: true,
+            keyboard: true,
+            backdropClick: true,
+            template:  t, // OR: templateUrl: 'path/to/view.html',
+            controller: 'TopicDialogController'
+        };
+
+        $scope.openTopicDialog = function(){
+            var d = $dialog.dialog($scope.opts2);
+
+            d.open().then(function(name,summary){
+                if(name)
+                {
+//                    alert('dialog closed with result: ' + name + ' :: ' + summary);
+                    var topics = $scope.form.topics;
+                    topics.push({id:topics.length+1,title:name,activities:[]});
+                }
+            });
+        };
+    }
+    // the dialog is injected in the specified controller
+    function TopicDialogController($scope, dialog){
+        $scope.close = function(name,summary){
+            dialog.close(name,summary);
+        };
+    }
+
+</script>
+
+
+<div class="wrap" ng-controller="AdminCourseNew">
     <div id="icon-edit-comments" class="icon32"><br /></div><h2>Add New Course</h2>
     <h2><?php
         echo esc_html( $title );
@@ -8,7 +148,6 @@
     </h2>
     <?php if ( $notice ) : ?> <div id="notice" class="error"><p><?php echo $notice ?></p></div> <?php endif; ?>
     <?php if ( $message ) : ?> <div id="message" class="updated"><p><?php echo $message; ?></p></div> <?php endif; ?>
-
 
     <form id="aula-create" class="" method="post" action="admin.php?page=aula-save-course" >
 
@@ -39,42 +178,21 @@
 
             <div id="post-body" class="metabox-holder columns-<?php echo 1 == get_current_screen()->get_columns() ? '1' : '2'; ?>">
                 <div id="post-body-content">
-                    <?php if ( post_type_supports($post_type, 'title') ) { ?>
-                        <div id="titlediv">
-                            <div id="">
-                                <label class="screen-reader-text" id="title-prompt-text" for="title"><?php echo apply_filters( 'enter_name_course_here', __( 'Enter name or the course here' ), $post ); ?></label>
-                                <input type="text" name="post_title" size="30" value="<?php echo esc_attr( htmlspecialchars( $post->post_title ) ); ?>" id="title" autocomplete="off" />
-                            </div>
-                            <div id="">
-                                <label class="screen-reader-text" id="shortname-prompt-text" for="shortname"><?php echo apply_filters( 'enter_name_course_here', __( 'Enter a shortname, maybe an intelligent codify description ?' ), $post ); ?></label>
-                                <input type="text" name="post_shortname" size="30" value="<?php echo esc_attr( htmlspecialchars( $post->post_title ) ); ?>" id="shortname" autocomplete="off" />
-                                <a class="btn btn-success btn-small" onclick="tb_show('Topics','<?=plugins_url()?>/wordpress-aulaken/templates/modal-topic-new.php?KeepThis=trueTB_iframe=true&height=500&width=800')" href="#" title="test2">Add new Topic</a>
-                                <button class="btn btn-danger btn-small" onclick="">Angular Window</Button>
-                            </div>
-                            <div class="inside">
-                                <?php
-                                $sample_permalink_html = $post_type_object->public ? get_sample_permalink_html($post->ID) : '';
-                                $shortlink = wp_get_shortlink($post->ID, 'post');
-                                if ( !empty($shortlink) )
-                                    $sample_permalink_html .= '<input id="shortlink" type="hidden" value="' . esc_attr($shortlink) . '" /><a href="#" class="button button-small" onclick="prompt(&#39;URL:&#39;, jQuery(\'#shortlink\').val()); return false;">' . __('Get Shortlink') . '</a>';
-
-                                if ( $post_type_object->public && ! ( 'pending' == get_post_status( $post ) && !current_user_can( $post_type_object->cap->publish_posts ) ) ) { ?>
-                                    <div id="edit-slug-box" class="hide-if-no-js">
-                                        <?php
-                                        if ( $sample_permalink_html && 'auto-draft' != $post->post_status )
-                                            echo $sample_permalink_html;
-                                        ?>
-                                    </div>
-                                <?php
-                                }
-                                ?>
-                            </div>
-                            <?php
-                            wp_nonce_field( 'samplepermalink', 'samplepermalinknonce', false );
-                            ?>
-                        </div><!-- /titlediv -->
+                    <div id="titlediv">
+                        <div id="">
+                            <label class="screen-reader-text" for="title"><?php echo apply_filters( 'enter_name_course_here', __( 'Enter name or the course here' ), $post ); ?></label>
+                            <input type="text" name="post_title" size="30" value="<?php echo esc_attr( htmlspecialchars( $post->post_title ) ); ?>" id="title" autocomplete="off" />
+                        </div>
+                        <div id="">
+                            <input type="text" name="post_shortname" size="30" value="<?php echo esc_attr( htmlspecialchars( $post->post_title ) ); ?>" id="shortname" autocomplete="off" />
+                            <p class="btn btn-danger btn-small" ng-click="openDialog()" >Help</p>
+                        </div>
+                        <?php
+                        wp_nonce_field( 'samplepermalink', 'samplepermalinknonce', false );
+                        ?>
+                    </div><!-- /titlediv -->
                     <?php
-                    }
+
 
                     do_action( 'edit_form_after_title' );
 
@@ -119,15 +237,65 @@
                 </div>
                 <div id="postbox-container-2" class="postbox-container">
                     <?php
-
-                    do_meta_boxes(null, 'normal', $post);
-
-                    do_action('edit_form_advanced');
-
-                    // IMPORTANT METABOX 2
-                    do_meta_boxes(null, 'advanced', $post);
-
+                    //                    do_meta_boxes(null, 'normal', $post);
+                    //                    do_action('edit_form_advanced');
+                    //                    do_meta_boxes(null, 'advanced', $post);
                     ?>
+                    <!--//////////////////////////////////////////////////////////////////////-->
+                    <h2>Topics on the course
+                        <a class="btn btn-success btn-small" ng-click="openTopicDialog()" title="test2">Add new Topic</a>
+                    </h2>
+
+                    <apiumac close-others="oneAtATime">
+                        <apiumac-group ng-repeat="topic in form.topics">
+                            <apiumac-heading>
+                                <span>{{topic.title}}</span>
+                            </apiumac-heading>
+                            {{topic.summary}}
+                            <tabs>
+                                <pane heading="<?php _e('Topic'); ?>">
+                                    <div>
+                                        <label for="topicname">Name</label>
+                                        <input type="text" ng-model="topic.title" id="topicname" required/>
+                                    </div>
+                                    <div>
+                                        <label for="topicsummary">Summary</label>
+                                        <textarea ng-model="topic.summary" id="topicsummary" required></textarea>
+                                    </div>
+                                </pane>
+
+                                <pane heading="<?php _e('Activities'); ?>">
+                                    <table class="table">
+                                        <tr ng-repeat="activity in topic.activities" >
+                                            <td><img src="<?=plugins_url()?>/wordpress-aulaken/templates/angular/app/img/l/{{activity.pix}}"></td>
+                                            <td>{{activity.title}}</td>
+                                            <td><p ng-click="removeActivity(topic,activity)" class="btn btn-small btn-danger text-left">X</p>
+                                                <p popover-placement="bottom" popover="{{activity.content}}" class="btn btn-small btn-info text-right">?</p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <div class="modal-header">
+                                        <span class="btn btn-success" ng-click="openDialog(topic.id)">Add Activity or Resource</span>
+                                    </div>
+                                </pane>
+
+                                <pane heading="<?php _e('Success Workflow'); ?>">
+                                    <ul ui-sortable ng-model="list">
+                                        <li ng-repeat="item in list" class="item">{{item}}</li>
+                                    </ul>
+                                    <hr />
+                                    <div ng-repeat="item in list">{{item}}</div>
+                                </pane>
+
+                                <pane heading="<?php _e('Settings'); ?>">
+
+                                </pane>
+                            </tabs>
+
+                        </apiumac-group>
+                    </apiumac>
+
+
                 </div>
                 <?php
 

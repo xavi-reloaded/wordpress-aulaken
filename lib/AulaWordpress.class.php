@@ -169,6 +169,8 @@ class AulaWordpress implements IAulaWordpress {
         AulaAngularBootstrap::loadScripts();
         AulaAngularBootstrap::loadCSS();
 
+        AulaAngularBootstrap::loadApp();
+
         wp_enqueue_script( 'common' );
         wp_enqueue_script('utils');
 
@@ -422,7 +424,7 @@ class AulaWordpress implements IAulaWordpress {
         add_meta_box('lessonslistdiv', __('Lessons'), array(&$this->metaBoxHelper, 'post_lessons_meta_box'), null, 'side', 'core');
 
 
-        add_meta_box('lessonspaneldiv', __('Lessons'), array(&$this->metaBoxHelper, 'render_meta_box_lessons'), null, 'normal', 'core');
+//        add_meta_box('lessonspaneldiv', __('Lessons'), array(&$this->metaBoxHelper, 'render_meta_box_lessons'), null, 'normal', 'core');
     }
 
     public function render_aula_admin_message() {
