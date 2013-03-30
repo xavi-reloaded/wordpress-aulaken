@@ -13,4 +13,13 @@ require_once(dirname(__FILE__) . '/AulaBaseItem.class.php');
 class AulaTopicItem extends AulaBaseItem
 {
 
+    protected function getPostType()
+    {
+        return "aula-topic";
+    }
+
+    protected function getCommentStatus()
+    {
+        return "closed";
+    }
 }
