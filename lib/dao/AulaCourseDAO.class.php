@@ -12,19 +12,7 @@ require_once(dirname(__FILE__) . '/../helper/AulaHelper.class.php');
  */
 class AulaCourseDAO
 {
-    /**
-     * Get a collection of catalog items from the database. May
-     * possibly return an empty array.
-     *
-     * @param array $categories The array of category slugs to filter with. Will be ignored if false.
-     * @param string $operator  Operator used to test the categories filter. Possible values are 'IN', 'NOT IN' or 'AND'.
-     * @param string $sort The database field used to sort the collection. Possible values are 'title', 'order', 'date' or 'random'.
-     * @param string $order The order the collection should be returned in. Possible values are 'asc' or 'desc'.
-     * @param integer $offset The start ordinal of the collection, or number of catalog items to skip over.
-     * @param integer $limit The maximum amount of catalog items allowed in the collection.
-     * @param boolean $load_categories Wether to load the category ids for each item of the collection. Possible large database hit.
-     * @return array An array of DeliberaForum objects
-     */
+
 
     public static function getItems($customPostName, $custom_tax_name, $post_meta_name, $categories=false, $operator='IN', $sort='menu_order', $order='asc', $offset=0, $limit=-1, $load_categories=true)
     {
