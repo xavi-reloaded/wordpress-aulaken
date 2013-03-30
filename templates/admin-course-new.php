@@ -102,6 +102,7 @@
             '</table>'+
             '</div>'+
             '<div class="modal-footer">'+
+            '<button ng-click="close()" class="btn btn-primary" >Cancel</button>'+
             '<button ng-click="close(name,summary)" class="btn btn-primary" >Create Topic</button>'+
             '</div>';
 
@@ -121,7 +122,6 @@
             d.open().then(function(name,summary){
                 if(name)
                 {
-//                    alert('dialog closed with result: ' + name + ' :: ' + summary);
                     var topics = $scope.form.topics;
                     topics.push({id:topics.length+1,title:name,activities:[]});
                 }
@@ -139,7 +139,7 @@
 
 
 <div class="wrap" ng-controller="AdminCourseNew">
-    <div id="icon-edit-comments" class="icon32"><br /></div><h2>Add New Course</h2>
+    <div id="icon-edit-comments" class="icon32"><br /></div><h2><?= ( isset($post->ID)  ) ? _("Edit Course") : _("Add New Course"); ?> </h2>
     <h2><?php
         echo esc_html( $title );
         if ( isset( $post_new_file ) && current_user_can( $post_type_object->cap->create_posts ) )
@@ -178,19 +178,18 @@
 
             <div id="post-body" class="metabox-holder columns-<?php echo 1 == get_current_screen()->get_columns() ? '1' : '2'; ?>">
                 <div id="post-body-content">
-                    <div id="titlediv">
-                        <div id="">
-                            <label class="screen-reader-text" for="title"><?php echo apply_filters( 'enter_name_course_here', __( 'Enter name or the course here' ), $post ); ?></label>
-                            <input type="text" name="post_title" size="30" value="<?php echo esc_attr( htmlspecialchars( $post->post_title ) ); ?>" id="title" autocomplete="off" />
+
+                        <div>
+                            <label class="screen-reader-text" for="title">asd</label>
+                            <input type="text" class="input-block-level" name="post_title" value="<?php echo esc_attr( htmlspecialchars( $post->post_title ) ); ?>" id="title"/>
                         </div>
-                        <div id="">
-                            <input type="text" name="post_shortname" size="30" value="<?php echo esc_attr( htmlspecialchars( $post->post_title ) ); ?>" id="shortname" autocomplete="off" />
+                        <div>
+                            <input type="text" name="post_shortname" value="<?=$post->post_shortcode?>" id="shortname"/>
                             <p class="btn btn-danger btn-small" ng-click="openDialog()" >Help</p>
                         </div>
                         <?php
                         wp_nonce_field( 'samplepermalink', 'samplepermalinknonce', false );
                         ?>
-                    </div><!-- /titlediv -->
                     <?php
 
 
