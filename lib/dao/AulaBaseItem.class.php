@@ -67,19 +67,12 @@ abstract class AulaBaseItem implements IAulaBaseItem {
             }
         }
 
-        // update post meta
-        //$this->updatePostMeta();
-
-        // update post terms
-        // NOTE: $this->categories must be an array on term ids, otherwise it is an array of term names keyed by term id.
-
-        $termIdArray = AulaHelper::getTermIdArrayFromCategory($this->getCategories());
-        $terms_set = wp_set_object_terms($this->id, $termIdArray, "aula-taxonomy");
-
         foreach ($this->meta as $key => $value) {
             update_post_meta($this->id, $key, $value);
         }
 
+        $termIdArray = AulaHelper::getTermIdArrayFromCategory($this->getCategories());
+        $terms_set = wp_set_object_terms($this->id, $termIdArray, "aula-taxonomy");
 
 
 //        wp_set_post_categories( $this->id, $this->categories );
