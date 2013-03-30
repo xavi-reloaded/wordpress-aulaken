@@ -10,5 +10,7 @@
 interface IAulaBaseItem {
 
     public function getDescriptionSummary();
+    public function save();
+    public function delete();
 
 }

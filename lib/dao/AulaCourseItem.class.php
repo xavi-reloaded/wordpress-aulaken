@@ -11,11 +11,7 @@ require_once(dirname(__FILE__) . '/AulaBaseItem.class.php');
 
 class AulaCourseItem extends AulaBaseItem
 {
-    public $id;
-    public $date;
-    public $order;
-    public $post_name;
-    public $image;
+
 
 
     public $format;                     // course format (weekly, Learning Object, Lesson)
@@ -46,121 +42,14 @@ class AulaCourseItem extends AulaBaseItem
     public $word_for_authenticated_user_on_frontpage;
 
 
-    public function save() {
 
-        $params = array();
-        $params['post_title']   = $this->getTitle();
-        $params['post_name']    = sanitize_title($this->getTitle());
-        $params['post_content'] = $this->getSummary();
-        $params['menu_order']   = $this->order;
-        $params['post_date']    = $this->date;
-        $params['post_status']  = 'publish';
-
-
-        if ($this->id > 0) {
-            $params['ID'] = $this->id;
-            $update = wp_update_post($params);
-            if ($update == 0) {
-                return false;
-            }
-        }
-        else {
-            $params['post_status']    = 'publish';
-            $params['comment_status'] = 'closed';
-            $params['post_type']      = 'aula-course';
-            $this->id = wp_insert_post($params);
-            if ($this->id === false) {
-                return false;
-            }
-        }
-
-        // update post meta
-        //$this->updatePostMeta();
-
-        // update post terms
-        // NOTE: $this->categories must be an array on term ids, otherwise it is an array of term names keyed by term id.
-
-        $termIdArray = AulaHelper::getTermIdArrayFromCategory($this->getCategories());
-        $terms_set = wp_set_object_terms($this->id, $termIdArray, "aula-taxonomy");
-
-//        wp_set_post_categories( $this->id, $this->categories );
-        if ($terms_set instanceof WP_Error) {
-            return __("Could not set categories, please try again.", 'aula');
-        }
-
-        return true;
-    }
-
-
-    public function delete($remove_images=true) {
-        if ($this->id > 0) {
-            // $this->deletePostMeta();
-            wp_delete_post($this->id, true);
-        }
-    }
-
-
-    //////////////////////////////////////////////
-    //////////   GETTERS AND SETTERS   ///////////
-    //////////////////////////////////////////////
-
-    public function setPostName($post_name)
+    protected function getPostType()
     {
-        $this->post_name = $post_name;
+        return "aula-course";
     }
 
-    public function getPostName()
+    protected function getCommentStatus()
     {
-        return $this->post_name;
+        return "closed";
     }
-
-
-
-    public function setDate($date)
-    {
-        $this->date = $date;
-    }
-
-    public function getDate()
-    {
-        return $this->date;
-    }
-
-
-
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function setOrder($order)
-    {
-        $this->order = $order;
-    }
-
-    public function getOrder()
-    {
-        return $this->order;
-    }
-
-
-
-    public function setImage($image)
-    {
-        $this->image = $image;
-    }
-
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-
-
-
 }

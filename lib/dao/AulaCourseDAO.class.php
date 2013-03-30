@@ -46,13 +46,13 @@ class AulaCourseDAO
 
             $item = new AulaCourseItem();
 
-            $item->id           = $post->ID;
+            $item->setId($post->ID);
             $item->setTitle($post->post_title);
             $item->setSummary($post->post_content);
-            $item->date         = $post->post_date;
+            $item->setDate($post->post_date);
             $item->setCategories(array());
-            $item->order        = $post->menu_order;
-            $item->post_name    = $post->post_name;
+            $item->setOrder($post->menu_order);
+            $item->setPostName($post->post_name); // TODO: check if its used
 
             $item_cats = array();
             if ($load_categories) {
@@ -104,12 +104,12 @@ class AulaCourseDAO
 
         $item = new AulaCourseItem();
         
-        $item->id           = $post->ID;
+        $item->setId($post->ID);
         $item->setTitle($post->post_title);
         $item->description  = $post->post_content;
-        $item->date         = $post->post_date;
+        $item->setDate($post->post_date);
         $item->setCategories($category_ids);
-        $item->order        = $post->menu_order;
+        $item->setOrder($post->menu_order);
         $item->_post_name   = $post->post_name;
         $meta = get_post_meta($post->ID, $post_meta_name, true);
         AulaHelper::processPostMeta($meta,$item);
