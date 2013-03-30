@@ -32,7 +32,7 @@ abstract class AulaBaseItem implements IAulaBaseItem {
         $this->categories = array();
     }
     abstract public function getPostType();
-    abstract protected function getCommentStatus();
+    abstract public function getCommentStatus();
 
     public function save() {
 

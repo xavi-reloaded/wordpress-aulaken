@@ -48,7 +48,7 @@ class AulaCourseItem extends AulaBaseItem
         return "aula-course";
     }
 
-    protected function getCommentStatus()
+    public function getCommentStatus()
     {
         return "closed";
     }
