@@ -384,7 +384,8 @@ class AulaWordpress implements IAulaWordpress {
         $limit  = 20;
         $category_filter = false;
 
-        $results = AulaCourseDAO::getItems($this->custom_post_course_name, $this->custom_tax_name, $this->custom_user_meta_name,$category_filter, 'IN', $sort, $order, $offset, $limit);
+        $dao = new AulaCourseDAO(new AulaCourseItem());
+        $results = $dao->getItems($this->custom_post_course_name, $this->custom_tax_name, $this->custom_user_meta_name,$category_filter, 'IN', $sort, $order, $offset, $limit);
 
         include_once($this->directories['template'] . '/admin-portals.php');
     }

@@ -43,7 +43,7 @@ class AulaCourseItem extends AulaBaseItem
 
 
 
-    protected function getPostType()
+    public function getPostType()
     {
         return "aula-course";
     }
