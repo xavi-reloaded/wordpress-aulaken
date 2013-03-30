@@ -76,9 +76,9 @@ class AulaCourseDAO
     }
 
     /**
-     * Get a single catalog item by database id
+     * Get a single course item by database id
      *
-     * @param integer $id The id of the catalog item you wish to get.
+     * @param integer $id The id of the course item you wish to get.
      * @return null|AunaCourse
      */
 

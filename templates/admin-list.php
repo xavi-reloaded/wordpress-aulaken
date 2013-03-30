@@ -59,7 +59,7 @@
 			<?php if (count($results) < 1): ?>
 				<tr>
 					<td colspan='8'><p>
-						<p><?php _e("No catalog items found", 'aula'); ?></p>
+						<p><?php _e("No course items found", 'aula'); ?></p>
 
 						<?php if ($selected_term !== false): ?>
 							<p><?php _e("Use the category drop down above to switch category views.", 'aula'); ?></p>
