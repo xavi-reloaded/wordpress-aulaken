@@ -269,7 +269,8 @@
                                         <tr ng-repeat="activity in topic.activities" >
                                             <td><img src="<?=plugins_url()?>/wordpress-aulaken/templates/angular/app/img/l/{{activity.pix}}"></td>
                                             <td>{{activity.title}}</td>
-                                            <td><p ng-click="removeActivity(topic,activity)" class="btn btn-small btn-danger text-left">X</p>
+                                            <td>
+                                                <p ng-click="removeActivity(topic,activity)" class="btn btn-small btn-danger text-left">X</p>
                                                 <p popover-placement="bottom" popover="{{activity.content}}" class="btn btn-small btn-info text-right">?</p>
                                             </td>
                                         </tr>
