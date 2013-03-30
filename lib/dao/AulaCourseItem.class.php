@@ -7,9 +7,9 @@
  * To change this template use File | Settings | File Templates.
  */
 
-require_once(dirname(__FILE__) . '/../helper/AulaHelper.class.php');
+require_once(dirname(__FILE__) . '/AulaBaseItem.class.php');
 
-class AulaCourseItem
+class AulaCourseItem extends AulaBaseItem
 {
     public $id;
     public $date;
@@ -17,11 +17,7 @@ class AulaCourseItem
     public $post_name;
     public $image;
 
-    public $categories;                 // course categories
-    public $title;                      // course full name
-    public $shortname;                  // course short name
-    public $id_number;                  // course id number
-    public $summary;                    // course summary
+
     public $format;                     // course format (weekly, Learning Object, Lesson)
     public $start_date;                 // course start date
     public $new_items_to_show;          // course new items to show
@@ -48,22 +44,6 @@ class AulaCourseItem
     public $word_for_guess;
     public $word_for_authenticated_user;
     public $word_for_authenticated_user_on_frontpage;
-
-    function __construct($title="",$shortname="",$summary="")
-    {
-        $this->title = $title;
-        $this->shortname = $shortname;
-        $this->summary = $summary;
-        $this->categories = array();
-    }
-
-
-    public function getDescriptionSummary() {
-        $no_line_breaks       = str_replace(array("\r", "\n", "\r\n"), ' ', ($this->getSummary()));
-        $description_summary  = substr($no_line_breaks, 0, 120);
-        $description_summary .= (AulaHelper::string_length($no_line_breaks) > 120)? '...' : '';
-        return $description_summary;
-    }
 
 
     public function save() {
@@ -117,7 +97,6 @@ class AulaCourseItem
             // $this->deletePostMeta();
             wp_delete_post($this->id, true);
         }
-
     }
 
 
