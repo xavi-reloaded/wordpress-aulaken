@@ -1,7 +1,7 @@
 <?php
 
 require_once(dirname(__FILE__) . '/AulaCourseItem.class.php');
-require_once(dirname(__FILE__) . '/AulaHelper.class.php');
+require_once(dirname(__FILE__) . '/../helper/AulaHelper.class.php');
 
 /**
  * Created by JetBrains PhpStorm.

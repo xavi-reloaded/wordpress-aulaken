@@ -1,8 +1,8 @@
 <?php
 
 require_once(dirname(__FILE__) . '/IAulaWordpress.class.php');
-require_once(dirname(__FILE__) . '/AulaCourseDAO.class.php');
-require_once(dirname(__FILE__) . '/AulaMetaboxHelper.class.php');
+require_once(dirname(__FILE__) . '/dao/AulaCourseDAO.class.php');
+require_once(dirname(__FILE__) . '/helper/AulaMetaboxHelper.class.php');
 require_once(dirname(__FILE__) . '/AulaAngularBootstrap.class.php');
 /**
  * Created by JetBrains PhpStorm.

@@ -7,7 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-require_once(dirname(__FILE__) . '/AulaHelper.class.php');
+require_once(dirname(__FILE__) . '/../helper/AulaHelper.class.php');
 
 class AulaCourseItem
 {

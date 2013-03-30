@@ -2,7 +2,7 @@
 //require_once 'PHPUnit/Framework.php';
 
 require_once(dirname(__FILE__) . '/mockpress/mockpress.php');
-require_once('../lib/AulaHelper.class.php');
+require_once('../lib/helper/AulaHelper.class.php');
 
 class AulaHelperTest extends PHPUnit_Framework_TestCase
 {
