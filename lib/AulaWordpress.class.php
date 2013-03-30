@@ -339,7 +339,8 @@ class AulaWordpress implements IAulaWordpress {
             } else {
                 $id = null;
             }
-            $new_item = AulaCourseDAO::saveCourseItem($title, $new_item_order, $id, $summary, $tax_input, $shortname);
+            $dao = new AulaCourseDAO(new AulaCourseItem());
+            $new_item = $dao->saveItem($title, $new_item_order, $id, $summary, $tax_input, $shortname);
 
             header('Location: admin.php?page=aula&id=' . $new_item->getId()); die;
 
@@ -392,9 +393,6 @@ class AulaWordpress implements IAulaWordpress {
 
     public function admin_course_new()
     {
-
-
-
         $this->addMetaBoxForNewForm();
 
         $post_new_file=true;

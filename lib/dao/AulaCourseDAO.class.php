@@ -49,20 +49,6 @@ class AulaCourseDAO extends AulaBaseDAO
 
         return $item;
     }
-
-    public static function saveCourseItem($title, $new_item_order,$id="",$summary="",$tax_input=null,$shortname="")
-    {
-        $new_item = new AulaCourseItem();
-        if (isset($id)) $new_item->setId($id);
-        $new_item->setTitle($title);
-        $new_item->setOrder($new_item_order);
-        $new_item->setSummary($summary);
-        $new_item->setCategories($tax_input);
-        $new_item->setShortname($shortname);
-        $new_item->save();
-        return $new_item;
-    }
-
     public static function getItemById($id)
     {
     }

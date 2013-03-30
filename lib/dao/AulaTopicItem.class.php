@@ -22,4 +22,9 @@ class AulaTopicItem extends AulaBaseItem
     {
         return "closed";
     }
+
+    public function getObjectItem()
+    {
+        return new AulaTopicItem();
+    }
 }

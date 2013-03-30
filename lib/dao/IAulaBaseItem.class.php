@@ -13,5 +13,6 @@ interface IAulaBaseItem {
     public function save();
     public function delete();
     public function getPostType();
+    public function getObjectItem();
 
 }

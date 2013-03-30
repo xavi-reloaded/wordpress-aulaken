@@ -33,6 +33,7 @@ abstract class AulaBaseItem implements IAulaBaseItem {
     }
     abstract public function getPostType();
     abstract public function getCommentStatus();
+    abstract public function getObjectItem();
 
     public function save() {
 

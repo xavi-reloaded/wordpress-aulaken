@@ -21,7 +21,6 @@ abstract class AulaBaseDAO implements IAulaBaseDAO {
     {
         $items = array();
 
-
         $params = array(
             'post_type'=> $this->aulaItem->getPostType(),
             'orderby'=> $sort,
@@ -31,7 +30,6 @@ abstract class AulaBaseDAO implements IAulaBaseDAO {
         );
 
         if (!empty($categories)) {
-
             $tax_query_array = array(
                 array(
                     'taxonomy' => $this->aulaItem->getPostType(),
@@ -47,7 +45,7 @@ abstract class AulaBaseDAO implements IAulaBaseDAO {
 
         foreach ($posts as $post) {
 
-            $item = new AulaCourseItem();
+            $item = $this->aulaItem->getObjectItem();
 
             $item->setId($post->ID);
             $item->setTitle($post->post_title);
@@ -76,6 +74,20 @@ abstract class AulaBaseDAO implements IAulaBaseDAO {
         }
 
         return $items;
+    }
+
+
+    public function saveItem($title, $new_item_order,$id="",$summary="",$tax_input=null,$shortname="")
+    {
+        $new_item = $item = $this->aulaItem->getObjectItem();
+        if (isset($id)) $new_item->setId($id);
+        $new_item->setTitle($title);
+        $new_item->setOrder($new_item_order);
+        $new_item->setSummary($summary);
+        $new_item->setCategories($tax_input);
+        $new_item->setShortname($shortname);
+        $new_item->save();
+        return $new_item;
     }
 
 }

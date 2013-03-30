@@ -52,4 +52,9 @@ class AulaCourseItem extends AulaBaseItem
     {
         return "closed";
     }
+
+    public function getObjectItem()
+    {
+        return new AulaCourseItem();
+    }
 }
