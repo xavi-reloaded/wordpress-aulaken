@@ -327,24 +327,25 @@ class AulaWordpress implements IAulaWordpress {
         $nonce_verified = wp_verify_nonce( $_REQUEST['_aula_create_course_nonce'], 'aula-create-course' );
 
         if ($nonce_verified) {
-            $title = $_REQUEST['post_title'];
-            $summary = $_REQUEST['post_summary'];
-            $shortname = $_REQUEST['post_shortname'];
-            $tax_input = $_REQUEST['tax_input'];
+            $aulaCourseItem = new AulaCourseItem();
+            $aulaCourseItem->setTitle($_REQUEST['post_title']);
+            $aulaCourseItem->setSummary($_REQUEST['post_summary']);
+            $aulaCourseItem->setShortname($_REQUEST['post_shortname']);
+            $aulaCourseItem->setCategories($_REQUEST['tax_input']);
 
             $new_item_order = wp_count_posts($this->custom_post_course_name)->publish + 1;
 
             if (isset($_REQUEST['save'])){
-                $id=$_REQUEST['save_id'];
+                $aulaCourseItem->setId($_REQUEST['save_id']);
             } else {
-                $id = null;
+                $aulaCourseItem->setId(null);
             }
-            $dao = new AulaCourseDAO(new AulaCourseItem());
-            $new_item = $dao->saveItem($title, $new_item_order, $id, $summary, $tax_input, $shortname);
+
+
+            $dao = new AulaCourseDAO($aulaCourseItem);
+            $new_item = $dao->saveItem();
 
             header('Location: admin.php?page=aula&id=' . $new_item->getId()); die;
-
-            // wp_redirect( self_admin_url("admin.php?page=delibera&id=".$new_item->getId()) );
         }
         else {
             $error = __("WordPress Nonce Error, please reload the form and try again.", 'aula');
@@ -418,12 +419,11 @@ class AulaWordpress implements IAulaWordpress {
 
         add_meta_box('submitdiv', __('Publish Course'), array(&$this->metaBoxHelper, 'post_submit_meta_box'), null, 'side', 'core');
         add_meta_box('categoriesdiv', __('Course Categories'), array(&$this->metaBoxHelper, 'post_categories_meta_box'), null, 'side', 'core');
-        add_meta_box('lessonslistdiv', __('Lessons'), array(&$this->metaBoxHelper, 'post_lessons_meta_box'), null, 'side', 'core');
+        add_meta_box('lessonslistdiv', __('Topics'), array(&$this->metaBoxHelper, 'post_lessons_meta_box'), null, 'side', 'core');
 
-
-//        add_meta_box('lessonspaneldiv', __('Lessons'), array(&$this->metaBoxHelper, 'render_meta_box_lessons'), null, 'normal', 'core');
     }
 
+    //TODO: put bootstrap message here
     public function render_aula_admin_message() {
         foreach ($this->wp_messages as $message) {
             echo "<div id='message' class='updated'><p>";
@@ -443,10 +443,8 @@ class AulaWordpress implements IAulaWordpress {
         $error = false;
 
         if (isset($_REQUEST['id'])) {
-
 //            check_admin_referer('aula-delete-course');
             $item = AulaCourseDAO::getItem($_REQUEST['id']);
-            echo "ITEM ES";
             if ($item) {
                 $item->delete();
                 header('Location: admin.php?page=aula&message=2'); die;

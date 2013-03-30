@@ -2,10 +2,10 @@
 <?php $sort_url = ($order=='asc')? "&amp;order=desc" : "&amp;order=asc" ?>
 <?php $cat_url  = (isset($_GET['category']))? "&amp;category=".$_GET['category'] : "" ?>
 
-<table class="widefat" cellspacing="0">
+<table class="widefat">
     <thead>
     <tr>
-        <th class="check-column"><input type="checkbox" /></th>
+        <th class="check-column"><input type="checkbox"/></th>
         <th ><?php _e("Image", "aula"); ?></th>
         <?php $css_sort = ($sort=='title')? "sorted" : "sortable" ?>
         <?php $sort_url = ($order=='asc')? "&amp;order=desc" : "&amp;order=asc" ?>
@@ -16,18 +16,14 @@
                 <span class="sorting-indicator">&nbsp;</span>
             </a>
         </th>
-
-
         <th><?php _e("Summary", "aula"); ?></th>
         <th><?php _e("Categories", "aula"); ?></th>
-
         <th style="width:80px;">
             <a href="admin.php?page=aula&amp;sort=menu_order<?php echo $sort_url . $cat_url ?>">
                 <span><?php _e("Order", "aula"); ?></span>
                 <span class="sorting-indicator">&nbsp;</span>
             </a>
         </th>
-
         <th style="width:100px;">
             <a href="admin.php?page=aula&amp;sort=date<?php echo $sort_url . $cat_url ?>">
                 <span><?php _e("Date", "aula"); ?></span>
@@ -36,22 +32,20 @@
         </th>
     </tr>
     </thead>
+
     <tfoot>
     <tr>
         <th class="check-column"><input type="checkbox" /></th>
         <th><?php _e("Image", "aula"); ?></th>
         <th><?php _e("Title", "aula"); ?></th>
-
         <th><?php _e("Summary", "aula"); ?></th>
-
-
         <th><?php _e("Categories", "aula"); ?></th>
         <th><?php _e("Order", "aula"); ?></th>
         <th><?php _e("Date", "aula"); ?></th>
     </tr>
     </tfoot>
 
-    <tbody id="aula_items">
+    <tbody>
 
     <?php if (count($results) < 1): ?>
         <tr>
@@ -71,9 +65,9 @@
 
         <tr>
             <th class="check-column">
-                <input type="checkbox" class="bulk_selection" name="bulk_action_id" value="<?php echo $result->getId() ?>" />
+                <input type="checkbox"  name="bulk_action_id" value="<?php echo $result->getId() ?>" />
             </th>
-            <td class="cb_icon_column">
+            <td>
                 <a href="<?php echo $edit ?>"><img src="<?php echo $this->urls['thumbnails'] . "/" . $result->getImage() ?>" alt="" /></a>
             </td>
             <td>
@@ -86,7 +80,6 @@
                     <span Popover-animation="true"  popover-placement="top" popover="<? echo $result->getAbout();?>">Info</span>
                 </div>
             </td>
-
 
             <td><?php echo $result->getDescriptionSummary() ?></td>
 

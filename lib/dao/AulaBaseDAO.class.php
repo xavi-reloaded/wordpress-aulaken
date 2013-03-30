@@ -66,7 +66,6 @@ abstract class AulaBaseDAO implements IAulaBaseDAO {
                 }
                 $item->setCategories($category_ids);
             }
-
             $meta = get_post_meta($post->ID, $post_meta_name, true);
             AulaHelper::processPostMeta($meta,$item);
 
@@ -77,17 +76,10 @@ abstract class AulaBaseDAO implements IAulaBaseDAO {
     }
 
 
-    public function saveItem($title, $new_item_order,$id="",$summary="",$tax_input=null,$shortname="")
+    public function saveItem()
     {
-        $new_item = $item = $this->aulaItem->getObjectItem();
-        if (isset($id)) $new_item->setId($id);
-        $new_item->setTitle($title);
-        $new_item->setOrder($new_item_order);
-        $new_item->setSummary($summary);
-        $new_item->setCategories($tax_input);
-        $new_item->setShortname($shortname);
-        $new_item->save();
-        return $new_item;
+        $this->aulaItem->save();
+        return $this->aulaItem;
     }
 
 }

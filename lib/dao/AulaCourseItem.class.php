@@ -43,11 +43,11 @@ class AulaCourseItem extends AulaBaseItem
 
     public $topics_on_course = array();
 
+
     public function save($params = array())
     {
         return parent::save($params);
     }
-
 
     public function getPostType()
     {
