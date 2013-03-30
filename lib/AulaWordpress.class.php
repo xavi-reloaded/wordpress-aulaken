@@ -332,15 +332,15 @@ class AulaWordpress implements IAulaWordpress {
             $aulaCourseItem->setSummary($_REQUEST['post_summary']);
             $aulaCourseItem->setShortname($_REQUEST['post_shortname']);
             $aulaCourseItem->setCategories($_REQUEST['tax_input']);
+            $aulaCourseItem->setOrder(wp_count_posts($this->custom_post_course_name)->publish + 1);
 
-            $new_item_order = wp_count_posts($this->custom_post_course_name)->publish + 1;
+            echo $_REQUEST['topicsArray'];
 
             if (isset($_REQUEST['save'])){
                 $aulaCourseItem->setId($_REQUEST['save_id']);
             } else {
                 $aulaCourseItem->setId(null);
             }
-
 
             $dao = new AulaCourseDAO($aulaCourseItem);
             $new_item = $dao->saveItem();

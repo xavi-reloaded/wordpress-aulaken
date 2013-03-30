@@ -43,17 +43,7 @@
         };
 
         var master = {
-            name: '',
-            summary: '',
-
-            topics : [
-                {id:1,title:'A topic to learn wraks',summary:'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.',
-                    activities:[ {title:'Assignment',pix:'assignment.png',content:'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.'}]
-                },
-                {id:2,title:'A topic to learn wraks',summary:'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.',
-                    activities:[ {title:'Assignment',pix:'assignment.png',content:'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.'}]
-                }
-            ]
+            topics : []
         };
 
         $scope.cancel = function() {
@@ -120,6 +110,13 @@
                 }
             });
         };
+
+        $scope.topicsEscaped='mierder for you';
+
+        $scope.htmlEscapeTopicsData = function(){
+            $scope.topicsEscaped=encodeURIComponent($scope.form);
+
+        };
     }
     // the dialog is injected in the specified controller
     function TopicDialogController($scope, dialog){
@@ -142,9 +139,11 @@
     <?php if ( $notice ) : ?> <div id="notice" class="error"><p><?php echo $notice ?></p></div> <?php endif; ?>
     <?php if ( $message ) : ?> <div id="message" class="updated"><p><?php echo $message; ?></p></div> <?php endif; ?>
 
-    <form id="aula-create" class="" method="post" action="admin.php?page=aula-save-course" >
+    <form id="aula-create" method="post" action="admin.php?page=aula-save-course&tEsc={{topicsEscaped}}" ng-submit="htmlEscapeTopicsData()">
 
         <?php wp_nonce_field($nonce_action); ?>
+
+
         <input type="hidden" id="user-id" name="user_ID" value="<?php echo (int) $user_ID ?>" />
         <input type="hidden" id="hiddenaction" name="action" value="<?php echo esc_attr( $form_action ) ?>" />
         <input type="hidden" id="originalaction" name="originalaction" value="<?php echo esc_attr( $form_action ) ?>" />
@@ -172,17 +171,17 @@
             <div id="post-body" class="metabox-holder columns-<?php echo 1 == get_current_screen()->get_columns() ? '1' : '2'; ?>">
                 <div id="post-body-content">
 
-                        <div>
-                            <label class="screen-reader-text" for="title">asd</label>
-                            <input type="text" class="input-block-level" name="post_title" value="<?php echo esc_attr( htmlspecialchars( $post->post_title ) ); ?>" id="title"/>
-                        </div>
-                        <div>
-                            <input type="text" name="post_shortname" value="<?=$post->post_shortcode?>" id="shortname"/>
-                            <p class="btn btn-danger btn-small" ng-click="openDialog()" >Help</p>
-                        </div>
-                        <?php
-                        wp_nonce_field( 'samplepermalink', 'samplepermalinknonce', false );
-                        ?>
+                    <div>
+                        <label class="screen-reader-text" for="title">asd</label>
+                        <input type="text" class="input-block-level" name="post_title" value="<?php echo esc_attr( htmlspecialchars( $post->post_title ) ); ?>" id="title"/>
+                    </div>
+                    <div>
+                        <input type="text" name="post_shortname" value="<?=$post->post_shortcode?>" id="shortname"/>
+                        <p class="btn btn-danger btn-small" ng-click="openDialog()" >Help</p>
+                    </div>
+                    <?php
+                    wp_nonce_field( 'samplepermalink', 'samplepermalinknonce', false );
+                    ?>
                     <?php
 
 
@@ -263,7 +262,7 @@
                                             <td>{{activity.title}}</td>
                                             <td>
                                                 <p ng-click="removeActivity(topic,activity)" class="btn btn-small btn-danger text-left">X</p>
-                                                <p popover-placement="bottom" popover="{{activity.content}}" class="btn btn-small btn-info text-right">?</p>
+                                                <span popover-placement="top" popover="{{activity.content}}" class="btn btn-small btn-info text-right">?</span>
                                             </td>
                                         </tr>
                                     </table>
@@ -287,13 +286,9 @@
 
                         </apiumac-group>
                     </apiumac>
-
-
                 </div>
                 <?php
-
                 do_action('dbx_post_sidebar');
-
                 ?>
             </div><!-- /post-body -->
             <br class="clear" />
