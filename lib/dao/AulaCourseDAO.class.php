@@ -2,6 +2,7 @@
 
 require_once(dirname(__FILE__) . '/AulaCourseItem.class.php');
 require_once(dirname(__FILE__) . '/../helper/AulaHelper.class.php');
+require_once(dirname(__FILE__) . '/AulaBaseDAO.class.php');
 
 /**
  * Created by JetBrains PhpStorm.
@@ -10,10 +11,8 @@ require_once(dirname(__FILE__) . '/../helper/AulaHelper.class.php');
  * Time: 12:54
  * To change this template use File | Settings | File Templates.
  */
-class AulaCourseDAO
+class AulaCourseDAO extends AulaBaseDAO
 {
-
-
     public static function getItems($customPostName, $custom_tax_name, $post_meta_name, $categories=false, $operator='IN', $sort='menu_order', $order='asc', $offset=0, $limit=-1, $load_categories=true)
     {
         $items = array();
@@ -74,13 +73,6 @@ class AulaCourseDAO
 
         return $items;
     }
-
-    /**
-     * Get a single course item by database id
-     *
-     * @param integer $id The id of the course item you wish to get.
-     * @return null|AunaCourse
-     */
 
     public static function getItem($id, $customPostName=null,$post_meta_name=null)
     {
