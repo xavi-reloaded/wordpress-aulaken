@@ -24,6 +24,8 @@ abstract class AulaBaseItem implements IAulaBaseItem {
     private $post_name;
     private $image;
 
+    protected $meta=array();
+
     function __construct($title="",$shortname="",$summary="")
     {
         $this->title = $title;
@@ -34,16 +36,18 @@ abstract class AulaBaseItem implements IAulaBaseItem {
     abstract public function getPostType();
     abstract public function getCommentStatus();
     abstract public function getObjectItem();
+    abstract public function getMetadataArray($meta = array());
 
-    public function save() {
+    public function save($params = array()) {
 
-        $params = array();
+
         $params['post_title']   = $this->getTitle();
         $params['post_name']    = sanitize_title($this->getTitle());
         $params['post_content'] = $this->getSummary();
         $params['menu_order']   = $this->order;
         $params['post_date']    = $this->date;
         $params['post_status']  = 'publish';
+
 
 
         if ($this->id > 0) {
@@ -71,6 +75,12 @@ abstract class AulaBaseItem implements IAulaBaseItem {
 
         $termIdArray = AulaHelper::getTermIdArrayFromCategory($this->getCategories());
         $terms_set = wp_set_object_terms($this->id, $termIdArray, "aula-taxonomy");
+
+        foreach ($this->meta as $key => $value) {
+            update_post_meta($this->id, $key, $value);
+        }
+
+
 
 //        wp_set_post_categories( $this->id, $this->categories );
         if ($terms_set instanceof WP_Error) {

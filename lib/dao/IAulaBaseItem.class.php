@@ -10,9 +10,10 @@
 interface IAulaBaseItem {
 
     public function getDescriptionSummary();
-    public function save();
+    public function save($params = array());
     public function delete();
     public function getPostType();
     public function getObjectItem();
+    public function getMetadataArray($meta = array());
 
 }

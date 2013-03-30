@@ -28,12 +28,10 @@ class AulaHelper {
     }
 
     public static function processPostMeta($meta, $obj) {
-
         // deserialize meta if necessary
         if (is_serialized($meta)) {
             $meta = unserialize($meta);
         }
-
         // loop through meta array and set properties
         if (is_array($meta)) {
             foreach ($meta as $key => $value) {
