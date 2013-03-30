@@ -41,6 +41,8 @@ class AulaCourseItem extends AulaBaseItem
     public $word_for_authenticated_user;
     public $word_for_authenticated_user_on_frontpage;
 
+    public $topics_on_course = array();
+
     public function save($params = array())
     {
         return parent::save($params);
@@ -94,6 +96,13 @@ class AulaCourseItem extends AulaBaseItem
         $this->meta['word_for_authenticated_user'] =$this->word_for_authenticated_user;
         $this->meta['word_for_authenticated_user_on_frontpage'] =$this->word_for_authenticated_user_on_frontpage;
 
+        $this->meta['topics_on_course'] = $this->topics_on_course;
+
         return $meta;
+    }
+
+    public function getAbout()
+    {
+        return "mierder for you";
     }
 }

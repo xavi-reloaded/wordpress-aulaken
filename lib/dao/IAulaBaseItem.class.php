@@ -15,5 +15,6 @@ interface IAulaBaseItem {
     public function getPostType();
     public function getObjectItem();
     public function getMetadataArray($meta = array());
+    public function getAbout();
 
 }

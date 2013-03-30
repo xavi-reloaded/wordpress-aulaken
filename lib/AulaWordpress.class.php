@@ -351,7 +351,7 @@ class AulaWordpress implements IAulaWordpress {
         }
         if (!$init_run && $error !== false) {
             $this->wp_error($error);
-            include_once($this->directories['template'] . '/admin-portals.php');
+            include_once($this->directories['template'] . '/admin-aula.php');
         }
 
     }
@@ -388,7 +388,7 @@ class AulaWordpress implements IAulaWordpress {
         $dao = new AulaCourseDAO(new AulaCourseItem());
         $results = $dao->getItems($this->custom_post_course_name, $this->custom_tax_name, $this->custom_user_meta_name,$category_filter, 'IN', $sort, $order, $offset, $limit);
 
-        include_once($this->directories['template'] . '/admin-portals.php');
+        include_once($this->directories['template'] . '/admin-aula.php');
     }
 
     public function admin_course_new()

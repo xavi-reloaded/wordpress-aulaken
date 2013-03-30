@@ -32,4 +32,9 @@ class AulaTopicItem extends AulaBaseItem
     {
         // TODO: Implement getMetadataArray() method.
     }
+
+    public function getAbout()
+    {
+        // TODO: Implement getAbout() method.
+    }
 }

@@ -56,13 +56,6 @@
             ]
         };
 
-        $scope.topics = [
-            {title:'A topic to learn wraks',summary:'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.',
-                activities:[ {title:'Assignment',pix:'assignment.png',content:'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.'},
-
-                ]}
-        ];
-
         $scope.cancel = function() {
             $scope.form = angular.copy(master);
         };
