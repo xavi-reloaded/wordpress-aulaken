@@ -80,7 +80,7 @@
 						<a href="<?php echo $edit ?>"><img src="<?php echo $this->urls['thumbnails'] . "/" . $result->getImage() ?>" class="cb_item_icon" alt="" /></a>
 					</td>
 					<td>
-						<strong><a href="<?php echo $edit ?>" title="Edit CataBlog Item"><?php echo ($result->getTitle()) ?></a></strong>
+						<strong><a href="<?php echo $edit ?>" title="Edit Aula Item"><?php echo ($result->getTitle()) ?></a></strong>
 						<div class="row-actions">
 							<span><a href="<?php echo $edit ?>"><?php _e("Edit", "aula"); ?></a></span>
 							<span> | </span>

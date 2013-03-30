@@ -12,11 +12,11 @@ require_once(dirname(__FILE__) . '/../helper/AulaHelper.class.php');
 
 abstract class AulaBaseItem implements IAulaBaseItem {
 
-    public $id_number;                  // course id number
-    public $title;                      // course full name
-    public $shortname;                  // course short name
-    public $summary;                    // course summary
-    public $categories;                 // course categories
+    private $id_number;                  // course id number
+    private $title;                      // course full name
+    private $shortname;                  // course short name
+    private $summary;                    // course summary
+    private $categories;                 // course categories
 
     function __construct($title="",$shortname="",$summary="")
     {
@@ -32,6 +32,25 @@ abstract class AulaBaseItem implements IAulaBaseItem {
         $description_summary .= (AulaHelper::string_length($no_line_breaks) > 120)? '...' : '';
         return $description_summary;
     }
+
+
+
+    public function setCategories($categories) { $this->categories = $categories; }
+
+    public function getCategories() { return $this->categories; }
+
+    public function setSummary($description) { $this->summary = $description; }
+
+    public function getSummary() { return $this->summary; }
+
+    public function setTitle($title){$this->title = $title;}
+
+    public function getTitle(){return $this->title;}
+
+    public function getShortName(){return $this->shortname;}
+
+    public function setShortname($shortname){$this->shortname=$shortname;}
+
 
 
 

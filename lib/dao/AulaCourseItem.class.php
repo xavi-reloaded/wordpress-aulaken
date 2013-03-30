@@ -49,9 +49,9 @@ class AulaCourseItem extends AulaBaseItem
     public function save() {
 
         $params = array();
-        $params['post_title']   = $this->title;
-        $params['post_name']    = sanitize_title($this->title);
-        $params['post_content'] = $this->summary;
+        $params['post_title']   = $this->getTitle();
+        $params['post_name']    = sanitize_title($this->getTitle());
+        $params['post_content'] = $this->getSummary();
         $params['menu_order']   = $this->order;
         $params['post_date']    = $this->date;
         $params['post_status']  = 'publish';
@@ -80,7 +80,7 @@ class AulaCourseItem extends AulaBaseItem
         // update post terms
         // NOTE: $this->categories must be an array on term ids, otherwise it is an array of term names keyed by term id.
 
-        $termIdArray = AulaHelper::getTermIdArrayFromCategory($this->categories);
+        $termIdArray = AulaHelper::getTermIdArrayFromCategory($this->getCategories());
         $terms_set = wp_set_object_terms($this->id, $termIdArray, "aula-taxonomy");
 
 //        wp_set_post_categories( $this->id, $this->categories );
@@ -114,15 +114,7 @@ class AulaCourseItem extends AulaBaseItem
         return $this->post_name;
     }
 
-    public function setCategories($categories)
-    {
-        $this->categories = $categories;
-    }
 
-    public function getCategories()
-    {
-        return $this->categories;
-    }
 
     public function setDate($date)
     {
@@ -134,15 +126,7 @@ class AulaCourseItem extends AulaBaseItem
         return $this->date;
     }
 
-    public function setSummary($description)
-    {
-        $this->summary = $description;
-    }
 
-    public function getSummary()
-    {
-        return $this->summary;
-    }
 
     public function setId($id)
     {
@@ -164,15 +148,7 @@ class AulaCourseItem extends AulaBaseItem
         return $this->order;
     }
 
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    }
 
-    public function getTitle()
-    {
-        return $this->title;
-    }
 
     public function setImage($image)
     {
@@ -184,15 +160,7 @@ class AulaCourseItem extends AulaBaseItem
         return $this->image;
     }
 
-    public function getShortName()
-    {
-        return $this->shortname;
-    }
 
-    public function setShortname($shortname)
-    {
-        $this->shortname=$shortname;
-    }
 
 
 }

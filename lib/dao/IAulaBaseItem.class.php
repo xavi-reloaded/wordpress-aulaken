@@ -9,4 +9,6 @@
 
 interface IAulaBaseItem {
 
+    public function getDescriptionSummary();
+
 }

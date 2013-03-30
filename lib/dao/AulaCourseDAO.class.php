@@ -59,10 +59,10 @@ class AulaCourseDAO
             $item = new AulaCourseItem();
 
             $item->id           = $post->ID;
-            $item->title        = $post->post_title;
-            $item->summary      = $post->post_content;
+            $item->setTitle($post->post_title);
+            $item->setSummary($post->post_content);
             $item->date         = $post->post_date;
-            $item->categories   = array();
+            $item->setCategories(array());
             $item->order        = $post->menu_order;
             $item->post_name    = $post->post_name;
 
@@ -75,7 +75,7 @@ class AulaCourseDAO
                         $category_ids[$term->term_id] = $term->name;
                     }
                 }
-                $item->categories = $category_ids;
+                $item->setCategories($category_ids);
             }
 
             $meta = get_post_meta($post->ID, $post_meta_name, true);
@@ -117,10 +117,10 @@ class AulaCourseDAO
         $item = new AulaCourseItem();
         
         $item->id           = $post->ID;
-        $item->title        = $post->post_title;
+        $item->setTitle($post->post_title);
         $item->description  = $post->post_content;
         $item->date         = $post->post_date;
-        $item->categories   = $category_ids;
+        $item->setCategories($category_ids);
         $item->order        = $post->menu_order;
         $item->_post_name   = $post->post_name;
         $meta = get_post_meta($post->ID, $post_meta_name, true);
