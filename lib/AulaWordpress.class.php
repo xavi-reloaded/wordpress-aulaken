@@ -334,7 +334,9 @@ class AulaWordpress implements IAulaWordpress {
             $aulaCourseItem->setCategories($_REQUEST['tax_input']);
             $aulaCourseItem->setOrder(wp_count_posts($this->custom_post_course_name)->publish + 1);
 
-            echo $_REQUEST['topicsArray'];
+
+
+            $weke =  $_GET['tEsc'];
 
             if (isset($_REQUEST['save'])){
                 $aulaCourseItem->setId($_REQUEST['save_id']);
