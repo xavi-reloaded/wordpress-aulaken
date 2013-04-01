@@ -34,9 +34,9 @@ angular.module('app.services', ['ngResource']).
                 msgs = [];
             }
         };
-    }]);
-//    value('version', '0.1').
-//    value('author','Xavi Hidalgo');
+    }]).
+    value('version', '0.1').
+    value('author','Xavi Hidalgo');
 ;
 
 //angular.module('app', [], function($provide) {
