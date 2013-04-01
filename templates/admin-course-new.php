@@ -1,4 +1,4 @@
-<script type='text/javascript' src="http://localhost/apiumtech/wp-content/plugins/wordpress-aulaken/templates/admin-course-new-dummy.js"></script>
+<script type='text/javascript' src="http://localhost/apiumtech/wp-content/plugins/wordpress-aulaken/templates/admin-course-new-dummy2.js"></script>
 
 <div class="wrap" ng-controller="AdminCourseNew">
     <div id="icon-edit-comments" class="icon32"><br /></div><h2><?= ( isset($post->ID)  ) ? _("Edit Course") : _("Add New Course"); ?> </h2>
@@ -11,11 +11,15 @@
     <?php if ( $notice ) : ?> <div id="notice" class="error"><p><?php echo $notice ?></p></div> <?php endif; ?>
     <?php if ( $message ) : ?> <div id="message" class="updated"><p><?php echo $message; ?></p></div> <?php endif; ?>
 
-    <form id="aula-create" method="post" action="admin.php?page=aula-save-course" >
+    <form id="aula-create" method="post" name="aula-create" action="admin.php?page=aula-save-course" >
+
 <!--        ng-submit="sendJson()"-->
 
         <?php wp_nonce_field($nonce_action); ?>
-<!--        {{form}} <p class="btn btn-danger" ng-submit="callNotify(form);">rest</p>-->
+        {{form}} </br>
+        <p class="btn btn-danger" ng-submit="callGreeter();">greeter</p>
+        <p class="btn btn-danger" ng-submit="callPhone();">phone</p>
+        <p class="btn btn-danger" ng-submit="callNotify();">notify</p>
 
         <input type="hidden" id="user-id" name="user_ID" value="<?php echo (int) $user_ID ?>" />
         <input type="hidden" id="hiddenaction" name="action" value="<?php echo esc_attr( $form_action ) ?>" />
