@@ -105,4 +105,10 @@ class AulaCourseItem extends AulaBaseItem
     {
         return "mierder for you";
     }
+
+
+    public function toJson()
+    {
+        // TODO: Implement toJson() method.
+    }
 }

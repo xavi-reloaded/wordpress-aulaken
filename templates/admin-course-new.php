@@ -47,7 +47,7 @@
                         </div>
                         <div>
                             <input type="text" name="post_shortname" value="<?=$post->post_shortcode?>" id="shortname"/>
-                            <p class="btn btn-danger btn-small" ng-click="notify(weke)" >Help</p>
+                            <p class="btn btn-danger btn-small" ng-click="notify(form)" >Help</p>
                         </div>
                         <?php
                         wp_nonce_field( 'samplepermalink', 'samplepermalinknonce', false );

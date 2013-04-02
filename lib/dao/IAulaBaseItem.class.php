@@ -16,5 +16,6 @@ interface IAulaBaseItem {
     public function getObjectItem();
     public function getMetadataArray($meta = array());
     public function getAbout();
+    public function toJson();
 
 }

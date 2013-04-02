@@ -5,7 +5,7 @@
  * Time: 10:46 AM
  * To change this template use File | Settings | File Templates.
  */
-function AdminCourseNew($scope, $dialog, notify){
+function AdminCourseNew($scope, $dialog, topicsService){
 
     $scope.opts = {
         backdrop: true,
@@ -48,31 +48,6 @@ function AdminCourseNew($scope, $dialog, notify){
             });
     };
 
-    var master = {
-        name: '',
-        summary: '',
-
-        topics : [ ]
-    };
-
-//    {id:1,title:'A topic to learn wraks',summary:'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.',
-//        activities:[ {title:'Assignment',pix:'assignment.png',content:'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.'}]
-//    },
-//    {id:2,title:'A topic to learn wraks',summary:'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.',
-//        activities:[ {title:'Assignment',pix:'assignment.png',content:'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.'}]
-//    }
-
-    $scope.cancel = function() {
-        $scope.form = angular.copy(master);
-    };
-
-    $scope.save = function() {
-        master = $scope.form;
-        $scope.form = angular.copy(master);
-
-    };
-
-    $scope.cancel();
 
     $scope.removeActivity  = function(topic, activity) {
         var topics = $scope.form.topics;
@@ -130,13 +105,85 @@ function AdminCourseNew($scope, $dialog, notify){
     $scope.notify = function(msg){
         notify(msg);
     }
+
+
+
+
+    $scope.courseId = 55;
+// display list with topics
+    $scope.getTopicsListFromCourse = function() {
+        topicsService.query(
+            {courseId: $scope.courseId }, //params
+            function (data) { //success
+                $scope.form = data.data;
+            },
+            function (data) { //failure
+                console.log("Error occurred while getting list of topics");
+            });
+    }
+    $scope.getTopicsListFromCourse();
+
 }
-// the dialog is injected in the specified controller
+
+
+AdminCourseNew.$inject = ['$scope', '$dialog','topicsService'];
+
+
 function TopicDialogController($scope, dialog){
     $scope.close = function(name,summary){
         dialog.close(name,summary);
     };
 }
 
-AdminCourseNew.$inject = ['$scope', '$dialog','notify'];
 
+// the dialog is injected in the specified controller
+
+//// show edit screen if edit button is clicked
+//    $scope.showEditScreen = function(id) {
+//        $scope.user = User.get({topicsId: id});
+//        $scope.updateUserDetailsButtonIsVisible = true;
+//        $scope.userModScreenIsVisible = true;
+//    }
+//
+//// hide edit screen if close button is clicked
+//    $scope.hideEditScreen = function() {
+//        $scope.updateUserDetailsButtonIsVisible = false;
+//        $scope.saveUserDetailsButtonIsVisible = false;
+//        $scope.userModScreenIsVisible = false;
+//    }
+//
+//// update a user
+//    $scope.updateUserDetails = function() {
+//        $scope.user.$update();
+//        for(var i=0;i<$scope.users.length;i++) {
+//            if($scope.users[i].id == $scope.user.id) {
+//                angular.extend($scope.users[i], $scope.user);
+//                break;
+//            }
+//        }
+//        console.log($scope.user);
+//        //$scope.user = User.get({userId: $scope.user.id});
+//        $scope.updateUserDetailsButtonIsVisible = false;
+//        $scope.userModScreenIsVisible = false;
+//    }
+//
+//// show a new user screen
+//    $scope.showNewScreen = function() {
+//        $scope.user = new User();
+//        $scope.saveUserDetailsButtonIsVisible = true;
+//        $scope.userModScreenIsVisible = true;
+//    }
+//
+//// save a new user
+//    $scope.saveUserDetails = function() {
+//        $scope.user.$create();
+//        $scope.users.push($scope.user);
+//        $scope.saveUserDetailsButtonIsVisible = false;
+//        $scope.userModScreenIsVisible = false;
+//    }
+//
+//// delete a user
+//    $scope.deleteUser = function(id) {
+//        $scope.user = topicsService.get({userId: id});
+//        $scope.user.$delete();
+//    }

@@ -25,5 +25,16 @@ angular.module('app.services', ['ngResource']).
             }
         };
     }]).
+
+    factory('topicsService', function($resource){
+        var serverUrl = 'http://enriched.localhost/apiumtech/wp-content/plugins/wordpress-aulaken/rest/topicsService.php?c=:courseId';
+        return $resource(serverUrl, {courseId: '@id'}, {
+            query: {method: 'GET', headers: [{'Content-Type': 'application/json'}, {'Accept': 'application/json'}]},
+            get: {method:'GET', headers: [{'Content-Type': 'application/json'}, {'Accept': 'application/json'}]},
+            update: {method:'PUT', headers: [{'Content-Type': 'application/json'}, {'Accept': 'application/json'}]},
+            create: {method:'POST', headers: [{'Content-Type': 'application/json'}, {'Accept': 'application/json'}]},
+            delete: {method:'DELETE', headers: [{'Content-Type': 'application/json'}, {'Accept': 'application/json'}]}
+        });
+    }).
     value('version', '0.1').
     value('author', 'Xavi');
