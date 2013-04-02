@@ -15,6 +15,8 @@ function AdminCourseNew($scope, $dialog, topicsService){
         controller: 'ActivityResourceDialogController'
     };
 
+    $scope.form = { topics : [] };
+
 
 
     $scope.openDialog = function(topicId){
@@ -115,7 +117,8 @@ function AdminCourseNew($scope, $dialog, topicsService){
         topicsService.query(
             {courseId: $scope.courseId }, //params
             function (data) { //success
-                $scope.form = data.data;
+                console.log(data.topics);
+                $scope.form =data;
             },
             function (data) { //failure
                 console.log("Error occurred while getting list of topics");
