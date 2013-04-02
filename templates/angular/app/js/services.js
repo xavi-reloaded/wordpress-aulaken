@@ -27,7 +27,7 @@ angular.module('app.services', ['ngResource']).
     }]).
 
     factory('topicsService', function($resource){
-        var serverUrl = 'http://enriched.localhost/apiumtech/wp-content/plugins/wordpress-aulaken/rest/topicsService.php?c=:courseId';
+        var serverUrl = 'http://localhost/apiumtech/wp-content/plugins/wordpress-aulaken/rest/topicsService.php?c=:courseId';
         return $resource(serverUrl, {courseId: '@id'}, {
             query: {method: 'GET', headers: [{'Content-Type': 'application/json'}, {'Accept': 'application/json'}], isArray:false},
             get: {method:'GET', headers: [{'Content-Type': 'application/json'}, {'Accept': 'application/json'}]},
