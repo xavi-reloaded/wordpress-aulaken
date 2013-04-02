@@ -6,7 +6,7 @@ angular.module('app.services', ['ngResource']).
 
     // Teach the injector how to build a 'greeter'
     // Notice that greeter itself is dependent on '$window'
-    factory('greeter', function($window) {
+    factory('greeter', ['$window',function() {
         // This is a factory function, and is responsible for
         // creating the 'greet' service.
         console.log('into greeter service');
@@ -15,7 +15,7 @@ angular.module('app.services', ['ngResource']).
                 $window.alert('into greeter service');
             }
         };
-    }).
+    }]).
 
     factory('phone', function($resource){
         console.log('into phone service');

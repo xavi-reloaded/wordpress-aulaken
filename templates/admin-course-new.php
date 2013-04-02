@@ -17,7 +17,7 @@
 
         <?php wp_nonce_field($nonce_action); ?>
         {{form}} </br>
-        <p class="btn btn-danger" ng-submit="callGreeter();">greeter</p>
+        <p class="btn btn-danger" ng-submit="callGreeter(1,2,3);">greeter</p>
         <p class="btn btn-danger" ng-submit="callPhone();">phone</p>
         <p class="btn btn-danger" ng-submit="callNotify();">notify</p>
 
