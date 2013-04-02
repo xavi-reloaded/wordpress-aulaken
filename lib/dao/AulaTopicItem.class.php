@@ -12,6 +12,20 @@ require_once(dirname(__FILE__) . '/AulaBaseItem.class.php');
 
 class AulaTopicItem extends AulaBaseItem
 {
+    public $activities = array();
+
+
+    public function setActivities($activities)
+    {
+        $this->activities = $activities;
+    }
+
+    public function getActivities()
+    {
+        return $this->activities;
+    }
+
+
 
     public function getPostType()
     {
@@ -36,5 +50,17 @@ class AulaTopicItem extends AulaBaseItem
     public function getAbout()
     {
         // TODO: Implement getAbout() method.
+    }
+
+    public function toJson()
+    {
+        $json = array(
+            'id' => $this->getId(),
+            'title' => $this->getTitle(),
+            'summary' => $this->getSummary(),
+            'activities' => $this->getActivities()
+        );
+
+        return json_encode($json);
     }
 }

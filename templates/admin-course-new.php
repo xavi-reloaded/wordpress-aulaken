@@ -1,4 +1,5 @@
-<script type='text/javascript' src="http://localhost/apiumtech/wp-content/plugins/wordpress-aulaken/templates/admin-course-new-dummy2.js"></script>
+<script type='text/javascript' src='http://enriched.localhost/apiumtech/wp-content/plugins/wordpress-aulaken/templates/temp-topic-presentation-model.js'></script>
+
 
 <div class="wrap" ng-controller="AdminCourseNew">
     <div id="icon-edit-comments" class="icon32"><br /></div><h2><?= ( isset($post->ID)  ) ? _("Edit Course") : _("Add New Course"); ?> </h2>
@@ -11,16 +12,10 @@
     <?php if ( $notice ) : ?> <div id="notice" class="error"><p><?php echo $notice ?></p></div> <?php endif; ?>
     <?php if ( $message ) : ?> <div id="message" class="updated"><p><?php echo $message; ?></p></div> <?php endif; ?>
 
-    <form id="aula-create" method="post" name="aula-create" action="admin.php?page=aula-save-course" >
-
-<!--        ng-submit="sendJson()"-->
+    {{form}}
+    <form id="aula-create" class="" method="post" action="admin.php?page=aula-save-course" >
 
         <?php wp_nonce_field($nonce_action); ?>
-        {{form}} </br>
-        <p class="btn btn-danger" ng-submit="callGreeter(1,2,3);">greeter</p>
-        <p class="btn btn-danger" ng-submit="callPhone();">phone</p>
-        <p class="btn btn-danger" ng-submit="callNotify();">notify</p>
-
         <input type="hidden" id="user-id" name="user_ID" value="<?php echo (int) $user_ID ?>" />
         <input type="hidden" id="hiddenaction" name="action" value="<?php echo esc_attr( $form_action ) ?>" />
         <input type="hidden" id="originalaction" name="originalaction" value="<?php echo esc_attr( $form_action ) ?>" />
@@ -48,17 +43,17 @@
             <div id="post-body" class="metabox-holder columns-<?php echo 1 == get_current_screen()->get_columns() ? '1' : '2'; ?>">
                 <div id="post-body-content">
 
-                    <div>
-                        <label class="screen-reader-text" for="title">asd</label>
-                        <input type="text" class="input-block-level" name="post_title" value="<?php echo esc_attr( htmlspecialchars( $post->post_title ) ); ?>" id="title"/>
-                    </div>
-                    <div>
-                        <input type="text" name="post_shortname" value="<?=$post->post_shortcode?>" id="shortname"/>
-                        <p class="btn btn-danger btn-small" ng-click="openDialog()" >Help</p>
-                    </div>
-                    <?php
-                    wp_nonce_field( 'samplepermalink', 'samplepermalinknonce', false );
-                    ?>
+                        <div>
+                            <label class="screen-reader-text" for="title">asd</label>
+                            <input type="text" class="input-block-level" name="post_title" value="<?php echo esc_attr( htmlspecialchars( $post->post_title ) ); ?>" id="title"/>
+                        </div>
+                        <div>
+                            <input type="text" name="post_shortname" value="<?=$post->post_shortcode?>" id="shortname"/>
+                            <p class="btn btn-danger btn-small" ng-click="notify(form)" >Help</p>
+                        </div>
+                        <?php
+                        wp_nonce_field( 'samplepermalink', 'samplepermalinknonce', false );
+                        ?>
                     <?php
 
 
@@ -139,7 +134,7 @@
                                             <td>{{activity.title}}</td>
                                             <td>
                                                 <p ng-click="removeActivity(topic,activity)" class="btn btn-small btn-danger text-left">X</p>
-                                                <span popover-placement="top" popover="{{activity.content}}" class="btn btn-small btn-info text-right">?</span>
+                                                <p popover-placement="bottom" popover="{{activity.content}}" class="btn btn-small btn-info text-right">?</p>
                                             </td>
                                         </tr>
                                     </table>
@@ -163,9 +158,13 @@
 
                         </apiumac-group>
                     </apiumac>
+
+
                 </div>
                 <?php
+
                 do_action('dbx_post_sidebar');
+
                 ?>
             </div><!-- /post-body -->
             <br class="clear" />
