@@ -36,5 +36,6 @@ angular.module('app.services', ['ngResource']).
             delete: {method:'DELETE', headers: [{'Content-Type': 'application/json'}, {'Accept': 'application/json'}]}
         });
     }).
+
     value('version', '0.1').
     value('author', 'Xavi');
