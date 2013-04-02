@@ -5,13 +5,13 @@
  * Time: 10:46 AM
  * To change this template use File | Settings | File Templates.
  */
-function AdminCourseNew($scope, $dialog){
+function AdminCourseNew($scope, $dialog, notify){
 
     $scope.opts = {
         backdrop: true,
         keyboard: true,
         backdropClick: true,
-        templateUrl: 'wp-content/plugins/wordpress-aulaken/templates/partials/partial-resource-dialog.html',
+        templateUrl: '../wp-content/plugins/wordpress-aulaken/templates/partials/partial-resource-dialog.html',
         controller: 'ActivityResourceDialogController'
     };
 
@@ -52,15 +52,15 @@ function AdminCourseNew($scope, $dialog){
         name: '',
         summary: '',
 
-        topics : [
-            {id:1,title:'A topic to learn wraks',summary:'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.',
-                activities:[ {title:'Assignment',pix:'assignment.png',content:'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.'}]
-            },
-            {id:2,title:'A topic to learn wraks',summary:'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.',
-                activities:[ {title:'Assignment',pix:'assignment.png',content:'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.'}]
-            }
-        ]
+        topics : [ ]
     };
+
+//    {id:1,title:'A topic to learn wraks',summary:'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.',
+//        activities:[ {title:'Assignment',pix:'assignment.png',content:'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.'}]
+//    },
+//    {id:2,title:'A topic to learn wraks',summary:'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.',
+//        activities:[ {title:'Assignment',pix:'assignment.png',content:'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.'}]
+//    }
 
     $scope.cancel = function() {
         $scope.form = angular.copy(master);
@@ -126,6 +126,10 @@ function AdminCourseNew($scope, $dialog){
             }
         });
     };
+
+    $scope.notify = function(msg){
+        notify(msg);
+    }
 }
 // the dialog is injected in the specified controller
 function TopicDialogController($scope, dialog){
@@ -133,4 +137,6 @@ function TopicDialogController($scope, dialog){
         dialog.close(name,summary);
     };
 }
+
+AdminCourseNew.$inject = ['$scope', '$dialog','notify'];
 
