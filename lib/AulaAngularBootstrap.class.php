@@ -18,6 +18,7 @@ class AulaAngularBootstrap {
     public static function loadScripts() {
         $jsPath=plugins_url().'/wordpress-aulaken/js';
         wp_enqueue_script( "angular", $jsPath.'/angular/angular.js',false);
+        wp_enqueue_script( "angular-resource", $jsPath.'/angular/angular-resource.js',false);
         wp_enqueue_script( "angular-ui", $jsPath.'/angular/angular-ui.min.js',false);
         wp_enqueue_script( "bootstrap", $jsPath.'/ui-bootstrap-tpls-0.2.0.js',false);
         wp_enqueue_script( "bootstrap-apium", $jsPath.'/ui-bootstrap-apium.js',false);
