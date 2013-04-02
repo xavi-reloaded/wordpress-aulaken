@@ -24,8 +24,13 @@ class AulaTopicItemTest extends PHPUnit_Framework_TestCase
     public function test_toJson_withActivities_json()
     {
         $this->sut=new AulaTopicItem();
-        $actual = $this->sut->toJson();
-        $expected = '{"id":null,"title":"","summary":"","activities":[]}';
+        $activities = array (
+            array('title' => 'Assignment', 'pix'=>'assignment.png', 'content'=>'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.'),
+            array('title' => 'Assignment', 'pix'=>'assignment.png', 'content'=>'An other fliping content for you')
+        );
+        $this->sut->setActivities($activities);
+        $actual = $this->sut->toJson('{"id":null,"title":"title of","summary":"","summary":""');
+        $expected = '{"id":null,"title":"","summary":"","activities":[{"title":"Assignment","pix":"assignment.png","content":"The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback."},{"title":"Assignment","pix":"assignment.png","content":"An other fliping content for you"}]}';
         $this->assertEquals($actual,$expected);
     }
 
