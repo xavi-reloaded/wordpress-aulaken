@@ -55,12 +55,12 @@ class AulaTopicItem extends AulaBaseItem
     public function toJson()
     {
         $json = array(
-            'id' => $this->getId(),
-            'title' => $this->getTitle(),
-            'summary' => $this->getSummary(),
-            'activities' => $this->getActivities()
+            id => $this->getId(),
+            title => $this->getTitle(),
+            summary => $this->getSummary(),
+            activities => $this->getActivities()
         );
 
-        return json_encode($json);
+        return $json;
     }
 }

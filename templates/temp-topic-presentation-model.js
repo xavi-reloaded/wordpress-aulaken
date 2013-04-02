@@ -117,8 +117,13 @@ function AdminCourseNew($scope, $dialog, topicsService){
         topicsService.query(
             {courseId: $scope.courseId }, //params
             function (data) { //success
-                console.log(data.topics);
-                $scope.form =data;
+                console.log(data);
+//                $scope.form =angular.toJson(data.toString());
+//                for(var i = 0; i < data.length; i++){
+//                    $scope.form.topics.push(data.topics[i]);
+//                }
+                $scope.form = data;
+
             },
             function (data) { //failure
                 console.log("Error occurred while getting list of topics");

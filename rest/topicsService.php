@@ -9,7 +9,7 @@
 require_once("../lib/dao/AulaTopicItem.class.php");
 
 header('Cache-Control: no-cache, must-revalidate');
-//header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
 header('Content-type: application/json');
 
 $topicsJson=array();
@@ -24,14 +24,14 @@ $aulaTopicItem->setId(1);
 $aulaTopicItem->setActivities($activities);
 
 $aulaTopicItem2=new AulaTopicItem("Sample Json Response 2");
-$aulaTopicItem2->setId(2);
+$aulaTopicItem2->setId(2222);
 $aulaTopicItem2->setActivities($activities);
 
 
 array_push($topicsJson,$aulaTopicItem->toJson());
 array_push($topicsJson,$aulaTopicItem2->toJson());
 
-$topicsJsonVar=array("topics" => $topicsJson);
+$topicsJsonVar=array( "topics" => $topicsJson);
 
 echo json_encode($topicsJsonVar);
 
