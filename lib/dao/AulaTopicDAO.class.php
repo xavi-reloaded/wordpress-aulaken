@@ -28,6 +28,34 @@ class AulaTopicDAO extends AulaBaseDAO
 
     }
 
+    public function getTopicItemsFromJson($json)
+    {
+        $topicItemList = array();
+        $jsonDecode = json_decode($json);
+
+        if (!isset($jsonDecode->form->topics))
+        {
+            return $topicItemList;
+        }
+
+        $topics = $jsonDecode->form->topics ;
+
+        foreach ($topics as $topic)
+        {
+            $aulaTopicItem = new AulaTopicItem($topic->title, '', $topic->summary);
+            $aulaTopicItem->setId($topic->id);
+            foreach ($topic->activities as $activity) {
+                $swek = 1;
+            }
+            array_push($topicItemList, $aulaTopicItem);
+        }
+
+
+        return $topicItemList;
+    }
+
+
+
     public static function getItem($id)
     {
         $post = get_post($id);
@@ -60,5 +88,6 @@ class AulaTopicDAO extends AulaBaseDAO
 
         return $item;
     }
+
 
 }
