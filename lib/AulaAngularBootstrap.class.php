@@ -32,7 +32,7 @@ class AulaAngularBootstrap {
     }
 
     public static function loadApp() {
-        $appPath=plugins_url().'/wordpress-aulaken/templates/angular/app/js';
+        $appPath=plugins_url().'/wordpress-aulaken/templates/app/js';
         wp_enqueue_script("angular_services", $appPath.'/services.js',array(),false,true);
         wp_enqueue_script("angular_controllers", $appPath.'/controllers.js',array(),false,true);
         wp_enqueue_script("angular_filters", $appPath.'/filters.js',array(),false,true);

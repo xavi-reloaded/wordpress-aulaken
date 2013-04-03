@@ -1,4 +1,4 @@
-<script type='text/javascript' src='http://enriched.localhost/apiumtech/wp-content/plugins/wordpress-aulaken/templates/temp-topic-presentation-model.js'></script>
+<script type='text/javascript' src='http://enriched.localhost/apiumtech/wp-content/plugins/wordpress-aulaken/templates/app/js/temp-topic-presentation-model.js'></script>
 
 
 <div class="wrap" ng-controller="AdminCourseNew">
