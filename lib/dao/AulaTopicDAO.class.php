@@ -15,6 +15,7 @@ class AulaTopicDAO extends AulaBaseDAO
 
     public function getTopicsFromCourseId($id)
     {
+        $course = AulaCourseDAO::getItem($id);
         return "mierder";
 
     }
