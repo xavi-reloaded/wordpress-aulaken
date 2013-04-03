@@ -81,7 +81,7 @@ abstract class AulaBaseItem implements IAulaBaseItem {
             return __("Could not set categories, please try again.", 'aula');
         }
 
-        return true;
+        return $this->id;
     }
 
 

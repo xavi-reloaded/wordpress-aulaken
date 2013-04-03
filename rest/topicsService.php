@@ -13,16 +13,20 @@
 header('Content-type: application/x-www-form-urlencoded');
 require_once("../../../../wp-load.php");
 require_once("../lib/dao/AulaTopicDAO.class.php");
+require_once("../lib/dao/AulaCourseDAO.class.php");
 
 
 $method = $_SERVER['REQUEST_METHOD'];
 
-$aulaTopicDAO = new AulaTopicDAO(new AulaTopicItem());
+$aulaTopicDAO  = new AulaTopicDAO(new AulaTopicItem());
+$aulaCourseDAO = new AulaCourseDAO(new AulaCourseItem());
 
 if ($method=="POST") {
 //    $data = json_decode(file_get_contents("php://input"));
     $data_no_decode = file_get_contents("php://input");
-    $aulaTopicDAO->updateTopicsFromJson($data_no_decode);
+    $topicIdsSaved = $aulaTopicDAO->updateTopicsFromJson($data_no_decode);
+
+
 }
 
 

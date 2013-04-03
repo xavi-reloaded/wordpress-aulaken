@@ -98,12 +98,16 @@ class AulaTopicDAO extends AulaBaseDAO
 
     public function updateTopicsFromJson($json)
     {
+        $topicsId = array();
         $topicItems = $this->getTopicItemsFromJson($json);
         foreach ($topicItems as $topicItem) {
-            $topicItem->save();
+            $idSaved = $topicItem->save();
+            array_push($topicsId,$idSaved);
         }
-        return true;
+        return $topicsId;
     }
+
+
 
 
 }
