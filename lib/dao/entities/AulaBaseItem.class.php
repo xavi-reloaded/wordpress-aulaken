@@ -8,7 +8,7 @@
  */
 
 require_once(dirname(__FILE__) . '/IAulaBaseItem.class.php');
-require_once(dirname(__FILE__) . '/../helper/AulaHelper.class.php');
+require_once(dirname(__FILE__) . '/../../helper/AulaHelper.class.php');
 
 abstract class AulaBaseItem implements IAulaBaseItem {
 
