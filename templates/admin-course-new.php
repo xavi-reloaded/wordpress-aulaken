@@ -1,4 +1,4 @@
-<script type='text/javascript' src='http://localhost/apiumtech/wp-content/plugins/wordpress-aulaken/templates/temp-topic-presentation-model.js'></script>
+<script type='text/javascript' src='http://enriched.localhost/apiumtech/wp-content/plugins/wordpress-aulaken/templates/temp-topic-presentation-model.js'></script>
 
 
 <div class="wrap" ng-controller="AdminCourseNew">
@@ -12,7 +12,6 @@
     <?php if ( $notice ) : ?> <div id="notice" class="error"><p><?php echo $notice ?></p></div> <?php endif; ?>
     <?php if ( $message ) : ?> <div id="message" class="updated"><p><?php echo $message; ?></p></div> <?php endif; ?>
 
-    {{form}}
     <form id="aula-create" class="" method="post" action="admin.php?page=aula-save-course" >
 
         <?php wp_nonce_field($nonce_action); ?>
