@@ -73,6 +73,8 @@ class Aula implements IAulaWordpress {
         $this->urls['thumbnails'] = $upload_directory . "/wordpress-aulaken/thumbnails";
         $this->urls['fullsize'] = $upload_directory . "/wordpress-aulaken/fullsize";
         $this->urls['user_views'] = $upload_directory . "/wordpress-aulaken/templates";
+
+        $this->urls['angular-app'] = content_url() . "/plugins/wordpress-aulaken/templates/app/js";
     }
 
     public function registerWordPressHooks()
