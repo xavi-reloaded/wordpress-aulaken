@@ -15,7 +15,10 @@ function AdminCourseNew($scope, $dialog, topicsService){
         controller: 'ActivityResourceDialogController'
     };
 
-    $scope.form = { topics : [] };
+    $scope.form = {
+        courseId : 55,
+        topics : []
+    };
 
 
 
@@ -64,10 +67,6 @@ function AdminCourseNew($scope, $dialog, topicsService){
         }
     };
 
-    $scope.addTopic = function() {
-        $scope.form.topics.push({value:''});
-    };
-
     var t = '<div class="modal-header">'+
         '<h1>Create New Topic</h1>'+
         '</div>'+
@@ -97,28 +96,25 @@ function AdminCourseNew($scope, $dialog, topicsService){
         d.open().then(function(name,summary){
             if(name)
             {
-                if (typeof ($scope.form.topics) === 'undefined') $scope.form.topics=[];
+                if (typeof ($scope.form.topics) === 'undefined') {
+                    $scope.form = {
+                        courseId : $scope.form.courseId,
+                        topics : []
+                    };
+                }
                 var topics = $scope.form.topics;
-                topics.push({id:topics.length+1,title:name,activities:[]});
+                topics.push({id:topics.length+1,title:name,summary:'Put some text here...',activities:[]});
             }
         });
     };
 
-    $scope.notify = function(msg){
-        notify(msg);
-    }
-
-
-
-
-    $scope.courseId = 55;
 // display list with topics
     $scope.getTopicsListFromCourse = function() {
         topicsService.query(
-            {courseId: $scope.courseId }, //params
+            {courseId: $scope.form.courseId }, //params
             function (data) { //success
                 console.log(data);
-                $scope.form = data;
+                $scope.form.topics = data.topics;
 
             },
             function (data) { //failure
@@ -127,6 +123,23 @@ function AdminCourseNew($scope, $dialog, topicsService){
     }
 
     $scope.getTopicsListFromCourse();
+
+
+
+    ///// SAVE
+
+    $scope.saveTopics = function() {
+        topicsService.create(
+            {form : $scope.form}, //params
+            function (data) { //success
+                console.log(data);
+                //$scope.form = data;
+
+            },
+            function (data) { //failure
+                console.log("Error occurred while getting list of topics");
+            });
+    }
 
 }
 

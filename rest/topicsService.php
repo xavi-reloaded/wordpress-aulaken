@@ -6,47 +6,25 @@
  * Time: 1:15 PM
  * To change this template use File | Settings | File Templates.
  */
-require_once("../lib/dao/entities/AulaTopicItem.class.php");
+//header('Cache-Control: no-cache, must-revalidate');
+//header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+header('Content-type: application/x-www-form-urlencoded');
 
-header('Cache-Control: no-cache, must-revalidate');
-header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-header('Content-type: application/json');
-
-$topicsJson=array();
-
-$activities = array (
-    array('title' => 'Assignment', 'pix'=>'assignment.png', 'content'=>'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.'),
-    array('title' => 'Assignment', 'pix'=>'assignment.png', 'content'=>'An other fliping content for you')
-);
-
-$aulaTopicItem=new AulaTopicItem("Sample Json Response");
-$aulaTopicItem->setId(1);
-$aulaTopicItem->setSummary("wek");
-$aulaTopicItem->setActivities($activities);
-
-$aulaTopicItem2=new AulaTopicItem("Sample Json Response 2");
-$aulaTopicItem2->setId(2222);
-$aulaTopicItem2->setSummary("wek");
-$aulaTopicItem2->setActivities($activities);
+require_once("../lib/dao/AulaTopicDAO.class.php");
 
 
-array_push($topicsJson,$aulaTopicItem->toJson());
-array_push($topicsJson,$aulaTopicItem2->toJson());
+$method = $_SERVER['REQUEST_METHOD'];
 
-$topicsJsonVar=array( "topics" => $topicsJson);
+if ($method=="POST") {
+//    $data = json_decode(file_get_contents("php://input"));
+    $data_no_decode = file_get_contents("php://input");
+    echo $data->name;
+}
 
-echo json_encode($topicsJsonVar);
+    $aulaTopicDAO = new AulaTopicDAO(new AulaTopicItem());
+    $topicsAsJson = true;
+    $topicsFromCourseJson = $aulaTopicDAO->getTopicsFromCourseId($_GET['c'], $topicsAsJson);
+    $topicsJsonVar=array( "topics" => $topicsFromCourseJson, "courseId" => $_GET['c']);
+    echo json_encode($topicsJsonVar);
 
 
-//// the good one below here !
-//echo '
-//{
-//    "topics":[{
-//                "id":1,
-//                "title":"Sample Json Response",
-//                "summary":"",
-//                "activities":[
-//                    {"title":"Assignment","pix":"assignment.png","content":"The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback."},
-//                    {"title":"Assignment","pix":"assignment.png","content":"An other fliping content for you"}]
-//            }]
-//}';
