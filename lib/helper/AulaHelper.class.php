@@ -35,9 +35,10 @@ class AulaHelper {
         // loop through meta array and set properties
         if (is_array($meta)) {
             foreach ($meta as $key => $value) {
-                $obj->{str_replace('-', '_', $key)} = $value;
+                $obj->{str_replace('-', '_', $key)} = is_array($value) ? $value[0] : $value;
             }
         }
+
     }
 
     //TODO: fill with aula post meta

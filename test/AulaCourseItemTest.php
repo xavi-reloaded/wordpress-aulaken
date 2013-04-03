@@ -57,6 +57,20 @@ class AulaCourseItemTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected_value, $this->sut->getDescriptionSummary());
     }
 
+    public function test_getChildTopics_jsonTopicsPostsId_jsonStringContainningIds()
+    {
+        $sut=new AulaCourseItem("course name","course short name",'fake summary bla bla bla');
+
+        $actual = $sut->getChildTopics();
+        $this->assertNull($actual);
+
+        $sut->setChildTopics(json_encode(array(3,2,1)));
+        $actual = $sut->getChildTopics();
+        $this->assertEquals("[3,2,1]",$actual);
+    }
+
+
+
 
 }
 ?>

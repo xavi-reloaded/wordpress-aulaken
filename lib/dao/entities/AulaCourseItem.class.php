@@ -41,7 +41,7 @@ class AulaCourseItem extends AulaBaseItem
     public $word_for_authenticated_user;
     public $word_for_authenticated_user_on_frontpage;
 
-    public $child_topics = array();
+    public $child_topics;
 
 
     public function save($params = array())
@@ -67,7 +67,7 @@ class AulaCourseItem extends AulaBaseItem
     // here are the fields not in a post (we save them using meta data)
     public function getMetadataArray($meta = array())
     {
-        $meta = array();
+        $this->meta = $meta;
 
         $this->meta['format'] =$this->format;                    // course format (weekly, Learning Object, Lesson)
         $this->meta['start_date'] =$this->start_date;                // course start date
@@ -98,7 +98,7 @@ class AulaCourseItem extends AulaBaseItem
 
         $this->meta['child_topics'] = $this->child_topics;
 
-        return $meta;
+        return $this->meta;
     }
 
     public function getAbout()

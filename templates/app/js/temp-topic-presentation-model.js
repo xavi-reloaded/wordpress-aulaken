@@ -16,7 +16,7 @@ function AdminCourseNew($scope, $dialog, topicsService){
     };
 
     $scope.form = {
-        courseId : 55,
+        courseId : 0,
         topics : []
     };
 
