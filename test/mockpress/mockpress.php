@@ -70,33 +70,75 @@ function _load_course_dummy_post()
     $type_course = "aula-course";
     $type_topic = "aula-topic";
 
-    $wp_test_expectations['posts'] = array(1 => array(
-        "var1" => "value1",
-        "post_type" => "aula-course",
-        "ID"        => "1",
-        "post_title"        => "test Title for Dummy",
-        "post_content"        => "this is the content",
-        "post_date"        => "",
-        "post_name"        => "",
-
-    ));
-
-    $query ="a:4:{s:9:\"post_type\";s:14:\"delibera-forum\";s:7:\"orderby\";s:10:\"menu_order\";s:5:\"order\";s:3:\"ASC\";s:11:\"numberposts\";i:-1;}";
-
-    $wp_test_expectations['get_posts'][$query]= array(
-        new FakePost(1, $type_course),
-        new FakePost(2,$type_course),
-        new FakePost(3,$type_course),
-        new FakePost(4,$type_course),
-        new FakePost(5,$type_course)
+    $activities = array (
+        array('title' => 'Assignment', 'pix'=>'assignment.png', 'content'=>'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.'),
+        array('title' => 'Assignment', 'pix'=>'assignment.png', 'content'=>'An other fliping content for you')
     );
 
-    $wp_test_expectations['get_posts'][$query]= array(
-        new FakePost(1,$type_topic),
-        new FakePost(2,$type_topic),
-        new FakePost(3,$type_topic),
-        new FakePost(4,$type_topic)
+    $wp_test_expectations['posts'] = array(
+        1 => array(
+            "post_type" => "aula-course",
+            "ID"        => "1",
+            "post_title"        => "test Title for Dummy Course",
+            "post_content"        => "this is the content",
+            "post_date"        => "",
+            "post_name"        => "",
+            "post_name"        => ""
+
+        ),
+        1111 => array(
+            "post_type" => "aula-topic",
+            "ID"        => "1111",
+            "post_title"        => "Sample Json Response",
+            "post_content"        => "",
+            "post_date"        => "",
+            "post_name"        => "",
+            "activities"        => $activities
+
+        ),
+        2222 => array(
+            "post_type" => "aula-topic",
+            "ID"        => "2222",
+            "post_title"        => "Sample Json Response 2",
+            "post_content"        => "",
+            "post_date"        => "",
+            "post_name"        => "",
+            "activities"        => $activities
+
+        )
+
     );
+
+    $wp_test_expectations['post_meta'] = array(
+        1    => array( "child_topics" => array ( 1111 , 2222) ),
+        1111 => array( "activities" => array(
+            array('title' => 'Assignment', 'pix'=>'assignment.png', 'content'=>'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.'),
+            array('title' => 'Assignment', 'pix'=>'assignment.png', 'content'=>'An other fliping content for you') )
+        ),
+        2222 => array( "activities" => array(
+            array('title' => 'Assignment', 'pix'=>'assignment.png', 'content'=>'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.'),
+            array('title' => 'Assignment', 'pix'=>'assignment.png', 'content'=>'An other fliping content for you') )
+        )
+    );
+
+
+
+//    $query ="a:4:{s:9:\"post_type\";s:14:\"delibera-forum\";s:7:\"orderby\";s:10:\"menu_order\";s:5:\"order\";s:3:\"ASC\";s:11:\"numberposts\";i:-1;}";
+//
+//    $wp_test_expectations['get_posts'][$query]= array(
+//        new FakePost(1, $type_course),
+//        new FakePost(2,$type_course),
+//        new FakePost(3,$type_course),
+//        new FakePost(4,$type_course),
+//        new FakePost(5,$type_course)
+//    );
+//
+//    $wp_test_expectations['get_posts'][$query]= array(
+//        new FakePost(1,$type_topic),
+//        new FakePost(2,$type_topic),
+//        new FakePost(3,$type_topic),
+//        new FakePost(4,$type_topic)
+//    );
 
 }
 

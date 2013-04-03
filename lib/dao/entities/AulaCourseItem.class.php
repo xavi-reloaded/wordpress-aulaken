@@ -41,7 +41,7 @@ class AulaCourseItem extends AulaBaseItem
     public $word_for_authenticated_user;
     public $word_for_authenticated_user_on_frontpage;
 
-    public $topics_on_course = array();
+    public $child_topics = array();
 
 
     public function save($params = array())
@@ -96,7 +96,7 @@ class AulaCourseItem extends AulaBaseItem
         $this->meta['word_for_authenticated_user'] =$this->word_for_authenticated_user;
         $this->meta['word_for_authenticated_user_on_frontpage'] =$this->word_for_authenticated_user_on_frontpage;
 
-        $this->meta['topics_on_course'] = $this->topics_on_course;
+        $this->meta['child_topics'] = $this->child_topics;
 
         return $meta;
     }
@@ -110,5 +110,15 @@ class AulaCourseItem extends AulaBaseItem
     public function toJson()
     {
         // TODO: Implement toJson() method.
+    }
+
+    public function getChildTopics()
+    {
+        return $this->child_topics;
+    }
+
+    public function setChildTopics($child_topics)
+    {
+        $this->child_topics = $child_topics;
     }
 }

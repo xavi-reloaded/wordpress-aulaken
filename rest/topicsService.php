@@ -21,10 +21,12 @@ $activities = array (
 
 $aulaTopicItem=new AulaTopicItem("Sample Json Response");
 $aulaTopicItem->setId(1);
+$aulaTopicItem->setSummary("wek");
 $aulaTopicItem->setActivities($activities);
 
 $aulaTopicItem2=new AulaTopicItem("Sample Json Response 2");
 $aulaTopicItem2->setId(2222);
+$aulaTopicItem2->setSummary("wek");
 $aulaTopicItem2->setActivities($activities);
 
 

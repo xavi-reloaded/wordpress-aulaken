@@ -32,6 +32,7 @@ abstract class AulaBaseItem implements IAulaBaseItem {
         $this->shortname = $shortname;
         $this->summary = $summary;
         $this->categories = array();
+        $this->meta = $this->getMetadataArray();
     }
     abstract public function getPostType();
     abstract public function getCommentStatus();

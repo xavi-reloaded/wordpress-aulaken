@@ -4,6 +4,7 @@
 require_once(dirname(__FILE__) . '/mockpress/mockpress.php');
 require_once('../lib/dao/AulaTopicDAO.class.php');
 require_once('../lib/dao/entities/AulaTopicItem.class.php');
+require_once(dirname(__FILE__) . '/TestHelper.class.php');
 
 class AulaTopicDAOTest extends PHPUnit_Framework_TestCase
 {
@@ -13,40 +14,33 @@ class AulaTopicDAOTest extends PHPUnit_Framework_TestCase
         _reset_wp();
         $_SERVER = array();
         $this->sut=new AulaTopicDAO(new AulaTopicItem());
+        _load_course_dummy_post();
     }
 
 
 	public function test_getTopicsFromCourseId_dummy_arrayOfTopics()
 	{
-        global $wp_test_expectations;
-        $actual = $this->sut->getTopicsFromCourseId(1);
-        $expected = $this->getDummyTopicsArray();
-
-
-
+        $actual = $this->sut->getTopicsFromCourseId(1, true);
+        $expected = TestHelper::getDummyTopicsArrayJson();
 		$this->assertEquals($expected, $actual);
 	}
 
-    private function getDummyTopicsArray()
+    public function test_getItem_1111mocked_topicObject()
     {
-        $topicsJson=array();
-        $activities = array (
-            array('title' => 'Assignment', 'pix'=>'assignment.png', 'content'=>'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.'),
-            array('title' => 'Assignment', 'pix'=>'assignment.png', 'content'=>'An other fliping content for you')
-        );
-        $aulaTopicItem=new AulaTopicItem("Sample Json Response");
-        $aulaTopicItem->setId(1);
-        $aulaTopicItem->setActivities($activities);
-
-        $aulaTopicItem2=new AulaTopicItem("Sample Json Response 2");
-        $aulaTopicItem2->setId(2222);
-        $aulaTopicItem2->setActivities($activities);
-
-        array_push($topicsJson,$aulaTopicItem->toJson());
-        array_push($topicsJson,$aulaTopicItem2->toJson());
-
-        return $topicsJson;
+        $actual = AulaTopicDAO::getItem(1111);
+        $expected = 1111;
+        $this->assertEquals($expected, $actual->getId());
+        $this->assertEquals(new AulaTopicItem(), $actual->getObjectItem());
     }
+
+    public function test_getItem_1_topicObject()
+    {
+        $actual = AulaTopicDAO::getItem(1111);
+        $expected = TestHelper::getMockedAulaTopic();
+        $this->assertEquals($expected->toJson(), $actual->toJson());
+    }
+
+
 
 
 

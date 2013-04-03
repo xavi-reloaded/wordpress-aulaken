@@ -144,13 +144,26 @@ function update_post_meta($post_id, $field, $value) {
  * @param boolean $single If true, return the first field's value.
  * @return string|array The first value, or all the values that are associated with this field.
  */
-function get_post_meta($post_id, $field, $single = false) {
+function get_post_meta($post_id, $field = '', $single = false) {
     global $wp_test_expectations;
+    $result_meta = array();
 
     if (!isset($wp_test_expectations['post_meta'][$post_id])) { return ""; }
-    if (!isset($wp_test_expectations['post_meta'][$post_id][$field])) { return ""; }
 
-    return ($single) ? $wp_test_expectations['post_meta'][$post_id][$field] : array($wp_test_expectations['post_meta'][$post_id][$field]);
+    if (!isset($wp_test_expectations['post_meta'][$post_id][$field]) && $field!='') { return ""; }
+
+    if ($field=='')
+    {
+        foreach ($wp_test_expectations['post_meta'][$post_id] as $post_meta => $value_post_meta) {
+            $result_meta[$post_meta] = $value_post_meta;
+        }
+    } else {
+        $result_meta =  ($single) ? $wp_test_expectations['post_meta'][$post_id][$field] : array($wp_test_expectations['post_meta'][$post_id][$field]);
+    }
+
+
+    return $result_meta;
+
 }
 
 /**
