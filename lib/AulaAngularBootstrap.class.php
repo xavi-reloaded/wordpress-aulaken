@@ -15,8 +15,7 @@
 
 class AulaAngularBootstrap {
 
-    public static function loadScripts() {
-        $jsPath=plugins_url().'/wordpress-aulaken/js';
+    public static function loadScripts($jsPath = "") {
         wp_enqueue_script( "angular", $jsPath.'/angular/angular.js',false);
         wp_enqueue_script( "angular-resource", $jsPath.'/angular/angular-resource.js',false);
         wp_enqueue_script( "angular-ui", $jsPath.'/angular/angular-ui.min.js',false);
@@ -25,14 +24,12 @@ class AulaAngularBootstrap {
 //        wp_enqueue_script( "bootstrap-ui", $jsPath.'/ui-bootstrap-0.2.0.js',false);
     }
 
-    public static function loadCSS() {
-        $cssPath=plugins_url().'/wordpress-aulaken/css';
+    public static function loadCSS($cssPath = "") {
         wp_enqueue_style("bootstrap_combined", $cssPath.'/bootstrap-combined.min.css');
         wp_enqueue_style("bootstrap_apium", $cssPath.'/bootstrap-apium.css');
     }
 
-    public static function loadApp() {
-        $appPath=plugins_url().'/wordpress-aulaken/templates/app/js';
+    public static function loadApp($appPath = "") {
         wp_enqueue_script("angular_services", $appPath.'/services.js',array(),false,true);
         wp_enqueue_script("angular_controllers", $appPath.'/controllers.js',array(),false,true);
         wp_enqueue_script("angular_filters", $appPath.'/filters.js',array(),false,true);

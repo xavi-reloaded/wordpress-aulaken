@@ -164,10 +164,10 @@ class AulaWordpress implements IAulaWordpress {
 
     public function admin_enqueue_scripts()
     {
-        AulaAngularBootstrap::loadScripts();
-        AulaAngularBootstrap::loadCSS();
+        AulaAngularBootstrap::loadScripts($this->urls['javascript']);
+        AulaAngularBootstrap::loadCSS($this->urls['css']);
 
-        AulaAngularBootstrap::loadApp();
+        AulaAngularBootstrap::loadApp($this->urls['angular-app']);
 
         wp_enqueue_script( 'common' );
         wp_enqueue_script('utils');
