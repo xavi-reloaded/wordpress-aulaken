@@ -11,7 +11,7 @@ function AdminCourseNew($scope, $dialog, topicsService){
         backdrop: true,
         keyboard: true,
         backdropClick: true,
-        templateUrl: '../wp-content/plugins/wordpress-aulaken/templates/partials/partial-resource-dialog.html',
+        templateUrl: '../wp-content/plugins/wordpress-aulaken/templates/partials/partial-resource-dialog.php',
         controller: 'ActivityResourceDialogController'
     };
 

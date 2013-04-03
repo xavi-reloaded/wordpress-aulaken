@@ -1,3 +1,9 @@
+<?php
+require_once('../../../../../wp-load.php');
+require_once('../../lib/Aula.class.php');
+$aula=new Aula();
+?>
+
 <div class="modal-header">
     <h2>Add an Activity or Resource</h2>
 </div>
@@ -8,7 +14,7 @@
         <apiumac close-others="oneAtATime">
             <apiumac-group ng-repeat="activity in activities">
                 <apiumac-heading>
-                    <img src="../wp-content/plugins/wordpress-aulaken/templates/angular/app/img/l/{{activity.pix}}">
+                    <img src="<?=$aula->urls['img-activities']?>/{{activity.pix}}">
                     <span>{{activity.title}}</span>
                     <button ng-click="close(activity)" class="btn btn-small" >Add</button>
                 </apiumac-heading>
@@ -21,7 +27,7 @@
         <apiumac close-others="oneAtATime">
             <apiumac-group ng-repeat="resource in resources">
                 <apiumac-heading>
-                    <img src="../wp-content/plugins/wordpress-aulaken/templates/angular/app/img/l/{{resource.pix}}">
+                    <img src="<?=$aula->urls['img-activities']?>/{{resource.pix}}">
                     {{resource.title}}
                     <button ng-click="close(resource)" class="btn btn-small left" >Add</button>
                 </apiumac-heading>

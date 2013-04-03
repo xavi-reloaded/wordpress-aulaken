@@ -65,6 +65,7 @@ class Aula implements IAulaWordpress {
         $this->urls['css'] = content_url() . "/plugins/wordpress-aulaken/css";
         $this->urls['javascript'] = content_url() . "/plugins/wordpress-aulaken/js";
         $this->urls['images'] = content_url() . "/plugins/wordpress-aulaken/images";
+        $this->urls['img-activities'] = content_url() . "/plugins/wordpress-aulaken/images/l";
         $this->urls['template'] = content_url() . "/plugins/wordpress-aulaken/templates";
         $this->urls['views'] = content_url() . "/plugins/wordpress-aulaken/templates/views";
         $this->urls['buttons'] = content_url() . "/plugins/wordpress-aulaken/templates/buttons";

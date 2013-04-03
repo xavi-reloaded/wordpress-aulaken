@@ -130,7 +130,7 @@
                                 <pane heading="<?php _e('Activities'); ?>">
                                     <table class="table">
                                         <tr ng-repeat="activity in topic.activities" >
-                                            <td><img src="<?=plugins_url()?>/wordpress-aulaken/templates/angular/app/img/l/{{activity.pix}}"></td>
+                                            <td><img src="<?=$this->urls['img-activities']?>/{{activity.pix}}"></td>
                                             <td>{{activity.title}}</td>
                                             <td>
                                                 <p ng-click="removeActivity(topic,activity)" class="btn btn-small btn-danger text-left">X</p>
