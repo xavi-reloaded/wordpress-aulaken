@@ -6,11 +6,13 @@
  * Time: 1:15 PM
  * To change this template use File | Settings | File Templates.
  */
-//header('Cache-Control: no-cache, must-revalidate');
+
+header('Cache-Control: no-cache, must-revalidate');
 //header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
 
 
-header('Content-type: application/x-www-form-urlencoded');
+header('Content-type: application/json');
+
 require_once("../../../../wp-load.php");
 require_once("../lib/dao/AulaTopicDAO.class.php");
 require_once("../lib/dao/AulaCourseDAO.class.php");
@@ -36,7 +38,6 @@ if ($_GET['c']>0) {
     $topicsFromCourseJson = $aulaTopicDAO->getTopicsFromCourseId($_GET['c'], $topicsAsJson);
     $topicsJsonVar=array( "topics" => $topicsFromCourseJson, "courseId" => $_GET['c']);
     echo json_encode($topicsJsonVar);
-
 }
 
 

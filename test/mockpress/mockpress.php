@@ -110,7 +110,7 @@ function _load_course_dummy_post()
     );
 
     $wp_test_expectations['post_meta'] = array(
-        1    => array( "child_topics" => array ( 1111 , 2222) ),
+        1    => array( "child_topics" => '[1111,2222]' ),
         1111 => array( "activities" => array(
             array('title' => 'Assignment', 'pix'=>'assignment.png', 'content'=>'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.'),
             array('title' => 'Assignment', 'pix'=>'assignment.png', 'content'=>'An other fliping content for you') )

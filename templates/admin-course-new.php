@@ -2,6 +2,7 @@
 
 
 <div class="wrap" ng-controller="AdminCourseNew">
+
     <div id="icon-edit-comments" class="icon32"><br /></div><h2><?= ( isset($post->ID)  ) ? _("Edit Course") : _("Add New Course"); ?> </h2>
     <h2><?php
         echo esc_html( $title );
@@ -23,7 +24,9 @@
         <input type="hidden" id="post_type" name="post_type" value="<?php echo esc_attr( $post_type ) ?>" />
         <input type="hidden" id="original_post_status" name="original_post_status" value="<?php echo esc_attr( $post->post_status) ?>" />
         <input type="hidden" id="referredby" name="referredby" value="<?php echo esc_url(stripslashes(wp_get_referer())); ?>" />
-        <input type="hidden" id="save_id" name="save_id" ng-model="form.courseId" ng-init="form.courseId='<?php echo $post->ID; ?>'" value="<?php echo $post->ID; ?>" />
+        <input type="hidden" id="save_id" name="save_id" ng-model="form.courseId"
+               ng-init="form.courseId='<?php echo $post->ID; ?>';getTopicsListFromCourse();" value="<?php echo $post->ID; ?>"
+        />
         <?php if ( ! empty( $active_post_lock ) ) { ?>
             <input type="hidden" id="active_post_lock" value="<?php echo esc_attr( implode( ':', $active_post_lock ) ); ?>" />
         <?php

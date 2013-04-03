@@ -68,6 +68,7 @@ abstract class AulaBaseItem implements IAulaBaseItem {
             }
         }
 
+        $this->meta = $this->getMetadataArray();
         foreach ($this->meta as $key => $value) {
             update_post_meta($this->id, $key, $value);
         }

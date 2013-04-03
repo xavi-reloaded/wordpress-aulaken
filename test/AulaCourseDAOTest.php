@@ -31,9 +31,7 @@ class AulaCourseDAOTest extends PHPUnit_Framework_TestCase
         $courseItem = AulaCourseDAO::getItem(1);
         $actual = $courseItem->getChildTopics();
 
-        $this->assertTrue(is_array($actual));
-
-        $expected = array(1111,2222);
+        $expected = '[1111,2222]';
         $this->assertEquals($expected,$actual);
 
     }
@@ -50,7 +48,7 @@ class AulaCourseDAOTest extends PHPUnit_Framework_TestCase
     public function test_updateTopicArrayById()
     {
         $sut = new AulaCourseDAO(new AulaCourseItem());
-        $topicArray = array(1,2,3);
+        $topicArray = '[1,2,3]';
         $actual = $sut->updateTopicArrayById(2222,$topicArray);
         $this->assertEquals(2222,$actual);
 

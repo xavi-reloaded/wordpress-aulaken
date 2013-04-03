@@ -44,7 +44,7 @@ class AulaTopicItem extends AulaBaseItem
 
     public function getMetadataArray($meta = array())
     {
-        // TODO: Implement getMetadataArray() method.
+        return $meta;
     }
 
     public function getAbout()

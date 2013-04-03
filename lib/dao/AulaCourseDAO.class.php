@@ -50,7 +50,6 @@ class AulaCourseDAO extends AulaBaseDAO
 
     public function updateTopicArrayById($courseId, $topicIds = array())
     {
-        echo $courseId;
         $item = $this->getItem($courseId);
         $item->setChildTopics(json_encode($topicIds));
         return $item->save();

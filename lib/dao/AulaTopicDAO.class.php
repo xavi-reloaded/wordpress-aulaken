@@ -21,7 +21,7 @@ class AulaTopicDAO extends AulaBaseDAO
         $topicsFromCourse = array();
         $course = AulaCourseDAO::getItem($id);
         $childTopics = $course->getChildTopics();
-        foreach ($childTopics as $topicId ) {
+        foreach (json_decode($childTopics) as $topicId ) {
             $toJson = ($topicsAsJson) ? $this->getItem($topicId)->toJson() : $this->getItem($topicId);
             array_push($topicsFromCourse, $toJson);
         }

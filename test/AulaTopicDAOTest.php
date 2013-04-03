@@ -36,9 +36,10 @@ class AulaTopicDAOTest extends PHPUnit_Framework_TestCase
 
     public function test_getItem_toJson_1111mocked_validJson()
     {
-        $actual = AulaTopicDAO::getItem(1111);
+        $topicItem = AulaTopicDAO::getItem(1111);
         $expected = TestHelper::getMockedAulaTopic();
-        $this->assertEquals($expected->toJson(), $actual->toJson());
+        $actual = $topicItem->toJson();
+        $this->assertEquals($expected->toJson(), $actual);
     }
 
 
@@ -51,6 +52,7 @@ class AulaTopicDAOTest extends PHPUnit_Framework_TestCase
             array(1,'{"form":{"courseId":55,"topics":[{"id":null,"title":"topic 1","summary":"Put some text here...","activities":[]}]}}'),
             array(1,'{"form":{"courseId":55,"topics":[{"id":null,"title":"topic 1","summary":"Put some text here...","activities":[{"title":"Assignment","pix":"assignment.png","content":"The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback."}]}]}}'),
             array(1,'{"form":{"courseId":55,"topics":[{"id":null,"title":"topic 1","summary":"Put some text here...","activities":[{"id":null,"title":"Assignment","pix":"assignment.png","content":"The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback."}]}]}}'),
+            array(3,'{"form":{"topics":[{"id":256,"title":"sdfg","summary":"","activities":[]},{"id":257,"title":"444","summary":"","activities":[]},{"id":258,"title":"222","summary":"","activities":[]}],"courseId":"249"}}'),
             array(0,''),
         );
     }
