@@ -29,7 +29,6 @@ function AdminCourseNew($scope, $dialog, topicsService){
                 var topics = $scope.form.topics;
                 for (var i = 0, ii = topics.length; i < ii; i++) {
                     if (id === topics[i].id) {
-
                         topics[i].activities.push(result)
                     }
                 }
@@ -98,6 +97,7 @@ function AdminCourseNew($scope, $dialog, topicsService){
         d.open().then(function(name,summary){
             if(name)
             {
+                if (typeof ($scope.form.topics) === 'undefined') $scope.form.topics=[];
                 var topics = $scope.form.topics;
                 topics.push({id:topics.length+1,title:name,activities:[]});
             }
