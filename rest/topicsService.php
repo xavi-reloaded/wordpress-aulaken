@@ -8,23 +8,30 @@
  */
 //header('Cache-Control: no-cache, must-revalidate');
 //header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-header('Content-type: application/x-www-form-urlencoded');
 
+
+header('Content-type: application/x-www-form-urlencoded');
+require_once("../../../../wp-load.php");
 require_once("../lib/dao/AulaTopicDAO.class.php");
 
 
 $method = $_SERVER['REQUEST_METHOD'];
 
+$aulaTopicDAO = new AulaTopicDAO(new AulaTopicItem());
+
 if ($method=="POST") {
 //    $data = json_decode(file_get_contents("php://input"));
     $data_no_decode = file_get_contents("php://input");
-    echo $data->name;
+    $aulaTopicDAO->updateTopicsFromJson($data_no_decode);
 }
 
-    $aulaTopicDAO = new AulaTopicDAO(new AulaTopicItem());
+
+if ($_GET['c']>0) {
     $topicsAsJson = true;
     $topicsFromCourseJson = $aulaTopicDAO->getTopicsFromCourseId($_GET['c'], $topicsAsJson);
     $topicsJsonVar=array( "topics" => $topicsFromCourseJson, "courseId" => $_GET['c']);
     echo json_encode($topicsJsonVar);
+
+}
 
 

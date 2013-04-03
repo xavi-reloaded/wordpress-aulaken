@@ -103,7 +103,7 @@ function AdminCourseNew($scope, $dialog, topicsService){
                     };
                 }
                 var topics = $scope.form.topics;
-                topics.push({id:topics.length+1,title:name,summary:'Put some text here...',activities:[]});
+                topics.push({id:null,title:name,summary:'Put some text here...',activities:[]});
             }
         });
     };
@@ -134,7 +134,6 @@ function AdminCourseNew($scope, $dialog, topicsService){
             function (data) { //success
                 console.log(data);
                 //$scope.form = data;
-
             },
             function (data) { //failure
                 console.log("Error occurred while getting list of topics");
