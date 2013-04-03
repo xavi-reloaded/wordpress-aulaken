@@ -11,6 +11,7 @@ require_once(dirname(__FILE__) . '/AulaBaseItem.class.php');
 
 class AulaActivityItem extends AulaBaseItem
 {
+    private $pix;
 
     public function getPostType()
     {
@@ -40,5 +41,14 @@ class AulaActivityItem extends AulaBaseItem
     public function toJson()
     {
         // TODO: Implement toJson() method.
+    }
+
+    public function setPix($pix)
+    {
+    }
+
+    public function getPix()
+    {
+        return $this->pix;
     }
 }

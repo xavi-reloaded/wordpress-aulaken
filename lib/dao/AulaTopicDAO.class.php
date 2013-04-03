@@ -1,6 +1,7 @@
 <?php
 require_once(dirname(__FILE__) . '/../helper/AulaHelper.class.php');
 require_once(dirname(__FILE__) . '/entities/AulaTopicItem.class.php');
+require_once(dirname(__FILE__) . '/entities/AulaActivityItem.class.php');
 require_once(dirname(__FILE__) . '/AulaBaseDAO.class.php');
 require_once(dirname(__FILE__) . '/AulaCourseDAO.class.php');
 
@@ -31,6 +32,8 @@ class AulaTopicDAO extends AulaBaseDAO
     public function getTopicItemsFromJson($json)
     {
         $topicItemList = array();
+
+
         $jsonDecode = json_decode($json);
 
         if (!isset($jsonDecode->form->topics))
@@ -44,9 +47,13 @@ class AulaTopicDAO extends AulaBaseDAO
         {
             $aulaTopicItem = new AulaTopicItem($topic->title, '', $topic->summary);
             $aulaTopicItem->setId($topic->id);
+            $activityItemList = array();
             foreach ($topic->activities as $activity) {
-                $swek = 1;
+                $aulaActivityItem = new AulaActivityItem($activity->title,'',$activity->content);
+                $aulaActivityItem->setPix($activity->pix);
+                array_push($activityItemList,$aulaActivityItem);
             }
+            $aulaTopicItem->setActivities($activityItemList);
             array_push($topicItemList, $aulaTopicItem);
         }
 
