@@ -64,6 +64,7 @@ function wp_update_post($object) {
 
     if (isset($wp_test_expectations['posts'][$object->ID])) {
         $wp_test_expectations['posts'][$object->ID] = $object;
+        return $object->ID;
     }
 }
 

@@ -82,7 +82,7 @@ class AulaTopicDAOTest extends PHPUnit_Framework_TestCase
         $aulaTopicDAO = new AulaTopicDAO(new AulaTopicItem());
         $actual = $aulaTopicDAO->updateTopicsFromJson($jsonWithActivities);
 
-        $this->assertEquals(true, $actual);
+        $this->assertEquals(3, sizeof($actual));
     }
 
 

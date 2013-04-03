@@ -23,9 +23,10 @@ $aulaCourseDAO = new AulaCourseDAO(new AulaCourseItem());
 
 if ($method=="POST") {
 //    $data = json_decode(file_get_contents("php://input"));
-    $data_no_decode = file_get_contents("php://input");
+    $json = file_get_contents("php://input");
     $topicIdsSaved = $aulaTopicDAO->updateTopicsFromJson($data_no_decode);
-
+    $courseId = $aulaCourseDAO->getCourseIdFromJson($json);
+    $aulaCourseDAO->updateTopicArrayById($courseId,$topicIdsSaved);
 
 }
 

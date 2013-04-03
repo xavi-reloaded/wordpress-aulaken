@@ -17,7 +17,7 @@ class AulaHelper {
 
     public static function getTermIdArrayFromCategory($category) {
         $termIdArray=array();
-        if (is_array($termIdArray)) {
+        if (isset($category["aula-taxonomy"])) {
         foreach ($category["aula-taxonomy"] as $key => $value) {
             if($key>0) array_push($termIdArray,(int)$value);
         }}
