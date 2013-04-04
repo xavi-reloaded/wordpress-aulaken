@@ -6,46 +6,30 @@
  * Time: 1:15 PM
  * To change this template use File | Settings | File Templates.
  */
+require_once("CourseService.class.php");
+
 
 header('Cache-Control: no-cache, must-revalidate');
-//header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-
-
+header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
 header('Content-type: application/json');
 
-require_once("../../../../wp-load.php");
-require_once("../lib/dao/AulaTopicDAO.class.php");
-require_once("../lib/dao/AulaCourseDAO.class.php");
+$courseService = new CourseService();
 
-
-$method = $_SERVER['REQUEST_METHOD'];
-
-$aulaTopicDAO  = new AulaTopicDAO(new AulaTopicItem());
-$aulaCourseDAO = new AulaCourseDAO(new AulaCourseItem());
-
-/**
- * @param $aulaTopicDAO
- */
-function print_json($aulaTopicDAO,$courseId)
-{
-    $topicsAsJson = true;
-    $topicsFromCourseJson = $aulaTopicDAO->getTopicsFromCourseId($courseId, $topicsAsJson);
-    $topicsJsonVar = array("topics" => $topicsFromCourseJson, "courseId" => $courseId);
-    echo json_encode($topicsJsonVar);
-}
-
-if ($method=="POST") {
-//    $data = json_decode(file_get_contents("php://input"));
+if ($_SERVER['REQUEST_METHOD']=="POST") {
     $json = file_get_contents("php://input");
-    $topicIdsSaved = $aulaTopicDAO->updateTopicsFromJson($json);
-    $courseId = $aulaCourseDAO->getCourseIdFromJson($json);
-    $aulaCourseDAO->updateTopicArrayById($courseId,$topicIdsSaved);
-    print_json($aulaTopicDAO,$courseId);
+    $savedId = $courseService->setAulaElement($json);
+}
+
+if ($_SERVER['REQUEST_METHOD']=="GET") {
+    $savedId = $_GET['c'];
+}
+
+if (isset($savedId)) {
+    $response = $courseService->getJsonAulaElement($savedId);
+    echo $response;
 }
 
 
-if ($_GET['c']>0 && $method=="GET") {
-    print_json($aulaTopicDAO,$_GET['c']);
-}
+
 
 

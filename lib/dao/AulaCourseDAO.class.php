@@ -51,6 +51,7 @@ class AulaCourseDAO extends AulaBaseDAO
     public function updateTopicArrayById($courseId, $topicIds = array())
     {
         $item = $this->getItem($courseId);
+        if ($item==null) return $item;
         $item->setChildTopics(json_encode($topicIds));
         return $item->save();
     }
@@ -60,6 +61,8 @@ class AulaCourseDAO extends AulaBaseDAO
         $data = json_decode($json);
         if (isset($data->form->courseId)){
             return $data->form->courseId;
+        } elseif (isset($data->courseId)) {
+            return $data->courseId;
         } else {
             return -1;
         }
