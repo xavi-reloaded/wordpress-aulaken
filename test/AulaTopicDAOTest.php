@@ -30,7 +30,7 @@ class AulaTopicDAOTest extends PHPUnit_Framework_TestCase
     {
         $this->sut=new AulaTopicDAO(new AulaTopicItem());
         $actual = $this->sut->getTopicsFromCourseId(1, true);
-        $expected = TestHelper::getDummyTopicsArrayJson() + 'mierder';
+        $expected = TestHelper::getDummyTopicsArrayJson();
         $this->assertEquals($expected, $actual);
     }
 
@@ -42,9 +42,9 @@ class AulaTopicDAOTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(new AulaTopicItem(), $actual->getObjectItem());
     }
 
-    public function test_getItem_toJson_1111mocked_validJson()
+    public function test_getItem_toJson_1111mocked_withChildsOption_validJson()
     {
-        $topicItem = AulaTopicDAO::getItem(1111);
+        $topicItem = AulaTopicDAO::getItem(1111, true);
         $expected = TestHelper::getMockedAulaTopic();
         $actual = $topicItem->toJson();
         $this->assertEquals($expected->toJson(), $actual);

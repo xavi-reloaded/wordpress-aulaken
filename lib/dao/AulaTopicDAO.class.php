@@ -77,8 +77,7 @@ class AulaTopicDAO extends AulaBaseDAO
     }
 
 
-
-    public static function getItem($id)
+    public static function getItem($id, $withChilds = false)
     {
         $post = get_post($id);
         if ($post == false) {
@@ -107,6 +106,16 @@ class AulaTopicDAO extends AulaBaseDAO
 
         $meta = get_post_meta($post->ID);
         AulaHelper::processPostMeta($meta,$item);
+
+        if ( $withChilds ) {
+            $activitiesArray = $item->getChildActivities();
+            if ($activitiesArray==null) return $item;
+            $activityObjectArray = array();
+            foreach (json_decode($activitiesArray) as $activityId) {
+                array_push($activityObjectArray,AulaActivityDAO::getItem($activityId));
+            }
+            $item->setAulaActivityItemArray($activityObjectArray);
+        }
 
         return $item;
     }
