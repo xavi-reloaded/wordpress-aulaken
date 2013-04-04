@@ -63,4 +63,41 @@ class AulaActivityDAO extends AulaBaseDAO
 
 
     }
-}
+
+    public function updateActivitiesFromJson($json)
+    {
+        $activitiesId = array();
+        $ActivityItems = $this->getActivityItemsFromJson($json);
+        foreach ($ActivityItems as $ActivityItem) {
+            $idSaved = $ActivityItem->save();
+            array_push($activitiesId,$idSaved);
+        }
+        return $activitiesId;
+    }
+
+    public function getActivityItemsFromJson($json)
+    {
+
+        $activityItemList = array();
+        $jsonDecode = json_decode($json);
+        if (!isset($jsonDecode->form->topics))
+        {
+            return $activityItemList;
+        }
+        $topics = $jsonDecode->form->topics ;
+
+        foreach ($topics as $topic)
+        {
+            if (isset($topic->activities))
+            {
+                foreach ($topic->activities as $activity) {
+                    $aulaActivityItem = new AulaActivityItem($activity->title,'',$activity->content);
+                    $aulaActivityItem->setPix($activity->pix);
+                    $aulaActivityItem->setId($activity->id);
+                    array_push($activityItemList,$aulaActivityItem);
+                }
+            }
+        }
+            return $activityItemList;
+        }
+    }
