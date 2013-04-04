@@ -17,6 +17,7 @@ abstract class BaseAulaService implements IAulaService {
 
     protected $aulaTopicDAO;
     protected $aulaCourseDAO;
+    protected $aulaActivityDAO;
     private $isTest;
 
     function __construct($isTest = false)
@@ -25,6 +26,7 @@ abstract class BaseAulaService implements IAulaService {
         if (!$this->isTest) require_once("../../../../wp-load.php");
         $this->aulaTopicDAO  = new AulaTopicDAO(new AulaTopicItem());
         $this->aulaCourseDAO = new AulaCourseDAO(new AulaCourseItem());
+        $this->aulaActivityDAO = new AulaActivityDAO(new AulaActivityItem());
     }
 
     public function throwError($errorCode, $message = "General Error Ocurred")
