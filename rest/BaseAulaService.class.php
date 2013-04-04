@@ -10,6 +10,7 @@
 
 require_once("../lib/dao/AulaTopicDAO.class.php");
 require_once("../lib/dao/AulaCourseDAO.class.php");
+require_once("../lib/dao/AulaActivityDAO.class.php");
 require_once("IAulaService.php");
 
 abstract class BaseAulaService implements IAulaService {
