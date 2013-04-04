@@ -66,19 +66,31 @@ class AulaActivityDAO extends AulaBaseDAO
 
     public function updateActivitiesFromJson($json)
     {
-        $activitiesId = array();
-        $ActivityItems = $this->getActivityItemsFromJson($json);
-        foreach ($ActivityItems as $ActivityItem) {
-            $idSaved = $ActivityItem->save();
-            array_push($activitiesId,$idSaved);
+        $ActivityItemsWithTopics = $this->getActivityItemsFromJson($json);
+
+        $activitiesByTopicsArray = array();
+
+        foreach ($ActivityItemsWithTopics as $ActivityItemsArray) {
+
+            $ActivityItems = $ActivityItemsArray[1];
+            $activitiesId = array();
+            foreach ($ActivityItems as $ActivityItem) {
+                $idSaved = $ActivityItem->save();
+                array_push($activitiesId,$idSaved);
+            }
+            array_push($activitiesByTopicsArray ,array($ActivityItemsArray[0],$activitiesId));
         }
-        return $activitiesId;
+
+        return $activitiesByTopicsArray;
     }
 
     public function getActivityItemsFromJson($json)
     {
 
+
         $activityItemList = array();
+        $topicItemList = array();
+
         $jsonDecode = json_decode($json);
         if (!isset($jsonDecode->form->topics))
         {
@@ -90,14 +102,18 @@ class AulaActivityDAO extends AulaBaseDAO
         {
             if (isset($topic->activities))
             {
+                $activityItemListByTopic = array();
                 foreach ($topic->activities as $activity) {
                     $aulaActivityItem = new AulaActivityItem($activity->title,'',$activity->content);
                     $aulaActivityItem->setPix($activity->pix);
                     $aulaActivityItem->setId($activity->id);
+
+                    array_push($activityItemListByTopic,$aulaActivityItem);
                     array_push($activityItemList,$aulaActivityItem);
                 }
+                array_push($topicItemList,array($topic->id,$activityItemListByTopic));
             }
         }
-            return $activityItemList;
-        }
+        return $topicItemList;
     }
+}
