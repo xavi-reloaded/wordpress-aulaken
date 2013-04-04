@@ -84,7 +84,7 @@ class AulaTopicDAO extends AulaBaseDAO
 
         $item->setId($post->ID);
         $item->setTitle($post->post_title);
-        $item->getSummary( $post->post_content );
+        $item->setSummary( $post->post_content );
         $item->setDate($post->post_date);
         $item->setCategories($category_ids);
         $item->setOrder($post->menu_order);
