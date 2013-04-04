@@ -11,7 +11,7 @@ require_once(dirname(__FILE__) . '/AulaBaseItem.class.php');
 
 class AulaActivityItem extends AulaBaseItem
 {
-    private $pix;
+    public $pix;
 
     public function getPostType()
     {
@@ -30,7 +30,9 @@ class AulaActivityItem extends AulaBaseItem
 
     public function getMetadataArray($meta = array())
     {
-        // TODO: Implement getMetadataArray() method.
+        $this->meta = $meta;
+        $this->meta['pix'] = $this->pix;
+        return $this->meta;
     }
 
     public function getAbout()
@@ -40,11 +42,18 @@ class AulaActivityItem extends AulaBaseItem
 
     public function toJson()
     {
-        // TODO: Implement toJson() method.
+        $json = array(
+            'id' => $this->getId(),
+            'title' => $this->getTitle(),
+            'pix' => $this->getPix(),
+            'content' => $this->getSummary()
+        );
+        return $json;
     }
 
     public function setPix($pix)
     {
+        $this->pix = $pix;
     }
 
     public function getPix()

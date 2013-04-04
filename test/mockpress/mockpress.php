@@ -70,10 +70,6 @@ function _load_course_dummy_post()
     $type_course = "aula-course";
     $type_topic = "aula-topic";
 
-    $activities = array (
-        array('title' => 'Assignment', 'pix'=>'assignment.png', 'content'=>'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.'),
-        array('title' => 'Assignment', 'pix'=>'assignment.png', 'content'=>'An other fliping content for you')
-    );
 
     $wp_test_expectations['posts'] = array(
         1 => array(
@@ -82,44 +78,72 @@ function _load_course_dummy_post()
             "post_title"        => "test Title for Dummy Course",
             "post_content"        => "this is the content",
             "post_date"        => "",
-            "post_name"        => "",
             "post_name"        => ""
-
+        ),
+        2 => array(
+            "post_type" => "aula-course",
+            "ID"        => "1",
+            "post_title"        => "test Title for Dummy Course",
+            "post_content"        => "this is the content",
+            "post_date"        => "",
+            "post_name"        => ""
         ),
         1111 => array(
             "post_type" => "aula-topic",
             "ID"        => "1111",
             "post_title"        => "Sample Json Response",
-            "post_content"        => "",
-            "post_date"        => "",
-            "post_name"        => "",
-            "activities"        => $activities
-
+            "post_content"        => "A nice content for the item",
+            "post_date"        => ""
         ),
         2222 => array(
             "post_type" => "aula-topic",
             "ID"        => "2222",
             "post_title"        => "Sample Json Response 2",
-            "post_content"        => "",
+            "post_content"        => "A nice content for the item",
+            "post_date"        => ""
+        ),
+        3333 => array(
+            "post_type" => "aula-topic",
+            "ID"        => "3333",
+            "post_title"        => "Sample Json Response 2",
+            "post_content"        => "yeja !",
             "post_date"        => "",
-            "post_name"        => "",
-            "activities"        => $activities
+            "post_name"        => ""
 
-        )
+        ),
+        5555 => array(
+            "post_type" => "aula-activity",
+            "ID"        => "5555",
+            "post_title"        => "Assignment",
+            "post_content"        => "The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.",
+            "post_date"        => "",
+            "post_name"        => ""
+
+        ),
+        6666 => array(
+            "post_type" => "aula-activity",
+            "ID"        => "6666",
+            "post_title"        => "Assignment",
+            "post_content"        => "An other fliping content for you",
+            "post_date"        => "",
+            "post_name"        => ""
+
+        ),
+
 
     );
+//    array('title' => 'Assignment', 'pix'=>'assignment.png', 'content'=>'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.'),
+//    array('title' => 'Assignment', 'pix'=>'assignment.png', 'content'=>'An other fliping content for you') )
 
     $wp_test_expectations['post_meta'] = array(
         1    => array( "child_topics" => '[1111,2222]' ),
-        1111 => array( "activities" => array(
-            array('title' => 'Assignment', 'pix'=>'assignment.png', 'content'=>'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.'),
-            array('title' => 'Assignment', 'pix'=>'assignment.png', 'content'=>'An other fliping content for you') )
-        ),
-        2222 => array( "activities" => array(
-            array('title' => 'Assignment', 'pix'=>'assignment.png', 'content'=>'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.'),
-            array('title' => 'Assignment', 'pix'=>'assignment.png', 'content'=>'An other fliping content for you') )
-        )
-    );
+        2    => array( "child_topics" => '[3333]' ),
+        1111 => array( "child_activities" => '[5555,6666]'),
+        2222 => array( "child_activities" => '[5555,6666]'),
+        3333 => array( "child_activities" => null ),
+        5555 => array( "pix" => 'assignment.png' ),
+        6666 => array( "pix" => 'assignment.png' )
+        );
 
 
 

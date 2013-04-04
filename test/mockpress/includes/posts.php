@@ -105,8 +105,10 @@ function get_post($id, $output = "") {
         $arrayPost = $wp_test_expectations['posts'][$id];
         $post_type = (isset($arrayPost['post_type'])) ? $arrayPost['post_type']  : "post";
         $post_title = (isset($arrayPost['post_title'])) ? $arrayPost['post_title']  : null;
+        $post_content = (isset($arrayPost['post_content'])) ? $arrayPost['post_content']  : null;
+        $post_name = (isset($arrayPost['post_name'])) ? $arrayPost['post_name']  : null;
 
-        $item =  new FakePost($id, $post_type,$post_title);
+        $item =  new FakePost($id, $post_type,$post_title,$post_name,$post_content);
         return $item;
     } else {
         return null;

@@ -30,13 +30,19 @@ class TestHelper {
      */
     public static function getMockedAulaTopic($id = 1111,$title="Sample Json Response")
     {
-        $activities = array (
-            array('title' => 'Assignment', 'pix'=>'assignment.png', 'content'=>'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.'),
-            array('title' => 'Assignment', 'pix'=>'assignment.png', 'content'=>'An other fliping content for you')
-        );
-        $aulaTopicItem = new AulaTopicItem($title);
+        $aulaTopicItem = new AulaTopicItem($title,"","A nice content for the item");
         $aulaTopicItem->setId($id);
-        $aulaTopicItem->setActivities($activities);
+
+        $actitivyItem1 = new AulaActivityItem('Assignment','','The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.');
+        $actitivyItem1->setPix('assignment.png');
+        $actitivyItem1->setId(5555);
+        $actitivyItem2 = new AulaActivityItem('Assignment','','An other fliping content for you');
+        $actitivyItem2->setPix('assignment.png');
+        $actitivyItem2->setId(6666);
+        $aulaTopicItem->setChildActivities('[1111,2222]');
+        $aulaTopicItem->setAulaActivityItemArray(array($actitivyItem1,$actitivyItem2));
+
+
         return $aulaTopicItem;
     }
 

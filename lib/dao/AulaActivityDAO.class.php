@@ -14,6 +14,34 @@ class AulaActivityDAO extends AulaBaseDAO
 {
     public static function getItem($id)
     {
-        // TODO: Implement getItem() method.
+        $post = get_post($id);
+        if ($post == false) {
+            return null;
+        }
+
+        $category_ids = array();
+        $aulaTaxonomy = "aula-taxonomy";
+
+        $terms = get_the_terms($post->ID, $aulaTaxonomy);
+        if (is_array($terms)) {
+            foreach ($terms as $term) {
+                $category_ids[$term->term_id] = $term->name;
+            }
+        }
+
+        $item = new AulaActivityItem();
+
+        $item->setId($post->ID);
+        $item->setTitle($post->post_title);
+        $item->setSummary( $post->post_content );
+        $item->setDate($post->post_date);
+        $item->setCategories($category_ids);
+        $item->setOrder($post->menu_order);
+        $item->_post_name   = $post->post_name;
+
+        $meta = get_post_meta($post->ID);
+        AulaHelper::processPostMeta($meta,$item);
+
+        return $item;
     }
 }

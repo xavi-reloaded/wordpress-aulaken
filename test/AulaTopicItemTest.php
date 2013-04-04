@@ -2,7 +2,8 @@
 //require_once 'PHPUnit/Framework.php';
 
 require_once(dirname(__FILE__) . '/mockpress/mockpress.php');
-require_once('../lib/dao/AulaTopicItem.class.php');
+require_once('../lib/dao/entities/AulaTopicItem.class.php');
+require_once('../lib/dao/entities/AulaActivityItem.class.php');
 
 class AulaTopicItemTest extends PHPUnit_Framework_TestCase
 {
@@ -18,44 +19,22 @@ class AulaTopicItemTest extends PHPUnit_Framework_TestCase
         $this->sut=new AulaTopicItem();
         $actual = $this->sut->toJson();
         $expected = '{"id":null,"title":"","summary":"","activities":[]}';
-        $this->assertEquals($actual,$expected);
+        $this->assertEquals($expected,json_encode($actual));
     }
 
     public function test_toJson_withActivities_json()
     {
-        $this->sut=new AulaTopicItem();
-        $activities = array (
-            array('title' => 'Assignment', 'pix'=>'assignment.png', 'content'=>'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.'),
-            array('title' => 'Assignment', 'pix'=>'assignment.png', 'content'=>'An other fliping content for you')
-        );
-        $this->sut->setActivities($activities);
-        $actual = $this->sut->toJson();
-        $expected = '{"id":null,"title":"","summary":"","activities":[{"title":"Assignment","pix":"assignment.png","content":"The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback."},{"title":"Assignment","pix":"assignment.png","content":"An other fliping content for you"}]}';
-        $this->assertEquals($actual,$expected);
+        $sut=new AulaTopicItem();
+        $actitivyItem1 = new AulaActivityItem('Assignment','','The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.');
+        $actitivyItem1->setPix('assignment.png');
+        $actitivyItem2 = new AulaActivityItem('Assignment','','An other fliping content for you');
+        $actitivyItem2->setPix('assignment.png');
+        $sut->setChildActivities('[1111,2222]');
+        $sut->setAulaActivityItemArray(array($actitivyItem1,$actitivyItem2));
+        $actual = $sut->toJson();
+        $expected = '{"id":null,"title":"","summary":"","activities":[{"id":null,"title":"Assignment","pix":"assignment.png","content":"The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback."},{"id":null,"title":"Assignment","pix":"assignment.png","content":"An other fliping content for you"}]}';
+        $this->assertEquals($expected,json_encode($actual));
     }
-
-    public function test_toJsonForTest_withActivities_json()
-    {
-        $this->sut=new AulaTopicItem("Sample Json Response");
-        $this->sut->setId(1);
-        $activities = array (
-            array('title' => 'Assignment', 'pix'=>'assignment.png', 'content'=>'The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.'),
-            array('title' => 'Assignment', 'pix'=>'assignment.png', 'content'=>'An other fliping content for you')
-        );
-        $this->sut->setActivities($activities);
-
-        $topicsJson=array();
-        array_push($topicsJson,$this->sut->toJson());
-
-        $expected = '{"topics" : [{"id":1,"title":"Sample Json Response","summary":"","activities":[{"title":"Assignment","pix":"assignment.png","content":"The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback."},{"title":"Assignment","pix":"assignment.png","content":"An other fliping content for you"}]}]}';;
-
-        $actual=array("topics" => $topicsJson);
-        $actual = json_encode($actual);
-        $this->assertEquals($actual,$expected);
-    }
-
-
-
 
 	public function test_construct_empty_wellFormed()
 	{

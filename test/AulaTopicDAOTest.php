@@ -20,11 +20,19 @@ class AulaTopicDAOTest extends PHPUnit_Framework_TestCase
 
 	public function test_getTopicsFromCourseId_dummy_arrayOfTopics()
 	{
-        $this->sut=new AulaTopicDAO(new AulaTopicItem());
-        $actual = $this->sut->getTopicsFromCourseId(1, true);
+        $sut=new AulaTopicDAO(new AulaTopicItem());
+        $actual = $sut->getTopicsFromCourseId(1, true);
         $expected = TestHelper::getDummyTopicsArrayJson();
 		$this->assertEquals($expected, $actual);
 	}
+
+    public function test_getTopicsFromCourseId_dummy_hasCorrespondentActivitiesJsonArray()
+    {
+        $this->sut=new AulaTopicDAO(new AulaTopicItem());
+        $actual = $this->sut->getTopicsFromCourseId(1, true);
+        $expected = TestHelper::getDummyTopicsArrayJson() + 'mierder';
+        $this->assertEquals($expected, $actual);
+    }
 
     public function test_getItem_1111mocked_topicObject()
     {
@@ -87,8 +95,14 @@ class AulaTopicDAOTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(3, sizeof($actual));
     }
 
-
-
+    public function test_updateActivitiesArrayById()
+    {
+        $aulaTopicDAO = new AulaTopicDAO(new AulaTopicItem());
+        $activitiesIds = '[1,2,3]';
+        $actual = $aulaTopicDAO->updateActivityArrayById(1111, $activitiesIds);
+        $expected = 1111;
+        $this->assertEquals($expected, $actual);
+    }
 
 }
 ?>

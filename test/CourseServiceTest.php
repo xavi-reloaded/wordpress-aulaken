@@ -46,7 +46,14 @@ class CourseServiceTest extends PHPUnit_Framework_TestCase
     public function test_getJsonAulaElement_mock1_validJson()
     {
         $actual = $this->sut->getJsonAulaElement(1);
-        $expected = '{"topics":[{"id":1111,"title":"Sample Json Response","summary":"post_content","activities":{"title":"Assignment","pix":"assignment.png","content":"The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback."}},{"id":2222,"title":"Sample Json Response 2","summary":"post_content","activities":{"title":"Assignment","pix":"assignment.png","content":"The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback."}}],"courseId":1}';
+        $expected = '{"topics":[{"id":1111,"title":"Sample Json Response","summary":"A nice content for the item","activities":[{"id":5555,"title":"Assignment","pix":"assignment.png","content":"The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback."},{"id":6666,"title":"Assignment","pix":"assignment.png","content":"An other fliping content for you"}]},{"id":2222,"title":"Sample Json Response 2","summary":"A nice content for the item","activities":[{"id":5555,"title":"Assignment","pix":"assignment.png","content":"The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback."},{"id":6666,"title":"Assignment","pix":"assignment.png","content":"An other fliping content for you"}]}],"courseId":1}';
+        $this->assertEquals($expected,$actual);
+    }
+
+    public function test_getJsonAulaElement_mock2NoActivities_validJson()
+    {
+        $actual = $this->sut->getJsonAulaElement(2);
+        $expected = '{"topics":[{"id":3333,"title":"Sample Json Response 2","summary":"yeja !","activities":[]}],"courseId":2}';
         $this->assertEquals($expected,$actual);
     }
 

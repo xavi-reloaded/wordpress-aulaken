@@ -15,7 +15,7 @@
 
 
     <form id="aula-create" class="" method="post" action="admin.php?page=aula-save-course" >
-
+{{form}}
         <?php wp_nonce_field($nonce_action); ?>
         <input type="hidden" id="user-id" name="user_ID" value="<?php echo (int) $user_ID ?>" />
         <input type="hidden" id="hiddenaction" name="action" value="<?php echo esc_attr( $form_action ) ?>" />

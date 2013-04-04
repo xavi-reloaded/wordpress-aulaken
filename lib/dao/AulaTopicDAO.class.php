@@ -4,15 +4,16 @@ require_once(dirname(__FILE__) . '/entities/AulaTopicItem.class.php');
 require_once(dirname(__FILE__) . '/entities/AulaActivityItem.class.php');
 require_once(dirname(__FILE__) . '/AulaBaseDAO.class.php');
 require_once(dirname(__FILE__) . '/AulaCourseDAO.class.php');
+require_once(dirname(__FILE__) . '/AulaActivityDAO.class.php');
 
 
 /**
-* Created by JetBrains PhpStorm.
-* User: fjhidalgo
-* Date: 2/06/12
-* Time: 12:54
-* To change this template use File | Settings | File Templates.
-*/
+ * Created by JetBrains PhpStorm.
+ * User: fjhidalgo
+ * Date: 2/06/12
+ * Time: 12:54
+ * To change this template use File | Settings | File Templates.
+ */
 class AulaTopicDAO extends AulaBaseDAO
 {
 
@@ -22,11 +23,24 @@ class AulaTopicDAO extends AulaBaseDAO
         $course = AulaCourseDAO::getItem($id);
         if ($course==null) return $topicsFromCourse;
         $childTopics = $course->getChildTopics();
+        if ($childTopics==null) return $topicsFromCourse;
         foreach (json_decode($childTopics) as $topicId ) {
-            $toJson = ($topicsAsJson) ? $this->getItem($topicId)->toJson() : $this->getItem($topicId);
+            $aulaTopicItem = $this->getItem($topicId);
+            $childActivities = $aulaTopicItem->getChildActivities();
+            $aulaActivityItemArray = array();
+            if ($childActivities!=null) {
+                foreach (json_decode($childActivities) as $activityId ) {
+                    $aulaActivityDAO = new aulaActivityDAO(new AulaActivityItem());
+                    $aulaActivityItem = $aulaActivityDAO->getItem($activityId);
+                    array_push($aulaActivityItemArray,$aulaActivityItem);
+                }
+            }
+            $aulaTopicItem->setAulaActivityItemArray($aulaActivityItemArray);
+            $toJson = ($topicsAsJson) ? $aulaTopicItem->toJson() : $this->getItem($topicId);
             array_push($topicsFromCourse, $toJson);
         }
         return $topicsFromCourse;
+
 
     }
 
@@ -54,7 +68,7 @@ class AulaTopicDAO extends AulaBaseDAO
                 $aulaActivityItem->setPix($activity->pix);
                 array_push($activityItemList,$aulaActivityItem);
             }
-            $aulaTopicItem->setActivities($activityItemList);
+            $aulaTopicItem->setChildActivities($activityItemList);
             array_push($topicItemList, $aulaTopicItem);
         }
 
@@ -108,7 +122,13 @@ class AulaTopicDAO extends AulaBaseDAO
         return $topicsId;
     }
 
-
+    public function updateActivityArrayById($topicId, $activitiesIds = array())
+    {
+        $item = $this->getItem($topicId);
+        if ($item==null) return $item;
+        $item->setChildActivities(json_encode($activitiesIds));
+        return $item->save();
+    }
 
 
 }

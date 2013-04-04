@@ -12,19 +12,8 @@ require_once(dirname(__FILE__) . '/AulaBaseItem.class.php');
 
 class AulaTopicItem extends AulaBaseItem
 {
-    public $activities = array();
-
-
-    public function setActivities($activities)
-    {
-        $this->activities = $activities;
-    }
-
-    public function getActivities()
-    {
-        return $this->activities;
-    }
-
+    public $child_activities;
+    public $aulaActivityItemArray = array();
 
 
     public function getPostType()
@@ -44,7 +33,9 @@ class AulaTopicItem extends AulaBaseItem
 
     public function getMetadataArray($meta = array())
     {
-        return $meta;
+        $this->meta = $meta;
+        $this->meta['child_activities'] = $this->child_activities;
+        return $this->meta;
     }
 
     public function getAbout()
@@ -58,9 +49,33 @@ class AulaTopicItem extends AulaBaseItem
             'id' => $this->getId(),
             'title' => $this->getTitle(),
             'summary' => $this->getSummary(),
-            'activities' => $this->getActivities()
+            'activities' => $this->getAulaActivityItemArray()
         );
-
         return $json;
+    }
+
+    public function getAulaActivityItemArray()
+    {
+        if ($this->getChildActivities()==null) return array();
+        $resultJsonArray = array();
+        foreach ($this->aulaActivityItemArray as $itemActivity) {
+            array_push($resultJsonArray, $itemActivity->toJson());
+        }
+        return $resultJsonArray;
+    }
+
+    public function setAulaActivityItemArray($aulaActivityItemArray)
+    {
+        $this->aulaActivityItemArray = $aulaActivityItemArray;
+    }
+
+    public function getChildActivities()
+    {
+        return $this->child_activities;
+    }
+
+    public function setChildActivities($child_activities)
+    {
+        $this->child_activities = $child_activities;
     }
 }
