@@ -113,11 +113,7 @@ function AdminCourseNew($scope, $dialog, topicsService){
         topicsService.query(
             {courseId: $scope.form.courseId }, //params
             function (data) { //success
-                console.log(JSON.stringify(data));
-                console.log(data.length);
                 $scope.form.topics = data.topics;
-//                $scope.form.topics = [{"id":289,"title":"asdasdf","summary":"","activities":[]}];
-
             },
             function (data) { //failure
                 console.log("Error occurred while getting list of topics");
@@ -133,7 +129,7 @@ function AdminCourseNew($scope, $dialog, topicsService){
             {form : $scope.form}, //params
             function (data) { //success
                 console.log(data);
-                //$scope.form = data;
+                $scope.form.topics = data.topics;
             },
             function (data) { //failure
                 console.log("Error occurred while getting list of topics");

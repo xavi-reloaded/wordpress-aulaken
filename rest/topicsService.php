@@ -23,21 +23,29 @@ $method = $_SERVER['REQUEST_METHOD'];
 $aulaTopicDAO  = new AulaTopicDAO(new AulaTopicItem());
 $aulaCourseDAO = new AulaCourseDAO(new AulaCourseItem());
 
+/**
+ * @param $aulaTopicDAO
+ */
+function print_json($aulaTopicDAO,$courseId)
+{
+    $topicsAsJson = true;
+    $topicsFromCourseJson = $aulaTopicDAO->getTopicsFromCourseId($courseId, $topicsAsJson);
+    $topicsJsonVar = array("topics" => $topicsFromCourseJson, "courseId" => $courseId);
+    echo json_encode($topicsJsonVar);
+}
+
 if ($method=="POST") {
 //    $data = json_decode(file_get_contents("php://input"));
     $json = file_get_contents("php://input");
     $topicIdsSaved = $aulaTopicDAO->updateTopicsFromJson($json);
     $courseId = $aulaCourseDAO->getCourseIdFromJson($json);
     $aulaCourseDAO->updateTopicArrayById($courseId,$topicIdsSaved);
-
+    print_json($aulaTopicDAO,$courseId);
 }
 
 
-if ($_GET['c']>0) {
-    $topicsAsJson = true;
-    $topicsFromCourseJson = $aulaTopicDAO->getTopicsFromCourseId($_GET['c'], $topicsAsJson);
-    $topicsJsonVar=array( "topics" => $topicsFromCourseJson, "courseId" => $_GET['c']);
-    echo json_encode($topicsJsonVar);
+if ($_GET['c']>0 && $method=="GET") {
+    print_json($aulaTopicDAO,$_GET['c']);
 }
 
 
