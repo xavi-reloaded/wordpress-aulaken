@@ -32,6 +32,9 @@ function AdminCourseNew($scope, $dialog, topicsService){
                 var topics = $scope.form.topics;
                 for (var i = 0, ii = topics.length; i < ii; i++) {
                     if (id === topics[i].id) {
+                        if (typeof($scope.form.topics[i].activities) === 'undefined' || $scope.form.topics[i].activities == null ) {
+                            $scope.form.topics[i].activities = [];
+                        }
                         topics[i].activities.push(result)
                     }
                 }
@@ -96,7 +99,7 @@ function AdminCourseNew($scope, $dialog, topicsService){
         d.open().then(function(name,summary){
             if(name)
             {
-                if (typeof ($scope.form.topics) === 'undefined') {
+                if (typeof ($scope.form.topics) === 'undefined' || $scope.form.topics == null) {
                     $scope.form = {
                         courseId : $scope.form.courseId,
                         topics : []
