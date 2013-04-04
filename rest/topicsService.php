@@ -20,10 +20,13 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
     $savedId = $courseService->setAulaElement($json);
 }
 
+if ($_SERVER['REQUEST_METHOD']=="DELETE") {
+    $json = file_get_contents("php://input");
+    $courseService->deleteAulaItemById($_GET['c']);
+}
 if ($_SERVER['REQUEST_METHOD']=="GET") {
     $savedId = $_GET['c'];
 }
-
 if (isset($savedId)) {
     $response = $courseService->getJsonAulaElement($savedId);
     echo $response;

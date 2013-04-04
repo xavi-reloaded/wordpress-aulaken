@@ -34,4 +34,10 @@ class CourseService extends BaseAulaService {
         $topicsJsonVar = array("topics" => $topicsFromCourseJson, "courseId" => $id);
         return json_encode($topicsJsonVar);
     }
+
+    public function deleteAulaItemById($id)
+    {
+        $this->aulaTopicDAO->deleteItem($id);
+
+    }
 }

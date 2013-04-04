@@ -75,5 +75,12 @@ class CourseServiceTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected,$actual);
     }
 
+    public function test_deleteAulaItemById()
+    {
+        $sut = new CourseService(isTest);
+        $actual = $sut->deleteAulaItemById(1111);
+        $this->assertEquals(true,$actual);
+    }
+
 
 }

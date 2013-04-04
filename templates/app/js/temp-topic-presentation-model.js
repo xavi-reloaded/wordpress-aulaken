@@ -70,10 +70,7 @@ function AdminCourseNew($scope, $dialog, topicsService){
         }
     };
 
-    $scope.removeTopic = function(topic) {
-        var topics = $scope.form.topics;
-        topics.splice(topic,1)
-    }
+
 
     var t = '<div class="modal-header">'+
         '<h1>Create New Topic</h1>'+
@@ -145,6 +142,21 @@ function AdminCourseNew($scope, $dialog, topicsService){
     }
 
     ///// SAVE
+
+    $scope.removeTopic = function(topic) {
+        var topics = $scope.form.topics;
+        topics.splice(topic,1);
+        topicsService.delete(
+            {courseId : topic.id}, //params
+            function (data) { //success
+                console.log(data);
+//                $scope.form.topics = data.topics;
+
+            },
+            function (data) { //failure
+                console.log("Error occurred while getting list of topics");
+            });
+    }
 
 
 

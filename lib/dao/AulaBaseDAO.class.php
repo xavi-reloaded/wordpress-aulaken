@@ -82,6 +82,12 @@ abstract class AulaBaseDAO implements IAulaBaseDAO {
         return $this->aulaItem;
     }
 
+    public function deleteItem($id)
+    {
+        $this->aulaItem->delete();
+        return $this->aulaItem;
+    }
+
 }
 
 
