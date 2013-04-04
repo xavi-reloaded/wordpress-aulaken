@@ -2,14 +2,15 @@
 require_once(dirname(__FILE__) . '/../helper/AulaHelper.class.php');
 require_once(dirname(__FILE__) . '/entities/AulaActivityItem.class.php');
 require_once(dirname(__FILE__) . '/AulaBaseDAO.class.php');
+require_once(dirname(__FILE__) . '/AulaTopicDAO.class.php');
 
 /**
-* Created by JetBrains PhpStorm.
-* User: fjhidalgo
-* Date: 2/06/12
-* Time: 12:54
-* To change this template use File | Settings | File Templates.
-*/
+ * Created by JetBrains PhpStorm.
+ * User: fjhidalgo
+ * Date: 2/06/12
+ * Time: 12:54
+ * To change this template use File | Settings | File Templates.
+ */
 class AulaActivityDAO extends AulaBaseDAO
 {
     public static function getItem($id)
@@ -43,5 +44,23 @@ class AulaActivityDAO extends AulaBaseDAO
         AulaHelper::processPostMeta($meta,$item);
 
         return $item;
+    }
+
+    public function getActivitiesFromTopicId($id, $topicsAsJson = false)
+    {
+        $activitiesFromTopics = array();
+        $topic = AulaTopicDAO::getItem($id);
+        if ($topic==null) return $activitiesFromTopics;
+        $childActivities = $topic->getChildActivities();
+        if ($childActivities==null) return $activitiesFromTopics;
+        foreach (json_decode($childActivities) as $activityId )
+        {
+            $toJson = ($topicsAsJson) ? $this->getItem($activityId)->toJson() : $this->getItem($activityId);
+            array_push($activitiesFromTopics, $toJson);
+        }
+        return $activitiesFromTopics;
+
+
+
     }
 }

@@ -46,4 +46,20 @@ class TestHelper {
         return $aulaTopicItem;
     }
 
+    public static function getDummyActivitiesArrayJson()
+    {
+        $activityJson=array();
+        $actitivyItem1 = new AulaActivityItem('Assignment','','The assignment activity module enables a teacher to communicate tasks, collect work and provide grades and feedback.');
+        $actitivyItem1->setPix('assignment.png');
+        $actitivyItem1->setId(5555);
+        $actitivyItem2 = new AulaActivityItem('Assignment','','An other fliping content for you');
+        $actitivyItem2->setPix('assignment.png');
+        $actitivyItem2->setId(6666);
+
+        array_push($activityJson,$actitivyItem1->toJson());
+        array_push($activityJson,$actitivyItem2->toJson());
+
+        return $activityJson;
+    }
+
 }
