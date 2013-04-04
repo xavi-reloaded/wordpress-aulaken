@@ -15,7 +15,7 @@
 
 
     <form id="aula-create" class="" method="post" action="admin.php?page=aula-save-course" >
-{{form}}
+
         <?php wp_nonce_field($nonce_action); ?>
         <input type="hidden" id="user-id" name="user_ID" value="<?php echo (int) $user_ID ?>" />
         <input type="hidden" id="hiddenaction" name="action" value="<?php echo esc_attr( $form_action ) ?>" />
@@ -26,7 +26,7 @@
         <input type="hidden" id="referredby" name="referredby" value="<?php echo esc_url(stripslashes(wp_get_referer())); ?>" />
         <input type="hidden" id="save_id" name="save_id" ng-model="form.courseId"
                ng-init="form.courseId='<?php echo $post->ID; ?>';getTopicsListFromCourse();" value="<?php echo $post->ID; ?>"
-        />
+            />
         <?php if ( ! empty( $active_post_lock ) ) { ?>
             <input type="hidden" id="active_post_lock" value="<?php echo esc_attr( implode( ':', $active_post_lock ) ); ?>" />
         <?php
@@ -46,17 +46,17 @@
             <div id="post-body" class="metabox-holder columns-<?php echo 1 == get_current_screen()->get_columns() ? '1' : '2'; ?>">
                 <div id="post-body-content">
 
-                        <div>
-                            <label class="screen-reader-text" for="title">asd</label>
-                            <input type="text" class="input-block-level" name="post_title" value="<?php echo esc_attr( htmlspecialchars( $post->post_title ) ); ?>" id="title"/>
-                        </div>
-                        <div>
-                            <input type="text" name="post_shortname" value="<?=$post->post_shortcode?>" id="shortname"/>
-                            <p class="btn btn-danger btn-small" ng-click="saveTopics(form)" >Help</p>
-                        </div>
-                        <?php
-                        wp_nonce_field( 'samplepermalink', 'samplepermalinknonce', false );
-                        ?>
+                    <div>
+                        <label class="screen-reader-text" for="title">asd</label>
+                        <input type="text" class="input-block-level" name="post_title" value="<?php echo esc_attr( htmlspecialchars( $post->post_title ) ); ?>" id="title"/>
+                    </div>
+                    <div>
+                        <input type="text" name="post_shortname" value="<?=$post->post_shortcode?>" id="shortname"/>
+                        <p class="btn btn-danger btn-small" ng-click="saveTopics(form)" >Help</p>
+                    </div>
+                    <?php
+                    wp_nonce_field( 'samplepermalink', 'samplepermalinknonce', false );
+                    ?>
                     <?php
 
 
@@ -115,7 +115,16 @@
                     <apiumac close-others="oneAtATime">
                         <apiumac-group ng-repeat="topic in form.topics">
                             <apiumac-heading>
-                                <span>{{topic.title}}</span>
+                                <!-- <table class="table table-striped table-bordered table-condensed">-->
+                                <table width="100%">
+                                    <tr>
+                                        <td><span>{{topic.title}}</span></td>
+<!--                                    </tr><tr>-->
+                                        <td ><span ng-click="removeTopic(topic)" class="btn btn-small btn-danger right">X</span></td>
+                                    </tr>
+                                </table>
+
+
                             </apiumac-heading>
                             {{topic.summary}}
                             <tabs>
