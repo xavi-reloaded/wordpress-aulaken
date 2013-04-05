@@ -50,7 +50,6 @@
 <!--        begin-->
         <ul id="timeline" style="top: -0%;">
 
-
         <li class="on" data-lectureid="213438">
 
             <div class="top">
@@ -93,7 +92,7 @@
             </div>
         </li>
 
-        <li class="chapter off">
+        <li class="chapter on">
             <span class="percent chapter-number"> <span>Section</span> 1 </span>
             <div class="note">
                 <span><b>Things You Should Know Before You Start</b></span>
@@ -102,8 +101,6 @@
                 <a href="" class="next-lecture continue">Continue</a>
             </div>
         </li>
-
-
 
         <li class="on" data-lectureid="213440">
 
@@ -262,12 +259,16 @@
                 <a href="" class="mark mini-tooltip"><span class="tooltip-content"><b>Mark as Completed</b><b>Mark as Uncompleted</b></span>
                 </a>
             </div>
-        </li><li class="show-progress">
+        </li>
+
+        <li class="show-progress">
             <span class="percent completion-ratio">37%</span>
             <div class="note">
                 <span>You have completed <b class="completion-ratio">37%</b> of this course</span>
             </div>
-        </li><li class="on" data-lectureid="213448">
+        </li>
+
+        <li class="on" data-lectureid="213448">
 
             <div class="prev-lecture">
                 <a href=""></a>
@@ -298,12 +299,16 @@
                 <a href="" class="mark mini-tooltip"><span class="tooltip-content"><b>Mark as Completed</b><b>Mark as Uncompleted</b></span>
                 </a>
             </div>
-        </li><li class="show-progress">
+        </li>
+
+        <li class="show-progress">
             <span class="percent completion-ratio">37%</span>
             <div class="note">
                 <span>You have completed <b class="completion-ratio">37%</b> of this course</span>
             </div>
-        </li><li class="chapter">
+        </li>
+
+        <li class="chapter">
         <span class="percent chapter-number">
             <span>Section</span>
             2
@@ -314,7 +319,9 @@
             <div class="bottom">
                 <a href="" class="next-lecture continue">Continue</a>
             </div>
-        </li><li class="on" data-lectureid="213961">
+        </li>
+
+        <li class="on" data-lectureid="213961">
 
             <div class="prev-lecture">
                 <a href=""></a>
@@ -345,12 +352,16 @@
                 <a href="" class="mark mini-tooltip"><span class="tooltip-content"><b>Mark as Completed</b><b>Mark as Uncompleted</b></span>
                 </a>
             </div>
-        </li><li class="show-progress">
+        </li>
+
+        <li class="show-progress">
             <span class="percent completion-ratio">37%</span>
             <div class="note">
                 <span>You have completed <b class="completion-ratio">37%</b> of this course</span>
             </div>
-        </li><li class="on" data-quizid="122" data-type="quiz">
+        </li>
+
+        <li class="on" data-quizid="122" data-type="quiz">
 
             <div class="prev-lecture">
                 <a href=""></a>
@@ -377,12 +388,16 @@
                 <a href="" class="mark mini-tooltip"><span class="tooltip-content"><span>Mark as Completed</span><b>Mark as Uncompleted</b></span>
                 </a>
             </div>
-        </li><li class="show-progress">
+        </li>
+
+        <li class="show-progress">
             <span class="percent completion-ratio">37%</span>
             <div class="note">
                 <span>You have completed <b class="completion-ratio">37%</b> of this course</span>
             </div>
-        </li><li class="on" data-lectureid="260943">
+        </li>
+
+        <li class="on" data-lectureid="260943">
 
             <div class="prev-lecture">
                 <a href=""></a>
@@ -413,12 +428,16 @@
                 <a href="" class="mark mini-tooltip"><span class="tooltip-content"><b>Mark as Completed</b><b>Mark as Uncompleted</b></span>
                 </a>
             </div>
-        </li><li class="show-progress">
+        </li>
+
+        <li class="show-progress">
             <span class="percent completion-ratio">37%</span>
             <div class="note">
                 <span>You have completed <b class="completion-ratio">37%</b> of this course</span>
             </div>
-        </li><li class="on completed" data-lectureid="236683">
+        </li>
+
+        <li class="on completed" data-lectureid="236683">
 
             <div class="prev-lecture">
                 <a href=""></a>
@@ -447,12 +466,16 @@
                 <a href="" class="mark mini-tooltip read"><span class="tooltip-content"><b>Mark as Completed</b><b>Mark as Uncompleted</b></span>
                 </a>
             </div>
-        </li><li class="show-progress">
+        </li>
+
+        <li class="show-progress">
             <span class="percent completion-ratio">37%</span>
             <div class="note">
                 <span>You have completed <b class="completion-ratio">37%</b> of this course</span>
             </div>
-        </li><li class="on completed" data-lectureid="213456">
+        </li>
+
+        <li class="on completed" data-lectureid="213456">
 
             <div class="prev-lecture">
                 <a href=""></a>
@@ -483,12 +506,16 @@
                 <a href="" class="mark mini-tooltip read"><span class="tooltip-content"><b>Mark as Completed</b><b>Mark as Uncompleted</b></span>
                 </a>
             </div>
-        </li><li class="show-progress">
+        </li>
+
+        <li class="show-progress">
             <span class="percent completion-ratio">37%</span>
             <div class="note">
                 <span>You have completed <b class="completion-ratio">37%</b> of this course</span>
             </div>
-        </li><li class="on completed" data-lectureid="213457">
+        </li>
+
+        <li class="on completed" data-lectureid="213457">
 
             <div class="prev-lecture">
                 <a href=""></a>
@@ -519,7 +546,9 @@
                 <a href="" class="mark mini-tooltip read"><span class="tooltip-content"><b>Mark as Completed</b><b>Mark as Uncompleted</b></span>
                 </a>
             </div>
-        </li><li class="show-progress">
+        </li>
+
+        <li class="show-progress">
             <span class="percent completion-ratio">37%</span>
             <div class="note">
                 <span>You have completed <b class="completion-ratio">37%</b> of this course</span>
@@ -570,7 +599,9 @@
             <div class="note">
                 <span>You have completed <b class="completion-ratio">37%</b> of this course</span>
             </div>
-        </li><li class="chapter">
+        </li>
+
+        <li class="chapter">
         <span class="percent chapter-number">
             <span>Section</span>
             3
@@ -581,7 +612,9 @@
             <div class="bottom">
                 <a href="" class="next-lecture continue">Continue</a>
             </div>
-        </li><li class="on" data-lectureid="213476">
+        </li>
+
+        <li class="on" data-lectureid="213476">
 
             <div class="prev-lecture">
                 <a href=""></a>
@@ -612,12 +645,16 @@
                 <a href="" class="mark mini-tooltip"><span class="tooltip-content"><b>Mark as Completed</b><b>Mark as Uncompleted</b></span>
                 </a>
             </div>
-        </li><li class="show-progress">
+        </li>
+
+        <li class="show-progress">
             <span class="percent completion-ratio">37%</span>
             <div class="note">
                 <span>You have completed <b class="completion-ratio">37%</b> of this course</span>
             </div>
-        </li><li class="on" data-lectureid="116904">
+        </li>
+
+        <li class="on" data-lectureid="116904">
 
             <div class="prev-lecture">
                 <a href=""></a>
@@ -648,12 +685,16 @@
                 <a href="" class="mark mini-tooltip"><span class="tooltip-content"><b>Mark as Completed</b><b>Mark as Uncompleted</b></span>
                 </a>
             </div>
-        </li><li class="show-progress">
+        </li>
+
+        <li class="show-progress">
             <span class="percent completion-ratio">37%</span>
             <div class="note">
                 <span>You have completed <b class="completion-ratio">37%</b> of this course</span>
             </div>
-        </li><li class="on" data-lectureid="256080">
+        </li>
+
+        <li class="on" data-lectureid="256080">
 
             <div class="prev-lecture">
                 <a href=""></a>
@@ -684,12 +725,16 @@
                 <a href="" class="mark mini-tooltip"><span class="tooltip-content"><b>Mark as Completed</b><b>Mark as Uncompleted</b></span>
                 </a>
             </div>
-        </li><li class="show-progress">
+        </li>
+
+        <li class="show-progress">
             <span class="percent completion-ratio">37%</span>
             <div class="note">
                 <span>You have completed <b class="completion-ratio">37%</b> of this course</span>
             </div>
-        </li><li class="chapter">
+        </li>
+
+        <li class="chapter">
         <span class="percent chapter-number">
             <span>Section</span>
             4
@@ -700,7 +745,9 @@
             <div class="bottom">
                 <a href="" class="next-lecture continue">Continue</a>
             </div>
-        </li><li class="on" data-lectureid="245286">
+        </li>
+
+        <li class="on" data-lectureid="245286">
 
             <div class="prev-lecture">
                 <a href=""></a>
@@ -731,12 +778,16 @@
                 <a href="" class="mark mini-tooltip"><span class="tooltip-content"><b>Mark as Completed</b><b>Mark as Uncompleted</b></span>
                 </a>
             </div>
-        </li><li class="show-progress">
+        </li>
+
+        <li class="show-progress">
             <span class="percent completion-ratio">37%</span>
             <div class="note">
                 <span>You have completed <b class="completion-ratio">37%</b> of this course</span>
             </div>
-        </li><li class="certificate">
+        </li>
+
+        <li class="certificate">
             <div class="badge">
                 <span class="icon"></span>
                 <!-- <span class="title">Junior Web Developer</span> -->

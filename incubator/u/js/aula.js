@@ -9,13 +9,16 @@
 function moveNext(){
 
     var aulaUtils =new AulaUtils();
+
     var timelineAtr = $('#timeline').attr('style');
+
     timelineAtr = aulaUtils.nextSectionOnTimeline(timelineAtr);
-    $('#timeline').attr('style',timelineAtr);
+    var timelineAtr = $('#timeline').attr('style',timelineAtr );
 
 }
 
 $(document).ready(function() {
+    AulaUtils = require('AulaUtils');
 
     $(".next-lecture").click(function(e) {
         e.preventDefault();
@@ -27,32 +30,9 @@ $(document).ready(function() {
 //        var n = t.timeline[t.reverseIndex["lecture" + this.options.lectureId] + 2];
 
         moveNext();
-    });
-    $(".prev-lecture").click(function(e) {
-        e.preventDefault();
-        console.log('next-lecture clicked');
 
-        var lectureId = '213438';
-        var t = $(".ud-lecture[data-lectureid=" + lectureId + "]"); //.parents(".ud-coursetaking"); //.data("ud_coursetaking");
-        console.log('asigned t' + t);
-//        var n = t.timeline[t.reverseIndex["lecture" + this.options.lectureId] + 2];
-
-        moveNext();
-    });
-
-    $(".show-progress").hover(function(e) {
-        e.preventDefault();
-        console.log('show-progress hover');
-
-        setTimeout(
-            function()
-            {
-                moveNext();
-            }, 2000);
 
     });
-
-
 });
 
 
