@@ -6604,8 +6604,9 @@ define("base64", function () {
         this.element.scrollTop(0)
     }})
 }), define("ud.lecture", ["jquery", "ud.package.default"], function (e) {
-    e.widget("ud.ud_lecture", {options: {lectureId: null, autoLoad: !0, courseId: null}, type: null, startPosition: null, position: null, total: null, lectureCompletedTimeout: null, lectureTrackTimeout: null, lectureTrackPause: !1, autoPlay: !0, _create: function () {
-        for (var e in this.options)typeof this.element.data(e.toLowerCase()) != "undefined" && (this.options[e] = this.element.data(e.toLowerCase()));
+    e.widget("ud.ud_lecture", {options: {lectureId: null, autoLoad: !0, courseId: null}, type: null, startPosition: null, position: null, total: null, lectureCompletedTimeout: null, lectureTrackTimeout: null, lectureTrackPause: !1, autoPlay: !0,
+        _create: function () {
+            for (var e in this.options) typeof this.element.data(e.toLowerCase()) != "undefined" && (this.options[e] = this.element.data(e.toLowerCase()));
         this.options.autoLoad && this.load(), this.element.bind("lectureCompleted_" + this.options.lectureId, this.lectureCompleteHandler.context(this)), this.element.bind("lectureDownloaded_" + this.options.lectureId, this.lectureDownloadHandler.context(this)), this.element.bind("lectureProgress_" + this.options.lectureId, this.lectureProgressHandler.context(this)), this.element.bind("lecturecontentready_" + this.options.lectureId, this._contentReady.context(this))
     }, lectureCompleteHandler: function (t, n) {
         e("#timeline li[data-lectureid=" + this.options.lectureId + "] .mark").addClass("read"), e("#timeline li[data-lectureid=" + this.options.lectureId + "]").addClass("completed");

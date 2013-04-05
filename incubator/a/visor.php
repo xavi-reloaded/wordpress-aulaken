@@ -19,21 +19,16 @@
     <link href="css/udemy-blessed1.css" rel="stylesheet">
     <link href="css/udemy-blessed2.css" rel="stylesheet">
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
 
-    <script data-main="js/app.js" src="../a/js/lib/require.js"></script>
-
-    <script src="js/AulaUtils.js"></script>
-    <script src="js/aula.js"></script>
+<!--    <script data-main="js/viewer.js" src="js/lib/require.js"></script>-->
 
 
-    <script language="javascript">
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="js/lib/jquery-ui.min.js"></script>
+    <script src="js/app/AulaUtils.js"></script>
 
+    <script src="js/app/aula.js"></script>
 
-
-
-    </script>
 </head>
 <body>
 
@@ -56,7 +51,7 @@
         <ul id="timeline" style="top: -0%;">
 
 
-        <li class="on completed" data-lectureid="213438">
+        <li class="on" data-lectureid="213438">
 
             <div class="top">
                 <span class="ch">SECTION 0</span> <span class="le">LECTURE</span> <span class="no">1</span>
@@ -110,7 +105,7 @@
 
 
 
-        <li class="on completed" data-lectureid="213440">
+        <li class="on" data-lectureid="213440">
 
             <div class="prev-lecture">
                 <a href=""></a>
